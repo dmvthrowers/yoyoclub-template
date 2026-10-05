@@ -5,7 +5,8 @@
 
 Checks every page for: broken internal links and images, images without alt text or
 size, invalid JSON-LD, missing title/description, the skip link, main#main-content,
-and that the header, menu, and footer are identical on every page.
+that the header, menu, and footer are identical on every page, and that no text still
+shows a {placeholder} (a misspelled word like {toys} in site.jsonc or a preset).
 Security: every page has the Content Security Policy and referrer tags, with no
 'unsafe-inline', no inline styles, scripts or event handlers, and no http:// links.
 Exits non-zero if anything fails. No installs needed.
@@ -24,6 +25,7 @@ SITE = (ROOT / args[0]).resolve() if args else ROOT / "_site"
 base_file = ROOT / ".build-base-path"
 BASE = args[1] if len(args) > 1 else (base_file.read_text().strip() if base_file.exists() else "/")
 errors = []
+PLACEHOLDER = re.compile(r"\{[A-Za-z_]+\}")
 
 
 class Page(HTMLParser):
@@ -35,6 +37,8 @@ class Page(HTMLParser):
         self.meta = {}
         self.csp = None
         self.security = []
+        self.placeholders = []
+        self._skip = 0
 
     def handle_starttag(self, tag, attrs):
         # HTMLParser lower-cases tag and attribute names and handles any quoting style.
@@ -50,6 +54,10 @@ class Page(HTMLParser):
             self.svgs.append(a)
         if tag == "title":
             self.title = True
+        if tag in ("script", "style"):
+            self._skip += 1
+        for k in ("alt", "title", "content", "aria-label"):
+            self.placeholders += PLACEHOLDER.findall(a.get(k) or "")
         if tag == "meta" and a.get("name"):
             self.meta[a["name"].lower()] = a.get("content", "")
         if tag == "meta" and (a.get("http-equiv") or "").lower() == "content-security-policy":
@@ -77,10 +85,15 @@ class Page(HTMLParser):
     def handle_endtag(self, tag):
         if tag == "script":
             self._ld = False
+        if tag in ("script", "style"):
+            self._skip = max(0, self._skip - 1)
 
     def handle_data(self, d):
         if self._ld:
             self.ld[-1] += d
+            self.placeholders += PLACEHOLDER.findall(d)
+        elif not self._skip:
+            self.placeholders += PLACEHOLDER.findall(d)
 
 
 def shared_block(html, start, end):
@@ -109,6 +122,8 @@ for page in pages:
         err("missing referrer meta tag")
     for problem in p.security:
         err(problem)
+    for word in dict.fromkeys(p.placeholders):
+        err(f"unfilled placeholder {word} in the page text (check its spelling in site.jsonc or the preset)")
     if not p.title:
         err("missing <title>")
     if not p.meta.get("description"):
