@@ -1,0 +1,363 @@
+{
+  "preset_name": "Youth yo-yo program",
+  "terms": {
+    "club_type": "Youth Yo-Yo Program",
+    "toy": "yo-yo",
+    "toys": "yo-yos",
+    "players": "kids",
+    "sport": "Yo-yo",
+    "meetup_label": "Club session"
+  },
+  "disciplines": [
+    "Yo-Yo",
+    "Classic Tricks",
+    "Trick Checklist",
+    "Kids & Families"
+  ],
+  "program": {
+    "ages": "ages 7 to 14",
+    "ages_short": "Ages 7–14",
+    "welcome": "No experience needed",
+    "about_title": "Yo-Yos Build More Than Tricks",
+    "about": [
+      "{name} is a yo-yo program for kids {ages}. Every session, kids learn new tricks, check them off their list, and cheer each other on. {welcome}.",
+      "Yo-yos teach patience, focus, and confidence. Every trick takes practice, and every kid can see their own progress. {loaners}"
+    ],
+    "pillars": [
+      {
+        "title": "Focus",
+        "text": "One trick at a time. Kids learn to slow down, try again, and stick with it."
+      },
+      {
+        "title": "Progress",
+        "text": "A trick checklist on the wall. Every box checked is a win."
+      },
+      {
+        "title": "Confidence",
+        "text": "Show a trick to the group. Teach a friend. Kids love being the expert."
+      },
+      {
+        "title": "Friends",
+        "text": "Kids of different ages learning together and helping each other."
+      }
+    ],
+    "badges": [
+      "Free",
+      "No experience needed",
+      "Loaners provided",
+      "Grown-up on site"
+    ],
+    "meetup_blurb": "A free yo-yo session for kids. Loaner yo-yos provided.",
+    "volunteer": "We need adult helpers. Untangle strings, cheer kids on, and learn alongside them. No yo-yo skills needed.",
+    "donate_text": "Sessions are free. Donations buy loaner yo-yos and string for every kid.",
+    "contact_note": "Questions about signing up, permission forms, or accessibility? Email us anytime."
+  },
+  "loaners": {
+    "yes": "We provide loaner yo-yos and string at every session.",
+    "no": "Each kid needs a yo-yo. Ask us for a recommendation; good starter yo-yos cost a few dollars."
+  },
+  "cost": {
+    "summary": "Free",
+    "details": "Meetups are free. No dues, no fees, no membership forms.",
+    "free": true
+  },
+  "learn": {
+    "title": "Learn to Yo-Yo",
+    "intro": "Every great thrower started with a wobbly sleeper. Practice at home with these tips, then show us at the next session.",
+    "basics": [
+      {
+        "title": "Start Responsive",
+        "text": "A responsive yo-yo comes back with a tug. It's the easiest way to learn the basics. Most beginner yo-yos are responsive."
+      },
+      {
+        "title": "Fit the String",
+        "text": "Stand the yo-yo on the floor. Cut the string about 2 inches above your belly button, then tie a slipknot around your middle finger."
+      },
+      {
+        "title": "Throw Straight Down",
+        "text": "Palm up, curl your arm, and throw. Let it spin at the bottom. That's a sleeper, and almost every trick starts with one."
+      },
+      {
+        "title": "Learn to Bind",
+        "text": "When your sleepers last 10 seconds or more, try an unresponsive yo-yo. You'll learn to bind to bring it back, and a whole world of tricks opens up."
+      }
+    ],
+    "levels_title": "Trick Checklist",
+    "levels_intro": "Print this page and check tricks off as you land them. Go in any order.",
+    "levels": [
+      {
+        "label": "Level 1",
+        "name": "First Tricks",
+        "text": "Responsive yo-yo. Learn to sleep and return.",
+        "tricks": [
+          "Gravity Pull",
+          "Sleeper",
+          "Forward Pass",
+          "Walk the Dog",
+          "Breakaway",
+          "Around the World",
+          "Rock the Baby",
+          "Trapeze"
+        ]
+      },
+      {
+        "label": "Level 2",
+        "name": "Building Blocks",
+        "text": "Ask a grown-up helper before trying an unresponsive yo-yo.",
+        "tricks": [
+          "Bind",
+          "Double or Nothing",
+          "Brain Twister",
+          "Split the Atom",
+          "Kwyjibo",
+          "Barrel Rolls",
+          "Eli Hops",
+          "Boingy Boing"
+        ]
+      },
+      {
+        "label": "Level 3",
+        "name": "Going Further",
+        "text": "Slack, whips, and speed. Now you're building your own style.",
+        "tricks": [
+          "Green Triangle",
+          "Mach 5",
+          "Suicide",
+          "Hook",
+          "Kamikaze",
+          "Black Hops",
+          "Plastic Whip",
+          "Finger Grind"
+        ]
+      }
+    ],
+    "divisions_title": "Contest Styles",
+    "divisions_intro": "Some kids want to compete one day. Yo-yo contests group freestyles into styles. Rules vary by contest.",
+    "divisions": [
+      {
+        "code": "1A",
+        "name": "Single A",
+        "text": "One yo-yo, string tricks. The most popular style."
+      },
+      {
+        "code": "2A",
+        "name": "Two-handed looping",
+        "text": "Two responsive yo-yos looping around your hands at once."
+      },
+      {
+        "code": "3A",
+        "name": "Double A",
+        "text": "Two yo-yos doing string tricks at the same time."
+      },
+      {
+        "code": "4A",
+        "name": "Offstring",
+        "text": "The yo-yo isn't tied to the string. You launch it and catch it."
+      },
+      {
+        "code": "5A",
+        "name": "Freehand",
+        "text": "A counterweight replaces the finger loop, so the whole setup flies."
+      }
+    ],
+    "links": [
+      {
+        "title": "Learn Tricks",
+        "links": [
+          {
+            "title": "YoYoTricks.com Trick Library",
+            "url": "https://yoyotricks.com/yoyo-tricks/",
+            "text": "Video lessons from beginner to expert."
+          },
+          {
+            "title": "YoYoExpert Learn",
+            "url": "https://yoyoexpert.com/pages/learn-yoyo-tricks",
+            "text": "Step-by-step trick videos."
+          },
+          {
+            "title": "Duncan Tutorial Videos",
+            "url": "https://duncantoys.com/pages/tutorial-videos",
+            "text": "Classic tricks, clearly explained."
+          },
+          {
+            "title": "Classic Yoyo Tricks",
+            "url": "https://www.classicyoyotricks.com/",
+            "text": "Old-school responsive tricks."
+          },
+          {
+            "title": "Skill Addicts",
+            "url": "https://skilladdicts.com/",
+            "text": "Trick trees and tutorials."
+          }
+        ]
+      },
+      {
+        "title": "For Teachers & Parents",
+        "links": [
+          {
+            "title": "Scouting America Yo-Yo Adventure",
+            "url": "https://www.scouting.org/cub-scout-adventures/yo-yo/",
+            "text": "Cub Scout requirements and guide."
+          },
+          {
+            "title": "Science Buddies: Sleepy Yo-yo",
+            "url": "https://www.sciencebuddies.org/science-fair-projects/project-ideas/Phys_p069/physics/yo-yo-sleep",
+            "text": "A yo-yo science project."
+          },
+          {
+            "title": "PhET Torque Simulation",
+            "url": "https://phet.colorado.edu/en/simulations/torque",
+            "text": "Explore the physics of spin."
+          }
+        ]
+      },
+      {
+        "title": "Care & Setup",
+        "links": [
+          {
+            "title": "Cleaning a Bearing",
+            "url": "https://yoyoexpert.com/pages/411-maintenance-cleaning-a-bearing",
+            "text": "When your yo-yo gets loud or stops sleeping."
+          },
+          {
+            "title": "How To Yo-yo: Maintenance",
+            "url": "https://www.howtoyoyo.com/yo-yo-maintenance/",
+            "text": "String, bearings, and pads."
+          }
+        ]
+      }
+    ],
+    "outro": "Stuck on a trick? Bring it to the next session."
+  },
+  "resources": [
+    {
+      "title": "History",
+      "links": [
+        {
+          "title": "YoYo Museum",
+          "url": "https://www.yoyomuseum.com/",
+          "text": "Vintage models and makers."
+        },
+        {
+          "title": "YoYo Archive",
+          "url": "https://yoyoarchive.org/",
+          "text": "Releases, results, and records."
+        },
+        {
+          "title": "National Yo-Yo Museum",
+          "url": "https://nationalyoyo.org/",
+          "text": "Chico, California."
+        },
+        {
+          "title": "YoYo Wiki",
+          "url": "https://yoyo.fandom.com/wiki/Main_Page",
+          "text": "Players, contests, and lore."
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "group": "Joining",
+      "q": "Who can join?",
+      "a": "Kids {ages}. {welcome}."
+    },
+    {
+      "group": "Joining",
+      "q": "When and where do you meet?",
+      "a": "{meetup}. We meet at {venue}, {address}."
+    },
+    {
+      "group": "Joining",
+      "q": "How much does it cost?",
+      "a": "{cost}"
+    },
+    {
+      "group": "Joining",
+      "q": "Do we need to sign up?",
+      "a": "Email {email} to sign up. We'll send a short permission form for a parent or guardian to fill out."
+    },
+    {
+      "group": "Sessions",
+      "q": "Does my child need a yo-yo?",
+      "a": "{loaners}"
+    },
+    {
+      "group": "Sessions",
+      "q": "Do parents need to stay?",
+      "a": "Parents and guardians are always welcome. Kids must be dropped off and picked up by a parent, guardian, or someone they've approved in writing."
+    },
+    {
+      "group": "Sessions",
+      "q": "Is it safe?",
+      "a": "Yes. We teach yo-yo safety first: give each other room, check strings, and never swing a yo-yo near someone's face. At least two screened adults are at every session."
+    },
+    {
+      "group": "Sessions",
+      "q": "My child is shy or has never tried a yo-yo. Is that okay?",
+      "a": "Absolutely. Most kids start with zero tricks. We go at each kid's pace."
+    },
+    {
+      "group": "Helping Out",
+      "q": "Can I volunteer?",
+      "a": "Yes, please. Email {email}. We need adult helpers, and you don't need any yo-yo skills."
+    },
+    {
+      "group": "Helping Out",
+      "q": "Can I start a program like this at my school or library?",
+      "a": "Yes! Get inexpensive take-apart yo-yos (responsive and unresponsive), lots of spare string, and a few trained helpers. Meet at the same time and place every week. Email us and we'll share what worked for us."
+    }
+  ],
+  "safety": {
+    "title": "Keeping Kids Safe",
+    "points": [
+      "At least two screened, trained adults are at every session. No adult is ever alone with a child who isn't their own.",
+      "Kids are signed in and signed out by a parent, guardian, or approved adult.",
+      "Yo-yo safety comes first: give each other room, check strings before throwing, and never swing a yo-yo near anyone's face.",
+      "Parents and guardians are always welcome to watch or join in."
+    ],
+    "photos": "We only post photos of kids with written permission from a parent or guardian, and never with a child's name. Ask us anytime and we'll take a photo down."
+  },
+  "conduct": {
+    "effective": "",
+    "version": "1.0",
+    "intro": "{name} is built on the idea that yo-yos and skill toys should be fun and welcoming for everyone. That only works if people treat each other well. This code sets out what we expect from everyone in our community.",
+    "short": "Be kind. Be welcoming. Don't make anyone feel unsafe or unwelcome. If you see something, say something.",
+    "applies": [
+      "Every kid in the program",
+      "Parents, guardians, and visitors",
+      "Adult volunteers and staff",
+      "Anyone in our group chats or online spaces"
+    ],
+    "expected": [
+      "Be respectful. Treat everyone with dignity, whatever their age, skill level, race, ethnicity, gender identity, sexual orientation, disability, religion, or background.",
+      "Be welcoming, especially to beginners and younger players. Everyone was new once.",
+      "Keep feedback encouraging. If someone asks for tips, help. Skip the harsh criticism.",
+      "Mind the space. Keep the venue clean, watch your yo-yo's reach, and look out for kids.",
+      "Respect decisions. Raise disagreements with organizers calmly and privately."
+    ],
+    "unacceptable": [
+      "Harassment of any kind, including unwanted contact, following, or persistent unwanted attention",
+      "Photographing someone who asked not to be photographed",
+      "Discrimination, slurs, or jokes that put people down",
+      "Threats or intimidation, in person or online",
+      "Taking or damaging someone's gear without permission",
+      "Disruptive behavior that ruins the meetup for others"
+    ],
+    "equipment": [
+      "Ask before you borrow. Ask before you try someone else's yo-yo, and hand it back the way you got it.",
+      "Look before you throw. Big tricks, looping, and offstring need open space.",
+      "Replace worn strings, and stop if a yo-yo is cracked or damaged.",
+      "Return loaner yo-yos before you leave."
+    ],
+    "reporting": "If something makes you uncomfortable, tell a club volunteer at the meetup or email us. We take every report seriously and keep it as private as we can.",
+    "consequences": "For kids, we start with a reminder and a talk with their parent or guardian. Adults who break this code may be asked to leave or step down as volunteers. Anything involving a child's safety is reported to the host school, library, or organization and, where needed, the authorities."
+  },
+  "theme": {
+    "primary": "#1d3f8a",
+    "accent": "#b45309",
+    "background": "#fffdf8",
+    "ink": "#1f2937",
+    "corners": "sharp"
+  }
+}

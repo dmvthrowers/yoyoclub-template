@@ -1,0 +1,10 @@
+# Keeps the pinned GitHub Actions in .github/workflows up to date with security fixes.
+# The site itself has no package dependencies.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore(deps)"

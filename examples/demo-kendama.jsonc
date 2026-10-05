@@ -1,0 +1,32 @@
+// Demo: a made-up kendama club using the "kendama-club" preset, with rounded corners.
+{
+  "preset": "kendama-club",
+  "site": { "url": "", "language": "en", "date_format": "us", "timezone": "America/Los_Angeles", "source_url": "", "credit": true },
+  "club": {
+    "name": "Cascade Kendama Club",
+    "short_name": "CKC",
+    "tagline": "Kendama Club · Tacoma, WA",
+    "slogan": "Bend your knees. Have fun.",
+    "city": "Tacoma", "region": "WA", "area": "",
+    "founded": "2023",
+    "description": "A friendly kendama club in Tacoma. Every other Saturday at the park or the rec center, rain or shine.",
+    "history": []
+  },
+  "meetup": {
+    "schedule": { "repeat": "weekly", "every": 2, "from": "2026-10-03", "weekday": "Saturday", "start": "11:00", "end": "13:00", "months": [] },
+    "show": 6,
+    "venue": "Eastside Rec Center", "room": "", "address": "300 E Park Way, Tacoma WA",
+    "directions": [],
+    "rsvp": "Drop in",
+    "first_time": "First time? Borrow a kendama and we'll teach you Big Cup.",
+    "loaners": true,
+    "skip": []
+  },
+  "contact": { "email": "hello@example.org", "social": [], "donate": { "label": "", "url": "" } },
+  "cost": { "summary": "Free", "details": "Sessions are free.", "free": true },
+  "officers": [ { "role": "Organizer", "name": "Alex Example", "bio": "Still chasing a clean Lunar." } ],
+  "events": [], "partners": [], "documents": [], "gallery": [], "links": [], "sister_clubs": [], "faq_extra": [],
+  "calendar": { "embed_url": "" },
+  "conduct": { "effective": "" },
+  "theme": { "corners": "round" }
+}

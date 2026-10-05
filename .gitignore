@@ -1,0 +1,14 @@
+# Build output (GitHub Actions rebuilds it on every change)
+_site/
+.build-base-path
+_showcase_test/
+_t/
+
+# OS and editor clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+__pycache__/

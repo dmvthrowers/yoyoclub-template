@@ -1,0 +1,520 @@
+{
+  "preset_name": "Skill toy club",
+  "terms": {
+    "club_type": "Yo-Yo & Skill Toy Club",
+    "toy": "skill toy",
+    "toys": "skill toys",
+    "players": "players",
+    "sport": "Yo-yo and skill toys",
+    "meetup_label": "Club meetup"
+  },
+  "disciplines": [
+    "Yo-Yo",
+    "Kendama",
+    "Spin Tops",
+    "Diabolo",
+    "Juggling",
+    "Flow Arts",
+    "All Ages"
+  ],
+  "program": {
+    "ages": "of all ages",
+    "ages_short": "All ages & levels",
+    "welcome": "Beginners, families, and competitors are all welcome",
+    "about_title": "More Than a Yo-Yo Club",
+    "about": [
+      "{name} is the yo-yo and skill toy community for {area}. Yo-yos, kendama, spin tops, diabolo, juggling: if it takes practice and it's fun, it's welcome here. {welcome}.",
+      "Never touched a kendama? Grinding a contest routine? This is your crew. {loaners} Someone will always help you land your first trick."
+    ],
+    "pillars": [
+      {
+        "title": "Try Everything",
+        "text": "Pick up a yo-yo, a kendama, or a spin top. Swap toys and find the one that clicks."
+      },
+      {
+        "title": "Learn",
+        "text": "Experienced players love to teach. Ask for help with any trick."
+      },
+      {
+        "title": "Play",
+        "text": "Jam sessions, trick battles, and games anyone can join."
+      },
+      {
+        "title": "Share",
+        "text": "Swap tips, try other people's gear, and learn how to care for your toys."
+      }
+    ],
+    "badges": [
+      "Free entry",
+      "All skill levels",
+      "Family friendly",
+      "Loaners available"
+    ],
+    "meetup_blurb": "A free, drop-in yo-yo and skill toy meetup. Beginners welcome, loaners available.",
+    "volunteer": "We're run by volunteers. Help set up, greet first-timers, teach a trick, or plan an event. Every bit counts.",
+    "donate_text": "Meetups are free, always. Donations cover string, loaner toys, and venue costs.",
+    "contact_note": "First time? You don't need to email first. Just show up. But we're happy to answer questions."
+  },
+  "loaners": {
+    "yes": "We bring loaner yo-yos and other skill toys to every meetup, so you don't need to bring anything.",
+    "no": "Bring your toys if you have them. Don't have any? Email us and we'll try to have a spare."
+  },
+  "cost": {
+    "summary": "Free",
+    "details": "Meetups are free. No dues, no fees, no membership forms.",
+    "free": true
+  },
+  "learn": {
+    "title": "Learn Skill Toys",
+    "intro": "Every skill toy starts the same way: one small trick, over and over, until it clicks. Pick a toy and start here.",
+    "basics": [
+      {
+        "title": "Yo-Yo",
+        "text": "Start with a responsive yo-yo. String to about 2 inches above your belly button, palm up, throw straight down."
+      },
+      {
+        "title": "Kendama",
+        "text": "Hold the ken by the handle, let the tama hang still, and bend your knees as you pull it up."
+      },
+      {
+        "title": "Spin Tops",
+        "text": "Wind the string tight from the tip up, then throw overhand and snap your wrist back."
+      },
+      {
+        "title": "Diabolo & Juggling",
+        "text": "Diabolo: roll it along the string to start it spinning. Juggling: start with one ball, then two."
+      }
+    ],
+    "levels_title": "First Tricks",
+    "levels_intro": "One starter list for each toy. Land these and you're on your way.",
+    "levels": [
+      {
+        "label": "Yo-yo",
+        "name": "Yo-Yo",
+        "text": "Responsive yo-yo.",
+        "tricks": [
+          "Sleeper",
+          "Gravity Pull",
+          "Forward Pass",
+          "Walk the Dog",
+          "Breakaway",
+          "Around the World",
+          "Rock the Baby",
+          "Trapeze"
+        ]
+      },
+      {
+        "label": "Kendama",
+        "name": "Kendama",
+        "text": "Knees bent, eyes on the tama.",
+        "tricks": [
+          "Big Cup",
+          "Small Cup",
+          "Base Cup",
+          "Spike",
+          "Candlestick",
+          "Airplane",
+          "Around the World",
+          "Lighthouse"
+        ]
+      },
+      {
+        "label": "Spin tops",
+        "name": "Spin Tops",
+        "text": "Wind tight, throw smooth.",
+        "tricks": [
+          "Ground Spin",
+          "Pick Up",
+          "Hand Spin",
+          "Throw to Hand"
+        ]
+      },
+      {
+        "label": "Diabolo",
+        "name": "Diabolo",
+        "text": "Keep it spinning and level.",
+        "tricks": [
+          "Rolling Start",
+          "Acceleration",
+          "Toss and Catch",
+          "Sun",
+          "Around the Leg"
+        ]
+      },
+      {
+        "label": "Juggling",
+        "name": "Juggling",
+        "text": "Throws first, catches second.",
+        "tricks": [
+          "One-Ball Toss",
+          "Two-Ball Exchange",
+          "Three-Ball Cascade",
+          "Reverse Cascade",
+          "Columns"
+        ]
+      }
+    ],
+    "divisions_title": "Yo-Yo Contest Styles",
+    "divisions_intro": "Yo-yo contests group freestyles into styles. You don't need to compete, but it helps to know the names. Rules vary by contest, so check the event's rules page.",
+    "divisions": [
+      {
+        "code": "1A",
+        "name": "Single A",
+        "text": "One yo-yo, string tricks. The most popular style."
+      },
+      {
+        "code": "2A",
+        "name": "Two-handed looping",
+        "text": "Two responsive yo-yos looping around your hands at once."
+      },
+      {
+        "code": "3A",
+        "name": "Double A",
+        "text": "Two yo-yos doing string tricks at the same time."
+      },
+      {
+        "code": "4A",
+        "name": "Offstring",
+        "text": "The yo-yo isn't tied to the string. You launch it and catch it."
+      },
+      {
+        "code": "5A",
+        "name": "Freehand",
+        "text": "A counterweight replaces the finger loop, so the whole setup flies."
+      }
+    ],
+    "links": [
+      {
+        "title": "Learn Tricks",
+        "links": [
+          {
+            "title": "YoYoTricks.com Trick Library",
+            "url": "https://yoyotricks.com/yoyo-tricks/",
+            "text": "Video lessons from beginner to expert."
+          },
+          {
+            "title": "YoYoExpert Learn",
+            "url": "https://yoyoexpert.com/pages/learn-yoyo-tricks",
+            "text": "Step-by-step trick videos."
+          },
+          {
+            "title": "Duncan Tutorial Videos",
+            "url": "https://duncantoys.com/pages/tutorial-videos",
+            "text": "Classic tricks, clearly explained."
+          },
+          {
+            "title": "Classic Yoyo Tricks",
+            "url": "https://www.classicyoyotricks.com/",
+            "text": "Old-school responsive tricks."
+          },
+          {
+            "title": "Skill Addicts",
+            "url": "https://skilladdicts.com/",
+            "text": "Trick trees and tutorials."
+          }
+        ]
+      },
+      {
+        "title": "Kendama",
+        "links": [
+          {
+            "title": "LearnKendama First 50",
+            "url": "https://yoyotricks.com/tag/kendama-first-50-tricks/",
+            "text": "Fifty starter tricks, in order."
+          },
+          {
+            "title": "Kendama USA Tutorials",
+            "url": "https://kendamausa.com/kendama-tricks-and-tutorials/",
+            "text": "Trick videos from beginner up."
+          },
+          {
+            "title": "Skill Addicts Kendama Tree",
+            "url": "https://app.skilladdicts.com/tree/kendama",
+            "text": "See what to learn next."
+          }
+        ]
+      },
+      {
+        "title": "Spin Tops",
+        "links": [
+          {
+            "title": "Skill Addicts: How to Spin a Top",
+            "url": "https://skilladdicts.com/how-to-spin-a-top/",
+            "text": "Winding and your first throw."
+          },
+          {
+            "title": "Getting Started with Spin Tops",
+            "url": "https://forums.yoyoexpert.com/t/getting-started-with-spin-tops/23363",
+            "text": "Forum guide for beginners."
+          },
+          {
+            "title": "YoYoExpert Spin Top Forum",
+            "url": "https://forums.yoyoexpert.com/c/spin-tops/16",
+            "text": "Ask questions, share tricks."
+          }
+        ]
+      },
+      {
+        "title": "Juggling & Diabolo",
+        "links": [
+          {
+            "title": "Library of Juggling",
+            "url": "https://libraryofjuggling.com/",
+            "text": "Hundreds of patterns, animated."
+          },
+          {
+            "title": "Skill Addicts: How to Juggle",
+            "url": "https://skilladdicts.com/learning-how-to-juggle/",
+            "text": "From one ball to three."
+          },
+          {
+            "title": "Skill Addicts: Diabolo",
+            "url": "https://skilladdicts.com/how-to-do-tricks-with-diabolo/",
+            "text": "Starting, spinning, and tricks."
+          }
+        ]
+      },
+      {
+        "title": "Flow Arts",
+        "links": [
+          {
+            "title": "Playpoi",
+            "url": "https://playpoi.com/",
+            "text": "Poi lessons for every level."
+          }
+        ]
+      },
+      {
+        "title": "Apps",
+        "links": [
+          {
+            "title": "Level Up! (iOS)",
+            "url": "https://apps.apple.com/us/app/level-up-yoyo-and-skill-toys/id414905488",
+            "text": "Track the tricks you've landed."
+          },
+          {
+            "title": "Skill Addicts (iOS)",
+            "url": "https://apps.apple.com/us/app/skill-addicts-play-learn/id6447176925",
+            "text": "Trick trees on your phone."
+          },
+          {
+            "title": "Skill Addicts (Android)",
+            "url": "https://play.google.com/store/apps/details?id=com.skilladdicts.app"
+          }
+        ]
+      }
+    ],
+    "outro": "Learning is faster in person. Bring your toys and questions to the next meetup."
+  },
+  "resources": [
+    {
+      "title": "Community",
+      "links": [
+        {
+          "title": "YoYoExpert Forums",
+          "url": "https://forums.yoyoexpert.com/",
+          "text": "The biggest yo-yo forum."
+        },
+        {
+          "title": "r/Throwers",
+          "url": "https://www.reddit.com/r/Throwers/",
+          "text": "Yo-yo talk on Reddit."
+        },
+        {
+          "title": "The Yo-Yo List",
+          "url": "https://www.theyoyolist.com/",
+          "text": "Shops, news, and releases."
+        },
+        {
+          "title": "YoYoNews",
+          "url": "https://yoyonews.com/",
+          "text": "Community news."
+        },
+        {
+          "title": "International Jugglers' Association",
+          "url": "https://www.juggle.org/",
+          "text": "Juggling news and festivals."
+        }
+      ]
+    },
+    {
+      "title": "Contests & Events",
+      "links": [
+        {
+          "title": "National Yo-Yo League",
+          "url": "https://nyyl.org/",
+          "text": "US contest league."
+        },
+        {
+          "title": "NYYL Contest Calendar",
+          "url": "https://compete.yoyocontest.com/compete/contests",
+          "text": "Find a contest near you."
+        },
+        {
+          "title": "International Yo-Yo Federation",
+          "url": "https://iyyf.org/",
+          "text": "World contests and rules."
+        },
+        {
+          "title": "YoYo Archive Events",
+          "url": "https://yoyoarchive.org/yya-events",
+          "text": "Community event calendar."
+        },
+        {
+          "title": "The Juggling Edge",
+          "url": "https://www.jugglingedge.com/events.php",
+          "text": "Juggling clubs and festivals."
+        }
+      ]
+    },
+    {
+      "title": "History",
+      "links": [
+        {
+          "title": "YoYo Museum",
+          "url": "https://www.yoyomuseum.com/",
+          "text": "Vintage models and makers."
+        },
+        {
+          "title": "YoYo Archive",
+          "url": "https://yoyoarchive.org/",
+          "text": "Releases, results, and records."
+        },
+        {
+          "title": "National Yo-Yo Museum",
+          "url": "https://nationalyoyo.org/",
+          "text": "Chico, California."
+        },
+        {
+          "title": "YoYo Wiki",
+          "url": "https://yoyo.fandom.com/wiki/Main_Page",
+          "text": "Players, contests, and lore."
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "group": "General",
+      "q": "What is {name}?",
+      "a": "{name} is a yo-yo and skill toy club for {area}. We bring together players {ages}, from total beginners to contest players. {welcome}."
+    },
+    {
+      "group": "General",
+      "q": "Is there a membership fee?",
+      "a": "{cost}"
+    },
+    {
+      "group": "General",
+      "q": "Do I have to compete?",
+      "a": "Not at all. Most people come to hang out, learn tricks, and have fun. Contests are one part of the hobby, not a requirement."
+    },
+    {
+      "group": "General",
+      "q": "Is it just yo-yos?",
+      "a": "No. Kendama, spin tops, diabolo, juggling, poi and other flow arts, and any other skill toy are welcome. Bring what you love."
+    },
+    {
+      "group": "Meetups",
+      "q": "When and where do you meet?",
+      "a": "{meetup}. We meet at {venue}, {address}. Come and go anytime during the meetup."
+    },
+    {
+      "group": "Meetups",
+      "q": "Do I need to RSVP?",
+      "a": "No. Just show up. If a meetup is ever cancelled, we post it on this site and our social media as early as we can."
+    },
+    {
+      "group": "Meetups",
+      "q": "What should I bring?",
+      "a": "Nothing. {loaners} Wear comfortable clothes you can move in."
+    },
+    {
+      "group": "Meetups",
+      "q": "Can kids come?",
+      "a": "Yes! All ages are welcome. Younger kids should come with a parent or guardian, especially the first time."
+    },
+    {
+      "group": "Getting Started",
+      "q": "Do I need to know how to do any tricks?",
+      "a": "No. Total beginners are just as welcome as experienced players. We'll help you with your first trick on any toy."
+    },
+    {
+      "group": "Getting Started",
+      "q": "What should I buy first?",
+      "a": "Try a few toys at a meetup first, then ask our members. They'll recommend a starter yo-yo or kendama for your budget."
+    },
+    {
+      "group": "Getting Started",
+      "q": "Is it cheating to learn on an unresponsive yo-yo?",
+      "a": "No. A landed trick is a landed trick. Classic tricks are worth learning on a responsive yo-yo too, but there's no wrong way to play."
+    },
+    {
+      "group": "Getting Involved",
+      "q": "How do I become a member?",
+      "a": "Just come to a meetup. There's no sign-up. If you show up, you're part of the club."
+    },
+    {
+      "group": "Getting Involved",
+      "q": "Can I volunteer?",
+      "a": "Yes, please. Email {email} or talk to us at a meetup. We always need help setting up, greeting newcomers, and running activities."
+    },
+    {
+      "group": "Getting Involved",
+      "q": "Can my organization partner with the club?",
+      "a": "Yes. We're open to venue partnerships, demos, workshops, and sponsorships. Email {email} with your idea."
+    }
+  ],
+  "safety": {
+    "title": "Keeping Meetups Safe",
+    "points": [
+      "Kids are welcome. Younger kids need a parent or guardian with them. A parent or guardian is responsible for their own child at every meetup.",
+      "Club volunteers never take kids anywhere away from the group or the meetup space.",
+      "Give each player room. Check behind you before a big trick, and keep looping, offstring, diabolo tosses, and flow arts in open space.",
+      "Check your gear before you play. Worn yo-yo strings and frayed kendama strings can snap."
+    ],
+    "photos": "We sometimes take photos at meetups for this website and our social media. Tell a volunteer if you or your child would rather not be photographed. We never post a child's full name, and we take photos down whenever asked."
+  },
+  "conduct": {
+    "effective": "",
+    "version": "1.0",
+    "intro": "{name} is built on the idea that yo-yos and skill toys should be fun and welcoming for everyone. That only works if people treat each other well. This code sets out what we expect from everyone in our community.",
+    "short": "Be kind. Be welcoming. Don't make anyone feel unsafe or unwelcome. If you see something, say something.",
+    "applies": [
+      "Everyone at our meetups and events, including players, parents, and spectators",
+      "Competitors and spectators at contests we run",
+      "Club volunteers and officers",
+      "Anyone in our online spaces and group chats"
+    ],
+    "expected": [
+      "Be respectful. Treat everyone with dignity, whatever their age, skill level, race, ethnicity, gender identity, sexual orientation, disability, religion, or background.",
+      "Be welcoming, especially to beginners and younger players. Everyone was new once.",
+      "Keep feedback encouraging. If someone asks for tips, help. Skip the harsh criticism.",
+      "Mind the space. Keep the venue clean, watch your yo-yo's reach, and look out for kids.",
+      "Respect decisions. Raise disagreements with organizers calmly and privately."
+    ],
+    "unacceptable": [
+      "Harassment of any kind, including unwanted contact, following, or persistent unwanted attention",
+      "Photographing someone who asked not to be photographed",
+      "Discrimination, slurs, or jokes that put people down",
+      "Threats or intimidation, in person or online",
+      "Taking or damaging someone's gear without permission",
+      "Disruptive behavior that ruins the meetup for others"
+    ],
+    "equipment": [
+      "Ask before you borrow. Hand it back the way you got it.",
+      "Look before you throw. Big tricks, tosses, and flow arts need open space.",
+      "Replace worn strings, and stop if a toy is cracked or damaged.",
+      "Return loaner toys before you leave."
+    ],
+    "reporting": "If something makes you uncomfortable, tell a club volunteer at the meetup or email us. We take every report seriously and keep it as private as we can.",
+    "consequences": "Organizers may give a warning, ask someone to leave a meetup, or ban someone from future events, depending on what happened. For anything involving a child's safety, we will contact the venue and, where needed, the authorities."
+  },
+  "theme": {
+    "primary": "#2b1b4e",
+    "accent": "#a8321c",
+    "background": "#fffdf8",
+    "ink": "#1f1a2e",
+    "corners": "sharp"
+  }
+}
