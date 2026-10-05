@@ -9,7 +9,9 @@ No installs needed: standard-library Python 3.9+ only.
 
 How it fits together:
   site.jsonc        your settings (the only file most people edit)
-  presets/*.json    starting text for each kind of club (yo-yo, skill toys, kendama, youth program)
+  presets/*.json    starting text for each kind of club (yo-yo, kendama, diabolo, spin top, juggling,
+                    mixed skill toys, youth program)
+  presets/_toys.json  the toy library: words, logo shape, and starter tips for each toy in "toys"
   assets/           stylesheet, script, your images and documents (copied as-is)
   content/*.html    optional extra HTML added to the bottom of a page (e.g. content/about.html)
   build.py          this file: meetup dates, then one small function per page, near the bottom
@@ -59,15 +61,122 @@ def merge(base, override):
     return override
 
 
+def read_preset(name):
+    path = ROOT / "presets" / f"{name}.json"
+    if name.startswith("_") or not path.exists():
+        return None
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+# ---------------------------------------------------------------- toys
+# "toys" names what a club plays, e.g. ["kendama"] or ["yo-yo", "kendama"]. Words like {toys} in
+# preset text come from it ("yo-yos and kendamas"). presets/_toys.json holds each toy's words,
+# logo shape, and starter text.
+
+def toy_key(value, lib):
+    k = str(value).strip().lower()
+    k = lib["aliases"].get(k, k).replace(" ", "-")
+    return lib["aliases"].get(k, k)
+
+
+def toy_entry(value, lib):
+    """One toy from the library. A name the library doesn't know still works, with plain wording."""
+    extra = value if isinstance(value, dict) else {}
+    name = str(extra.get("name", "") if extra else value).strip()
+    key = toy_key(name, lib)
+    if key in lib["toys"]:
+        entry = dict(lib["toys"][key])
+    else:
+        warnings.append(f'Toy "{name}" isn\'t in presets/_toys.json, so it gets plain wording and no starter tips. '
+                        f'Known toys: {", ".join(lib["toys"])}.')
+        label = " ".join(w[:1].upper() + w[1:] for w in name.split())
+        entry = {"name": name, "plural": name if name.endswith("s") else name + "s", "label": label,
+                 "players": "players", "sport": name[:1].upper() + name[1:], "emblem": "badge",
+                 "card": {"title": label, "text": "New to it? Ask at a meetup and someone will show you how to start."}}
+    entry.update({k: v for k, v in extra.items() if v})
+    entry["key"] = key
+    return entry
+
+
+def join_words(items):
+    items = [i for i in items if i]
+    return " and ".join(items) if len(items) <= 2 else ", ".join(items[:-1]) + ", and " + items[-1]
+
+
+def toy_terms(toys):
+    """Words for the club's toys: one toy, two ("yo-yos and kendamas"), or three or more ("skill toys")."""
+    if not toys:
+        return {}
+    n = len(toys)
+    names, plurals, labels = ([t[k] for t in toys] for k in ("name", "plural", "label"))
+    listed = join_words(plurals)
+    toy_title = labels[0] if n == 1 else (" & ".join(labels) if n == 2 else "Skill Toy")
+    sport = join_words([toys[0]["sport"]] + [t["sport"].lower() for t in toys[1:]])
+    return {"toy": names[0] if n == 1 else (join_words(names) if n == 2 else "skill toy"),
+            "toys": listed if n <= 3 else "skill toys",
+            "Toy": toy_title, "toy_list": listed[:1].upper() + listed[1:],
+            "players": toys[0]["players"] if n == 1 else "players",
+            "sport": sport, "club_type": f"{toy_title} Club", "meetup_label": "Club meetup"}
+
+
+def toy_mix(base, toys, lib, preset):
+    """Text for a club whose toys differ from its preset's: the Learn page, FAQ, loaner, safety,
+    and conduct wording are rebuilt for exactly those toys. A preset's own "mix" block wins over
+    the shared one in presets/_toys.json."""
+    mix = merge(lib["mix"], preset.get("mix") or {})
+    out = dict(base)
+    out["program"] = merge(base.get("program") or {}, mix["program"])
+    out["loaners"] = mix["loaners"]
+    out["disciplines"] = [t.get("chip") or t["label"] for t in toys] + ["All Ages"]
+    home = read_preset(toys[0].get("preset", "")) if len(toys) == 1 else None
+    if home:
+        learn = home["learn"]
+    else:
+        learn = dict(mix["learn"], basics=[t["card"] for t in toys if t.get("card")],
+                     levels=[t["level"] for t in toys if t.get("level")],
+                     links=[t["links"] for t in toys if t.get("links")], divisions=[])
+        if any(t["key"] == "yo-yo" for t in toys):
+            yoyo = (read_preset("yoyo-club") or {}).get("learn", {})
+            learn.update(divisions=yoyo.get("divisions", []), divisions_title="Yo-Yo Contest Styles",
+                         divisions_intro=yoyo.get("divisions_intro", ""))
+    out["learn"] = learn
+    community = list({link["url"]: link for t in toys for link in t.get("community", [])}.values())
+    out["resources"] = [{"title": mix["resources_title"], "links": community}] if community else []
+    faq = [f for f in mix["faq"] if len(toys) >= f.get("min_toys", 1)]
+    group = mix["faq_toy_group"]
+    extra = [dict(f, group=group) for t in toys for f in t.get("faq", [])]
+    at = max((i + 1 for i, f in enumerate(faq) if f.get("group") == group), default=len(faq))
+    out["faq"] = faq[:at] + extra + faq[at:]
+    out["safety"] = dict(base.get("safety") or {}, **mix.get("safety", {}))
+    out["safety"]["points"] = list(out["safety"].get("points", [])) + [t["safety"] for t in toys if t.get("safety")]
+    cc = mix.get("conduct", {})
+    out["conduct"] = dict(base.get("conduct") or {}, **{k: v for k, v in cc.items() if not k.startswith("equipment_")})
+    out["conduct"]["equipment"] = (cc.get("equipment_first", []) + [t["equipment"] for t in toys if t.get("equipment")]
+                                   + cc.get("equipment_last", []))
+    return out
+
+
 def load_config(config_path=ROOT / "site.jsonc"):
     site = load_jsonc(config_path)
     name = site.get("preset") or "yoyo-club"
-    preset_path = ROOT / "presets" / f"{name}.json"
-    if not preset_path.exists():
-        choices = ", ".join(sorted(p.stem for p in (ROOT / "presets").glob("*.json")))
+    preset = read_preset(name)
+    if preset is None:
+        choices = ", ".join(sorted(p.stem for p in (ROOT / "presets").glob("*.json") if not p.stem.startswith("_")))
         sys.exit(f'\nUnknown preset "{name}" in site.jsonc. Choose one of: {choices}\n')
-    preset = json.loads(preset_path.read_text(encoding="utf-8"))
-    return merge(preset, site)
+    lib = json.loads((ROOT / "presets" / "_toys.json").read_text(encoding="utf-8"))
+    preset_toys = [toy_entry(t, lib) for t in preset.get("toys") or []]
+    site_toys = [toy_entry(t, lib) for t in site.get("toys") or []]
+    toys = site_toys or preset_toys
+    base = dict(preset)
+    if site_toys and {t["key"] for t in site_toys} != {t["key"] for t in preset_toys}:
+        # Your toys differ from the preset's: the preset's toy words no longer apply.
+        base = toy_mix(base, toys, lib, preset)
+        base["terms"] = merge(toy_terms(toys), merge(lib["mix"], preset.get("mix") or {}).get("terms", {}))
+    else:
+        base["terms"] = merge(toy_terms(toys), preset.get("terms") or {})
+    cfg = merge(base, site)
+    cfg["toys"] = toys
+    return cfg
 
 
 # ---------------------------------------------------------------- helpers
@@ -242,6 +351,56 @@ def yoyo_png(size_w, size_h, primary, accent, background):
     return png(size_w, size_h, pixel)
 
 
+# Logo shapes for the other toys, on a 100 x 100 grid: (shapes, text center x/y, text scale).
+# Shapes: ("circle", cx, cy, r, color), ("ring", cx, cy, outer r, inner r, color),
+# ("rect", x, y, w, h, color), ("poly", [(x, y), ...], color). "p" = primary, "a" = accent.
+# The yo-yo keeps its own drawing (emblem_svg and yoyo_png).
+EMBLEMS = {
+    "kendama": ([("rect", 45, 68, 10, 32, "p"), ("rect", 24, 66, 52, 9, "a"), ("circle", 50, 36, 33, "p"),
+                 ("ring", 50, 36, 33, 29.5, "a"), ("circle", 50, 6.5, 4, "a")], (50, 37), 1.0),
+    "top": ([("rect", 46.5, 0, 7, 14, "p"), ("poly", [(22, 62), (78, 62), (50, 99)], "a"),
+             ("circle", 50, 46, 35, "p"), ("ring", 50, 46, 35, 31.5, "a")], (50, 46), 1.0),
+    "diabolo": ([("poly", [(3, 16), (3, 84), (47, 50)], "a"), ("poly", [(97, 16), (97, 84), (53, 50)], "a"),
+                 ("circle", 50, 50, 25, "p")], (50, 50), 0.72),
+    "juggling": ([("circle", 62, 11, 8, "a"), ("circle", 84, 26, 10, "a"), ("circle", 42, 60, 36, "p"),
+                  ("ring", 42, 60, 36, 32.5, "a")], (42, 60), 1.0),
+    "badge": ([("circle", 50, 50, 46, "a"), ("circle", 50, 50, 39, "p"), ("ring", 50, 50, 31, 29.5, "a")], (50, 50), 1.0),
+}
+
+
+def inside(shape, u, v):
+    kind = shape[0]
+    if kind == "circle":
+        return (u - shape[1]) ** 2 + (v - shape[2]) ** 2 <= shape[3] ** 2
+    if kind == "ring":
+        d2 = (u - shape[1]) ** 2 + (v - shape[2]) ** 2
+        return shape[4] ** 2 <= d2 <= shape[3] ** 2
+    if kind == "rect":
+        return shape[1] <= u <= shape[1] + shape[3] and shape[2] <= v <= shape[2] + shape[4]
+    pts = shape[1]                                              # convex polygon
+    signs = [(bx - ax) * (v - ay) - (by - ay) * (u - ax) for (ax, ay), (bx, by) in zip(pts, pts[1:] + pts[:1])]
+    return all(x >= 0 for x in signs) or all(x <= 0 for x in signs)
+
+
+def emblem_png(kind, size_w, size_h, primary, accent, background):
+    """The toy logo (without letters) for social previews and app icons."""
+    shapes = [(s[:-1], hex_rgb(primary if s[-1] == "p" else accent)) for s in reversed(EMBLEMS[kind][0])]
+    a, bg = hex_rgb(accent), hex_rgb(background)
+    wide = size_w > size_h
+    box = min(size_w, size_h) * (0.66 if wide else 0.8)
+    cx, cy = (size_w * 0.70, size_h * 0.5) if wide else (size_w / 2, size_h / 2)
+    ox, oy = cx - box / 2, cy - box / 2
+    stripe = size_h - max(8, size_h // 30)
+    def pixel(x, y):
+        if wide and y >= stripe:
+            return a
+        u, v = (x - ox) * 100 / box, (y - oy) * 100 / box
+        if not (0 <= u <= 100 and 0 <= v <= 100):
+            return bg
+        return next((color for shape, color in shapes if inside(shape, u, v)), bg)
+    return png(size_w, size_h, pixel)
+
+
 # ---------------------------------------------------------------- page building
 
 class Site:
@@ -362,8 +521,11 @@ class Site:
                   "venue": m.get("venue", ""), "address": m.get("address", ""),
                   "email": c["contact"]["email"], "cost": c["cost"]["details"] or c["cost"]["summary"],
                   "loaners": loan.get("yes") if m.get("loaners", True) else loan.get("no", ""),
-                  "toy": c["terms"]["toy"], "toys": c["terms"]["toys"], "players": c["terms"]["players"]}
-        return re.sub(r"\{(\w+)\}", lambda mt: values.get(mt.group(1), mt.group(0)), text)
+                  "players": "players", "toy": "skill toy", "toys": "skill toys"}
+        values.update({k: v for k, v in c["terms"].items() if isinstance(v, str)})
+        for _ in range(2):                     # twice, so {loaners} text can itself say {toys}
+            text = re.sub(r"\{(\w+)\}", lambda mt: values.get(mt.group(1), mt.group(0)), text)
+        return text
 
     def area(self):
         return self.club.get("area") or ", ".join(x for x in (self.club.get("city"), self.club.get("region")) if x)
@@ -458,7 +620,7 @@ class Site:
         if ld:
             payload = json.dumps(ld if len(ld) > 1 else ld[0], indent=2, ensure_ascii=False).replace("</", "<\\/")
             ld_html = f'\n  <script type="application/ld+json">\n{payload}\n  </script>'
-        sub = " · ".join(x for x in (self.cfg["terms"]["club_type"], self.area()) if x)
+        sub = " · ".join(x for x in (self.fill(self.cfg["terms"].get("club_type", "")), self.area()) if x)
         page = f"""<!DOCTYPE html>
 <html lang="{esc(self.cfg['site'].get('language') or 'en')}">
 <head>
@@ -635,7 +797,7 @@ class Site:
         for d, skip in self.occurrences:
             if skip:
                 continue
-            ev = {"@context": "https://schema.org", "@type": "Event", "name": f"{self.name} {self.cfg['terms']['meetup_label'].title()}",
+            ev = {"@context": "https://schema.org", "@type": "Event", "name": f"{self.name} {self.fill(self.cfg['terms']['meetup_label']).title()}",
                   "description": self.fill(self.cfg["program"]["meetup_blurb"]), "startDate": stamp(d, start),
                   "eventStatus": "https://schema.org/EventScheduled",
                   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
@@ -750,7 +912,7 @@ class Site:
 <section class="section">
   <div class="wrap narrow">
     <p class="eyebrow">About us</p>
-    <h2>{esc(c["program"]["about_title"])}</h2>
+    <h2>{esc(self.fill(c["program"]["about_title"]))}</h2>
     {about}
     {self.chips()}
     <p><a class="more" href="about.html">More about the club</a></p>
@@ -760,7 +922,7 @@ class Site:
 <section class="section section-alt">
   <div class="wrap">
     <p class="eyebrow center">What we do</p>
-    <h2 class="center">Come Throw With Us</h2>
+    <h2 class="center">{esc(self.fill(c["program"].get("pillars_title") or "Come Play With Us"))}</h2>
     {self.cards(c["program"]["pillars"], "cards cards-4")}
     <p class="center"><a class="btn btn-primary" href="learn.html">Start learning</a></p>
   </div>
@@ -768,7 +930,7 @@ class Site:
 {partners_html}"""
         org = {"@context": "https://schema.org", "@type": "SportsOrganization", "name": self.name,
                "description": g.get("description", ""), "email": c["contact"]["email"],
-               "sport": c["terms"]["sport"],
+               "sport": self.fill(c["terms"].get("sport", "")),
                "address": {"@type": "PostalAddress", "addressLocality": g.get("city", ""), "addressRegion": g.get("region", "")}}
         if self.base_url:
             org["url"] = self.base_url
@@ -807,7 +969,7 @@ class Site:
     {self.documents_html(docs)}
   </div>
 </section>"""
-        body = f"""{self.page_head("About us", c["program"]["about_title"], g.get("description", ""))}
+        body = f"""{self.page_head("About us", self.fill(c["program"]["about_title"]), g.get("description", ""))}
 
 <section class="section">
   <div class="wrap narrow">
@@ -902,7 +1064,7 @@ class Site:
         for lv in L.get("levels", []):
             tricks = "".join(f"<li>{esc(t)}</li>" for t in lv.get("tricks", []))
             levels.append(f'\n  <div class="card level"><span class="label">{esc(lv.get("label", ""))}</span>'
-                          f'<h3>{esc(lv["name"])}</h3><p>{esc(lv.get("text", ""))}</p><ul class="tricks">{tricks}</ul></div>')
+                          f'<h3>{esc(lv["name"])}</h3><p>{esc(self.fill(lv.get("text", "")))}</p><ul class="tricks">{tricks}</ul></div>')
         divisions = ""
         if L.get("divisions"):
             rows = "".join(f'<tr><th scope="row">{esc(d["code"])}</th><td>{esc(d["name"])}</td><td>{esc(d["text"])}</td></tr>'
@@ -910,14 +1072,14 @@ class Site:
             divisions = f"""
 <section class="section">
   <div class="wrap narrow">
-    <h2>{esc(L.get("divisions_title", "Contest Styles"))}</h2>
-    <p>{esc(L.get("divisions_intro", ""))}</p>
+    <h2>{esc(self.fill(L.get("divisions_title", "Contest Styles")))}</h2>
+    <p>{esc(self.fill(L.get("divisions_intro", "")))}</p>
     <div class="table-wrap"><table><thead><tr><th scope="col">Style</th><th scope="col">Name</th><th scope="col">What it is</th></tr></thead>
     <tbody>{rows}</tbody></table></div>
   </div>
 </section>"""
         links = self.link_groups(L.get("links", []))
-        body = f"""{self.page_head("Learn", L.get("title", "Learn to Throw"), L.get("intro", ""))}
+        body = f"""{self.page_head("Learn", self.fill(L.get("title") or "Learn the Basics"), self.fill(L.get("intro", "")))}
 
 <section class="section">
   <div class="wrap">
@@ -928,8 +1090,8 @@ class Site:
 
 <section class="section section-alt">
   <div class="wrap">
-    <h2 class="center">{esc(L.get("levels_title", "Trick Path"))}</h2>
-    <p class="center intro">{esc(L.get("levels_intro", ""))}</p>
+    <h2 class="center">{esc(self.fill(L.get("levels_title", "Trick Path")))}</h2>
+    <p class="center intro">{esc(self.fill(L.get("levels_intro", "")))}</p>
     <div class="cards cards-3">{"".join(levels)}
     </div>
   </div>
@@ -942,7 +1104,7 @@ class Site:
     <p class="center muted">{esc(self.fill(L.get("outro", "")))}</p>
   </div>
 </section>"""
-        return "Learn", f"Learn {c['terms']['toy']} tricks with {self.name}: first steps, a trick path, and tutorials.", body, None
+        return "Learn", f"Learn {self.fill('{toy}')} tricks with {self.name}: first steps, a trick path, and tutorials.", body, None
 
     def page_team(self):
         c = self.cfg
@@ -1072,9 +1234,9 @@ class Site:
     {inner}
   </div>
 </section>""")
-        body = f"""{self.page_head("Learn & reference", "Resources", f"Downloads, shops, and trusted links for {c['terms']['players']} of every level. Looking for tutorials? See the Learn page.")}
+        body = f"""{self.page_head("Learn & reference", "Resources", f"Downloads, shops, and trusted links for {self.fill('{players}')} of every level. Looking for tutorials? See the Learn page.")}
 {"".join(html_parts) or '<section class="section"><div class="wrap"><p class="center"><a href="learn.html">Start with the Learn page</a></p></div></section>'}"""
-        return "Resources", f"Downloads, shops, and trusted {c['terms']['toy']} links from {self.name}.", body, None
+        return "Resources", f"Downloads, shops, and trusted {self.fill('{toy}')} links from {self.name}.", body, None
 
     def page_faq(self):
         c = self.cfg
@@ -1227,11 +1389,45 @@ class Site:
 }}
 """
 
+    def emblem_kind(self):
+        """Logo shape: theme.emblem, or the club's first toy. Unknown names fall back to a plain badge."""
+        toys = self.cfg.get("toys") or []
+        kind = self.theme.get("emblem") or (toys[0].get("emblem") if toys else "yoyo") or "badge"
+        if kind not in EMBLEMS and kind != "yoyo":
+            warnings.append(f'theme.emblem "{kind}" should be one of: yoyo, {", ".join(EMBLEMS)}. Using "badge".')
+            kind = "badge"
+        return kind
+
     def emblem_svg(self):
-        """A yo-yo with the club's initials, on a string. Replace with assets/emblem.svg for your own logo."""
+        """The club's initials on a toy (a yo-yo by default). Replace with assets/emblem.svg for your own logo."""
         t = self.theme
         label = (self.club.get("short_name") or "".join(w[0] for w in re.findall(r"[A-Za-z0-9]+", self.name))[:3]).upper()[:4]
         size = {1: 34, 2: 28, 3: 22, 4: 17}.get(len(label), 17)
+        kind = self.emblem_kind()
+        if kind != "yoyo":
+            shapes, (tx, ty), scale = EMBLEMS[kind]
+            def color(c):
+                return t["primary"] if c == "p" else t["accent"]
+            def num(x):
+                return f"{x:g}"
+            parts = []
+            for s in shapes:
+                if s[0] == "circle":
+                    parts.append(f'<circle cx="{num(s[1])}" cy="{num(s[2])}" r="{num(s[3])}" fill="{color(s[4])}"/>')
+                elif s[0] == "ring":
+                    parts.append(f'<circle cx="{num(s[1])}" cy="{num(s[2])}" r="{num((s[3] + s[4]) / 2)}" fill="none" '
+                                 f'stroke="{color(s[5])}" stroke-width="{num(s[3] - s[4])}"/>')
+                elif s[0] == "rect":
+                    parts.append(f'<rect x="{num(s[1])}" y="{num(s[2])}" width="{num(s[3])}" height="{num(s[4])}" fill="{color(s[5])}"/>')
+                else:
+                    pts = " ".join(f"{num(x)},{num(y)}" for x, y in s[1])
+                    parts.append(f'<polygon points="{pts}" fill="{color(s[2])}"/>')
+            shapes_svg = "\n  ".join(parts)
+            return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="{esc(self.name)}">
+  {shapes_svg}
+  <text x="{num(tx)}" y="{num(ty)}" text-anchor="middle" dominant-baseline="central" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="{num(round(size * scale))}" fill="#ffffff">{esc(label)}</text>
+</svg>
+"""
         return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="{esc(self.name)}">
   <rect x="48.5" y="0" width="3" height="22" fill="{t["primary"]}"/>
   <circle cx="50" cy="58" r="41" fill="{t["accent"]}"/>
@@ -1252,10 +1448,15 @@ class Site:
         if not (OUT / "favicon.svg").exists():
             shutil.copy(OUT / "emblem.svg", OUT / "favicon.svg")
         t = self.theme
+        kind = self.emblem_kind()
+        def icon(w, h):
+            if kind == "yoyo":
+                return yoyo_png(w, h, t["primary"], t["accent"], t["background"])
+            return emblem_png(kind, w, h, t["primary"], t["accent"], t["background"])
         if not (OUT / "og-card.png").exists():                     # your own assets/og-card.png wins
-            (OUT / "og-card.png").write_bytes(yoyo_png(1200, 630, t["primary"], t["accent"], t["background"]))
+            (OUT / "og-card.png").write_bytes(icon(1200, 630))
         if not (OUT / "apple-touch-icon.png").exists():
-            (OUT / "apple-touch-icon.png").write_bytes(yoyo_png(180, 180, t["primary"], t["accent"], t["background"]))
+            (OUT / "apple-touch-icon.png").write_bytes(icon(180, 180))
         (OUT / "site.webmanifest").write_text(json.dumps({
             "name": self.name, "short_name": self.club.get("short_name") or self.name[:24],
             "start_url": "./", "display": "browser", "background_color": t["background"],
@@ -1312,6 +1513,7 @@ def main():
     nxt = site.next_meetup()
     print(f"Built {cfg.get('preset_name', cfg.get('preset'))} site for {site.name} into {OUT.relative_to(ROOT)}/"
           + (f" (address: {base_url})" if base_url else "")
+          + (f"\n  Toys: {', '.join(t['name'] for t in cfg['toys'])}" if cfg.get("toys") else "")
           + (f"\n  Next meetup: {fmt_date(nxt, site.style)}" if nxt else ""))
     for w in dict.fromkeys(warnings):          # each warning once, in order
         print("  WARNING:", w)

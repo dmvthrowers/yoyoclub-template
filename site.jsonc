@@ -8,11 +8,20 @@
   // STEP 1: Pick a starting preset. It fills in the Learn page, FAQ, links,
   // code of conduct, and safety rules. Choices:
   //   "yoyo-club"      - a yo-yo club (default)
-  //   "skill-toy-club" - yo-yos plus kendama, spin tops, diabolo, juggling, and more
   //   "kendama-club"   - a kendama club
+  //   "diabolo-club"   - a diabolo club
+  //   "spintop-club"   - a spin top (throw top) club
+  //   "juggling-club"  - a juggling and flow arts club (balls, clubs, poi, staff, hoop)
+  //   "skill-toy-club" - yo-yos plus kendama, spin tops, diabolo, juggling, and more
   //   "youth-program"  - a yo-yo program at a school, library, camp, or rec center
   // Anything you set below overrides the preset.
   "preset": "yoyo-club",
+
+  // What your club plays. [] = the preset's toys. To mix, list them, e.g. ["yo-yo", "kendama"]:
+  // the Learn page, FAQ, loaner, and safety text are then written for exactly those toys
+  // ("loaner yo-yos and kendamas"), and the logo becomes your first toy.
+  // Toys: "yo-yo", "kendama", "spin-top", "diabolo", "juggling", "flow-arts" (others work, with plain wording).
+  "toys": [],
 
   "site": {
     // Your site's address. Leave "" on GitHub Pages; it's filled in automatically.
@@ -34,7 +43,7 @@
   "club": {
     // Full name, as you want it in the page title and header
     "name": "Springfield Throwers",
-    // 1–4 letters for the generated yo-yo logo ("" = use the name's initials)
+    // 1–4 letters for the generated logo ("" = use the name's initials)
     "short_name": "ST",
     // Short line under the name on the home page
     "tagline": "Yo-Yo Club · Springfield, IL",
@@ -78,7 +87,7 @@
     "rsvp": "Drop in, no RSVP needed",
     // Shown on the next meetup only
     "first_time": "First time? Just show up. We'll hand you a yo-yo and teach you your first trick.",
-    // Do you bring loaner yo-yos? true or false
+    // Do you bring loaners (toys people can borrow)? true or false
     "loaners": true,
     // Dates with no meetup (holidays, venue closed). The site shows the note instead.
     // { "date": "2026-12-12", "note": "Holiday break. See you in January!" }
@@ -164,10 +173,13 @@
 
   // Colors (hex like "#14325c"). Delete a line to use the preset's color.
   // corners: "sharp" (square, the default), "soft", or "round".
+  // emblem: the generated logo's shape ("" = your first toy): "yoyo", "kendama", "top",
+  //   "diabolo", "juggling", or "badge" (a plain circle). Your own assets/emblem.svg replaces it.
   // The build warns you if text would be hard to read.
   "theme": {
     // "primary": "#14325c",
     // "accent": "#b4232a",
-    // "corners": "sharp"
+    // "corners": "sharp",
+    // "emblem": ""
   }
 }

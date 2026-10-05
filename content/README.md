@@ -21,7 +21,7 @@ Example `content/about.html`:
 
 ```html
 <h2>Our History</h2>
-<p>We started in 2025 with four throwers on a park bench.
+<p>We started in 2025 with four players on a park bench.
   Today 30 people come to a typical meetup.</p>
 <ul>
   <li>2025: First meetup</li>

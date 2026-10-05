@@ -20,6 +20,10 @@ EXAMPLES = [                               # (folder name, settings file)
     ("demo-skill-toy", "examples/demo-skill-toy.jsonc"),
     ("demo-kendama", "examples/demo-kendama.jsonc"),
     ("demo-youth-program", "examples/demo-youth-program.jsonc"),
+    ("demo-diabolo", "examples/demo-diabolo.jsonc"),
+    ("demo-spintop", "examples/demo-spintop.jsonc"),
+    ("demo-juggling", "examples/demo-juggling.jsonc"),
+    ("demo-mixed", "examples/demo-mixed.jsonc"),
 ]
 
 base_url = os.environ.get("SITE_URL", "").strip()

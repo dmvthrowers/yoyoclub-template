@@ -1,5 +1,8 @@
 {
   "preset_name": "Youth yo-yo program",
+  "toys": [
+    "yo-yo"
+  ],
   "terms": {
     "club_type": "Youth Yo-Yo Program",
     "toy": "yo-yo",
@@ -23,6 +26,7 @@
       "{name} is a yo-yo program for kids {ages}. Every session, kids learn new tricks, check them off their list, and cheer each other on. {welcome}.",
       "Yo-yos teach patience, focus, and confidence. Every trick takes practice, and every kid can see their own progress. {loaners}"
     ],
+    "pillars_title": "Come Throw With Us",
     "pillars": [
       {
         "title": "Focus",
@@ -359,5 +363,122 @@
     "background": "#fffdf8",
     "ink": "#1f2937",
     "corners": "sharp"
+  },
+  "mix": {
+    "_note": "Used instead of the shared text in presets/_toys.json when a program's toys aren't just yo-yos.",
+    "terms": {
+      "club_type": "Youth {Toy} Program",
+      "players": "kids",
+      "meetup_label": "Club session"
+    },
+    "program": {
+      "about_title": "Practice Builds More Than Tricks",
+      "about": [
+        "{name} is a {toy} program for kids {ages}. Every session, kids learn new tricks, check them off their list, and cheer each other on. {welcome}.",
+        "Skill toys teach patience, focus, and confidence. Every trick takes practice, and every kid can see their own progress. {loaners}"
+      ],
+      "pillars_title": "Come Play With Us",
+      "pillars": [
+        {
+          "title": "Focus",
+          "text": "One trick at a time. Kids learn to slow down, try again, and stick with it."
+        },
+        {
+          "title": "Progress",
+          "text": "A trick checklist on the wall. Every box checked is a win."
+        },
+        {
+          "title": "Confidence",
+          "text": "Show a trick to the group. Teach a friend. Kids love being the expert."
+        },
+        {
+          "title": "Friends",
+          "text": "Kids of different ages learning together and helping each other."
+        }
+      ],
+      "badges": [
+        "Free",
+        "No experience needed",
+        "Loaners provided",
+        "Grown-up on site"
+      ],
+      "meetup_blurb": "A free {toy} session for kids. Loaners provided.",
+      "volunteer": "We need adult helpers. Untangle strings, cheer kids on, and learn alongside them. No skills needed.",
+      "donate_text": "Sessions are free. Donations buy loaner {toys} and spare parts for every kid."
+    },
+    "loaners": {
+      "yes": "We provide loaner {toys} at every session.",
+      "no": "Each kid needs their own. Ask us for a recommendation; good starter {toys} don't have to cost much."
+    },
+    "learn": {
+      "intro": "Every trick starts with one small move, practiced until it clicks. Practice at home with these tips, then show us at the next session.",
+      "levels_title": "Trick Checklist",
+      "levels_intro": "Print this page and check tricks off as you land them. Go in any order.",
+      "outro": "Stuck on a trick? Bring it to the next session."
+    },
+    "faq_toy_group": "Sessions",
+    "faq": [
+      {
+        "group": "Joining",
+        "q": "Who can join?",
+        "a": "Kids {ages}. {welcome}."
+      },
+      {
+        "group": "Joining",
+        "q": "When and where do you meet?",
+        "a": "{meetup}. We meet at {venue}, {address}."
+      },
+      {
+        "group": "Joining",
+        "q": "How much does it cost?",
+        "a": "{cost}"
+      },
+      {
+        "group": "Joining",
+        "q": "Do we need to sign up?",
+        "a": "Email {email} to sign up. We'll send a short permission form for a parent or guardian to fill out."
+      },
+      {
+        "group": "Sessions",
+        "q": "Does my child need their own gear?",
+        "a": "{loaners}"
+      },
+      {
+        "group": "Sessions",
+        "q": "Do parents need to stay?",
+        "a": "Parents and guardians are always welcome. Kids must be dropped off and picked up by a parent, guardian, or someone they've approved in writing."
+      },
+      {
+        "group": "Sessions",
+        "q": "Is it safe?",
+        "a": "Yes. We teach safety first: give each other room, check gear before playing, and never swing or toss anything near someone's face. At least two screened adults are at every session."
+      },
+      {
+        "group": "Sessions",
+        "q": "My child is shy or has never tried this. Is that okay?",
+        "a": "Absolutely. Most kids start with zero tricks. We go at each kid's pace."
+      },
+      {
+        "group": "Helping Out",
+        "q": "Can I volunteer?",
+        "a": "Yes, please. Email {email}. We need adult helpers, and you don't need any skills."
+      },
+      {
+        "group": "Helping Out",
+        "q": "Can I start a program like this at my school or library?",
+        "a": "Yes! Get inexpensive starter {toys}, plenty of spare parts, and a few trained helpers. Meet at the same time and place every week. Email us and we'll share what worked for us."
+      }
+    ],
+    "safety": {
+      "points": [
+        "At least two screened, trained adults are at every session. No adult is ever alone with a child who isn't their own.",
+        "Kids are signed in and signed out by a parent, guardian, or approved adult.",
+        "Safety comes first: give each other room, check gear before playing, and never swing or toss anything near anyone's face.",
+        "Parents and guardians are always welcome to watch or join in."
+      ]
+    },
+    "conduct": {
+      "intro": "{name} is built on the idea that {toys} should be fun and welcoming for every kid. That only works if people treat each other well. This code sets out what we expect from everyone in our program."
+    }
   }
 }

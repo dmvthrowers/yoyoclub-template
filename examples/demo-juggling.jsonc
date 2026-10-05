@@ -1,0 +1,35 @@
+// Demo: a made-up juggling and flow arts club using the "juggling-club" preset.
+{
+  "preset": "juggling-club",
+  "site": { "url": "", "language": "en", "date_format": "us", "timezone": "America/New_York", "source_url": "", "credit": true },
+  "club": {
+    "name": "Riverbend Jugglers",
+    "short_name": "RJ",
+    "tagline": "Juggling & Flow Arts · Burlington, VT",
+    "slogan": "Drops are part of it.",
+    "city": "Burlington", "region": "VT", "area": "",
+    "founded": "2022",
+    "description": "Juggling, poi, staff, and hoop in Burlington. A free weekly open practice for every age and level.",
+    "history": []
+  },
+  "meetup": {
+    "schedule": { "repeat": "weekly", "every": 1, "weekday": "Tuesday", "start": "18:30", "end": "20:30", "months": [] },
+    "show": 6,
+    "venue": "Riverside Rec Center", "room": "Gym", "address": "75 River Rd, Burlington VT",
+    "directions": [],
+    "rsvp": "Drop in, no RSVP needed",
+    "first_time": "First time? Grab three beanbags and we'll teach you the cascade.",
+    "loaners": true,
+    "skip": [ { "date": "2026-12-22", "note": "Holiday break. No meetup." }, { "date": "2026-12-29", "note": "Holiday break. No meetup." } ]
+  },
+  "contact": { "email": "hello@example.org", "social": [], "donate": { "label": "", "url": "" } },
+  "cost": { "summary": "Free", "details": "Open practice is free.", "free": true },
+  "officers": [
+    { "role": "Organizer", "name": "Jamie Example", "bio": "Five balls, sometimes." },
+    { "role": "Flow Arts Lead", "name": "Rowan Example", "bio": "Teaches poi weaves and staff basics." }
+  ],
+  "events": [], "partners": [], "documents": [], "gallery": [], "links": [], "sister_clubs": [], "faq_extra": [],
+  "calendar": { "embed_url": "" },
+  "conduct": { "effective": "" },
+  "theme": {}
+}

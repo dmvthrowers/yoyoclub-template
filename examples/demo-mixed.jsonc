@@ -1,0 +1,34 @@
+// Demo: a made-up club that plays three toys. It uses the "skill-toy-club" preset and sets "toys",
+// so the Learn page, FAQ, loaner, and safety text cover exactly kendama, spin tops, and diabolo.
+{
+  "preset": "skill-toy-club",
+  "toys": ["kendama", "spin-top", "diabolo"],
+  "site": { "url": "", "language": "en", "date_format": "intl", "timezone": "Europe/London", "source_url": "", "credit": true },
+  "club": {
+    "name": "Northside Skill Toys",
+    "short_name": "NST",
+    "tagline": "Kendama · Spin Tops · Diabolo · Leeds",
+    "slogan": "Pick one up. Pass it on.",
+    "city": "Leeds", "region": "", "area": "",
+    "founded": "2025",
+    "description": "Kendama, spin tops, and diabolo in Leeds. A free monthly meetup with loaners for all three.",
+    "history": []
+  },
+  "meetup": {
+    "schedule": { "repeat": "monthly", "week": "last", "weekday": "Saturday", "start": "13:00", "end": "16:00", "months": [] },
+    "show": 6,
+    "venue": "Northside Community Hall", "room": "Main Hall", "address": "12 Example Street, Leeds",
+    "directions": [],
+    "rsvp": "Drop in",
+    "first_time": "First time? Try all three toys. Someone will show you each one.",
+    "loaners": true,
+    "skip": []
+  },
+  "contact": { "email": "hello@example.org", "social": [], "donate": { "label": "", "url": "" } },
+  "cost": { "summary": "Free", "details": "Meetups are free.", "free": true },
+  "officers": [ { "role": "Organiser", "name": "Robin Example", "bio": "Kendama first, then whatever's spinning." } ],
+  "events": [], "partners": [], "documents": [], "gallery": [], "links": [], "sister_clubs": [], "faq_extra": [],
+  "calendar": { "embed_url": "" },
+  "conduct": { "effective": "" },
+  "theme": { "primary": "#203a2e", "accent": "#a33a1c" }
+}

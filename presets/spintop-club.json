@@ -1,64 +1,64 @@
 {
-  "preset_name": "Kendama club",
+  "preset_name": "Spin top club",
   "toys": [
-    "kendama"
+    "spin-top"
   ],
   "terms": {
-    "club_type": "Kendama Club",
-    "toy": "kendama",
-    "toys": "kendamas",
+    "club_type": "Spin Top Club",
+    "toy": "spin top",
+    "toys": "spin tops",
     "players": "players",
-    "sport": "Kendama",
-    "meetup_label": "Kendama session"
+    "sport": "Spin tops",
+    "meetup_label": "Club meetup"
   },
   "disciplines": [
-    "Kendama",
-    "Trick Battles",
-    "Ken Games",
+    "Spin Tops",
+    "Throw Tops",
+    "Tricks & Long Spins",
     "All Ages"
   ],
   "program": {
     "ages": "of all ages",
     "ages_short": "All ages & levels",
     "welcome": "Beginners, families, and competitors are all welcome",
-    "about_title": "Ken, Tama, and Good Company",
+    "about_title": "Wind It, Throw It, Keep It Spinning",
     "about": [
-      "{name} is a kendama community for {area}. We meet to learn tricks, play games, and push each other to land the next one. {welcome}.",
-      "Never held a kendama? Working on Lunar? This is your crew. {loaners} Someone will always help you land your first cup."
+      "{name} is a spin top club for {area}. We meet to wind, throw, and trade tricks with people who love tops. {welcome}.",
+      "Never thrown a top? Chasing a longer spin? This is your crew. {loaners} Someone will always help you land your first throw."
     ],
-    "pillars_title": "Come Play With Us",
+    "pillars_title": "Come Spin With Us",
     "pillars": [
       {
         "title": "Learn",
-        "text": "Never played before? Someone will show you Big Cup in five minutes."
+        "text": "Never thrown a top? Someone will show you how to wind and throw in a few minutes."
       },
       {
         "title": "Play",
-        "text": "KEN games, trick battles, and challenges for every level."
+        "text": "Long-spin challenges, trick games, and jam sessions anyone can join."
       },
       {
         "title": "Progress",
-        "text": "Work through the trick ladder with players who've been there."
+        "text": "From your first floor spin to throws straight to your hand, work through the trick path with people who've been there."
       },
       {
         "title": "Share",
-        "text": "Try other kendamas, swap string, and trade tips on paint and care."
+        "text": "Try other people's tops, swap string, and learn how to care for tips and bodies."
       }
     ],
     "badges": [
       "Free entry",
       "All skill levels",
       "Family friendly",
-      "Loaner kendamas"
+      "Loaner tops"
     ],
-    "meetup_blurb": "A free, drop-in kendama session. Beginners welcome, loaner kendamas available.",
+    "meetup_blurb": "A free, drop-in spin top meetup. Beginners welcome, loaner tops available.",
     "volunteer": "We're run by volunteers. Help set up, greet first-timers, teach a trick, or plan an event. Every bit counts.",
-    "donate_text": "Sessions are free, always. Donations cover string, loaner kendamas, and venue costs.",
+    "donate_text": "Meetups are free, always. Donations cover string, loaner tops, floor mats, and venue costs.",
     "contact_note": "First time? You don't need to email first. Just show up. But we're happy to answer questions."
   },
   "loaners": {
-    "yes": "We have loaner kendamas at every session, so you don't need to bring anything.",
-    "no": "Bring a kendama if you have one. No kendama? Email us and we'll try to have a spare."
+    "yes": "We bring loaner tops and string to every meetup, so you don't need to bring anything.",
+    "no": "Bring your tops if you have them. Don't have one? Email us and we'll try to have a spare."
   },
   "cost": {
     "summary": "Free",
@@ -66,64 +66,61 @@
     "free": true
   },
   "learn": {
-    "title": "Learn Kendama",
-    "intro": "A kendama has three cups, a spike, and a ball called the tama. Here's how to start. Then come to a session and we'll help in person.",
+    "title": "Learn Spin Tops",
+    "intro": "A throw top is wound with string and thrown so it spins on its tip. Here's how to start. Then come to a meetup and we'll help in person.",
     "basics": [
       {
-        "title": "Know the Parts",
-        "text": "The ken is the handle with the big cup, small cup, base cup, and spike. The tama is the ball. The string ties them together."
+        "title": "Pick a Starter",
+        "text": "A wide, low top with a rounded tip is the most forgiving. Starter tops usually come with a string."
       },
       {
-        "title": "Hold It Right",
-        "text": "Hold the ken by the handle, just under the cups, like a pen. Let the tama hang still before every trick."
+        "title": "Wind It Tight",
+        "text": "Start the string at the tip and wind it up the body, tight and even. A neat wind matters more than a hard throw."
       },
       {
-        "title": "Bend Your Knees",
-        "text": "Your legs do the work, not your arm. Dip, pull the tama straight up, and bend again to catch it soft."
+        "title": "Throw and Snap",
+        "text": "Throw toward the floor in front of you and pull your hand back as the string runs out, so the top lands upright."
       },
       {
-        "title": "Fix the String",
-        "text": "Replace the string when it frays. Twisted string? Let the tama hang and spin until it untwists."
+        "title": "Find a Hard Floor",
+        "text": "Wood, tile, and concrete work. Carpet and grass stop most tops. Once it spins, try scooping it onto your palm."
       }
     ],
-    "levels_title": "Trick Ladder",
+    "levels_title": "Trick Path",
     "levels_intro": "A rough order to learn things in. Skip around. Every landed trick counts.",
     "levels": [
       {
         "label": "Level 1",
-        "name": "First Cups",
-        "text": "Pull straight up, bend, catch.",
+        "name": "First Spins",
+        "text": "Wind tight, throw smooth.",
         "tricks": [
-          "Big Cup",
-          "Small Cup",
-          "Base Cup",
-          "Spike",
-          "Candlestick",
-          "Around the Block"
+          "Floor Spin",
+          "Long Spin",
+          "Scoop to Hand",
+          "Hand Spin"
         ]
       },
       {
         "label": "Level 2",
         "name": "Building Up",
-        "text": "Flips, swings, and balances.",
+        "text": "Catches, transfers, and string work.",
         "tricks": [
-          "Airplane",
-          "Around the World",
-          "Around Japan",
-          "Lighthouse",
-          "Bird",
-          "Moshikame"
+          "Throw to Hand",
+          "Hand to Hand",
+          "String Spin",
+          "Lift from the Floor",
+          "Spin on the Back of Your Hand"
         ]
       },
       {
         "label": "Level 3",
         "name": "Going Further",
-        "text": "Spins, juggles, and style.",
+        "text": "Aim, timing, and your own style.",
         "tricks": [
-          "Earth Turn",
-          "Juggle",
-          "Stilt",
-          "Lunar",
+          "Throw to a Target",
+          "Toss and Catch",
+          "Two Tops at Once",
+          "Long-Spin Challenge",
           "Your Own Combo"
         ]
       }
@@ -134,19 +131,19 @@
         "title": "Learn Tricks",
         "links": [
           {
-            "title": "LearnKendama First 50",
-            "url": "https://yoyotricks.com/tag/kendama-first-50-tricks/",
-            "text": "Fifty starter tricks, in order."
+            "title": "Skill Addicts: How to Spin a Top",
+            "url": "https://skilladdicts.com/how-to-spin-a-top/",
+            "text": "Winding and your first throw."
           },
           {
-            "title": "Kendama USA Tutorials",
-            "url": "https://kendamausa.com/kendama-tricks-and-tutorials/",
-            "text": "Trick videos from beginner up."
+            "title": "Getting Started with Spin Tops",
+            "url": "https://forums.yoyoexpert.com/t/getting-started-with-spin-tops/23363",
+            "text": "Forum guide for beginners."
           },
           {
-            "title": "Skill Addicts Kendama Tree",
-            "url": "https://app.skilladdicts.com/tree/kendama",
-            "text": "See what to learn next."
+            "title": "Tops on Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Top",
+            "text": "History and how tops work."
           }
         ]
       },
@@ -165,26 +162,16 @@
         ]
       }
     ],
-    "outro": "Learning is faster in person. Bring your kendama and questions to the next session."
+    "outro": "Learning is faster in person. Bring your tops and questions to the next meetup."
   },
   "resources": [
     {
       "title": "Community",
       "links": [
         {
-          "title": "Kendama USA",
-          "url": "https://kendamausa.com/kendama-tricks-and-tutorials/",
-          "text": "Tutorials and community."
-        },
-        {
-          "title": "YoYoExpert Forums",
-          "url": "https://forums.yoyoexpert.com/",
-          "text": "Skill toy talk, kendama included."
-        },
-        {
-          "title": "Skill Addicts",
-          "url": "https://skilladdicts.com/",
-          "text": "Kendama, yo-yo, and more."
+          "title": "YoYoExpert Spin Top Forum",
+          "url": "https://forums.yoyoexpert.com/c/spin-tops/16",
+          "text": "Ask questions, share tricks."
         }
       ]
     }
@@ -193,7 +180,7 @@
     {
       "group": "General",
       "q": "What is {name}?",
-      "a": "{name} is a kendama club for {area}. We bring together players {ages}, from first-timers to contest players. {welcome}."
+      "a": "{name} is a spin top club for {area}. We bring together {players} {ages}, from first-timers to experienced players. {welcome}."
     },
     {
       "group": "General",
@@ -228,17 +215,17 @@
     {
       "group": "Getting Started",
       "q": "Do I need to know how to play?",
-      "a": "No. Total beginners are just as welcome as experienced players. We'll teach you your first cup."
+      "a": "No. Total beginners are just as welcome as experienced players. We'll help you with your first throw."
     },
     {
       "group": "Getting Started",
-      "q": "What kendama should I buy?",
-      "a": "Ask at a session! Try a few loaners first, and our members can recommend one for your budget."
+      "q": "What top should I buy?",
+      "a": "Try a few loaners at a meetup first. A wide, low top with a rounded tip is easiest to learn on, and our members can recommend one for your budget."
     },
     {
       "group": "Getting Started",
-      "q": "Is kendama loud?",
-      "a": "A little. Wooden tamas clack on the cups. We keep play in our space and keep it friendly for the venue."
+      "q": "What kind of floor do tops need?",
+      "a": "A hard, smooth floor like wood, tile, or concrete. Carpet and grass stop most tops. We meet where the floor works, and we put down mats where the venue asks."
     },
     {
       "group": "Getting Involved",
@@ -261,15 +248,15 @@
     "points": [
       "Kids are welcome. Younger kids need a parent or guardian with them. A parent or guardian is responsible for their own child at every meetup.",
       "Club volunteers never take kids anywhere away from the group or the meetup space.",
-      "Give each player room. Kendama swings and juggles need space, so check around you first.",
-      "Check your string before you play. A frayed string can snap and send the tama flying."
+      "Tops need a hard floor and room to throw. Throw toward the floor, never toward people, and keep a clear landing spot.",
+      "Check the tip and string before you throw. A loose tip can fly off. Metal tips can mark floors, so use mats where the venue asks."
     ],
     "photos": "We sometimes take photos at meetups for this website and our social media. Tell a volunteer if you or your child would rather not be photographed. We never post a child's full name, and we take photos down whenever asked."
   },
   "conduct": {
     "effective": "",
     "version": "1.0",
-    "intro": "{name} is built on the idea that kendama should be fun and welcoming for everyone. That only works if people treat each other well. This code sets out what we expect from everyone in our community.",
+    "intro": "{name} is built on the idea that spin tops should be fun and welcoming for everyone. That only works if people treat each other well. This code sets out what we expect from everyone in our community.",
     "short": "Be kind. Be welcoming. Don't make anyone feel unsafe or unwelcome. If you see something, say something.",
     "applies": [
       "Everyone at our meetups and events, including players, parents, and spectators",
@@ -281,7 +268,7 @@
       "Be respectful. Treat everyone with dignity, whatever their age, skill level, race, ethnicity, gender identity, sexual orientation, disability, religion, or background.",
       "Be welcoming, especially to beginners and younger players. Everyone was new once.",
       "Keep feedback encouraging. If someone asks for tips, help. Skip the harsh criticism.",
-      "Mind the space. Keep the venue clean, watch your swing, and look out for kids.",
+      "Mind the space. Keep the venue clean, watch where you throw, and look out for kids.",
       "Respect decisions. Raise disagreements with organizers calmly and privately."
     ],
     "unacceptable": [
@@ -293,19 +280,19 @@
       "Disruptive behavior that ruins the meetup for others"
     ],
     "equipment": [
-      "Ask before you borrow a kendama. Hand it back the way you got it.",
-      "Look before you swing. Big tricks need open space.",
-      "Replace frayed strings, and stop if a tama is cracked.",
-      "Return loaner kendamas before you leave."
+      "Ask before you borrow a top, and hand it back the way you got it.",
+      "Throw toward the floor, never toward people, and check your landing spot first.",
+      "Replace worn string, and stop if a top is cracked or its tip is loose.",
+      "Return loaner tops before you leave."
     ],
     "reporting": "If something makes you uncomfortable, tell a club volunteer at the meetup or email us. We take every report seriously and keep it as private as we can.",
     "consequences": "Organizers may give a warning, ask someone to leave a meetup, or ban someone from future events, depending on what happened. For anything involving a child's safety, we will contact the venue and, where needed, the authorities."
   },
   "theme": {
-    "primary": "#1f3d2b",
-    "accent": "#b43a1e",
-    "background": "#fffdf7",
-    "ink": "#1c241f",
+    "primary": "#1f2f45",
+    "accent": "#b03a12",
+    "background": "#fffdf9",
+    "ink": "#1a2433",
     "corners": "sharp"
   }
 }

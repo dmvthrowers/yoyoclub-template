@@ -1,64 +1,67 @@
 {
-  "preset_name": "Kendama club",
+  "preset_name": "Juggling club",
   "toys": [
-    "kendama"
+    "juggling",
+    "flow-arts"
   ],
   "terms": {
-    "club_type": "Kendama Club",
-    "toy": "kendama",
-    "toys": "kendamas",
-    "players": "players",
-    "sport": "Kendama",
-    "meetup_label": "Kendama session"
+    "club_type": "Juggling Club",
+    "toy": "juggling",
+    "toys": "juggling props",
+    "players": "jugglers",
+    "sport": "Juggling and flow arts",
+    "meetup_label": "Club meetup"
   },
   "disciplines": [
-    "Kendama",
-    "Trick Battles",
-    "Ken Games",
+    "Juggling",
+    "Clubs & Rings",
+    "Poi",
+    "Staff",
+    "Hoop",
     "All Ages"
   ],
   "program": {
     "ages": "of all ages",
     "ages_short": "All ages & levels",
-    "welcome": "Beginners, families, and competitors are all welcome",
-    "about_title": "Ken, Tama, and Good Company",
+    "welcome": "Beginners, families, and experienced jugglers are all welcome",
+    "about_title": "Throw, Catch, Flow",
     "about": [
-      "{name} is a kendama community for {area}. We meet to learn tricks, play games, and push each other to land the next one. {welcome}.",
-      "Never held a kendama? Working on Lunar? This is your crew. {loaners} Someone will always help you land your first cup."
+      "{name} is a juggling club for {area}: balls, clubs, and rings, plus flow arts like poi, staff, and hoop. We meet to learn patterns, pass with partners, and cheer each other on. {welcome}.",
+      "Never juggled? Working on five balls? This is your crew. {loaners} Someone will always help you with your first cascade."
     ],
-    "pillars_title": "Come Play With Us",
+    "pillars_title": "Come Juggle With Us",
     "pillars": [
       {
         "title": "Learn",
-        "text": "Never played before? Someone will show you Big Cup in five minutes."
+        "text": "Never juggled? Someone will teach you the three-ball cascade, one throw at a time."
       },
       {
         "title": "Play",
-        "text": "KEN games, trick battles, and challenges for every level."
+        "text": "Passing patterns, juggling games, and open jams anyone can join."
       },
       {
-        "title": "Progress",
-        "text": "Work through the trick ladder with players who've been there."
+        "title": "Flow",
+        "text": "Poi, staff, and hoop for anyone who'd rather spin than catch."
       },
       {
         "title": "Share",
-        "text": "Try other kendamas, swap string, and trade tips on paint and care."
+        "text": "Try clubs, rings, and other props, and trade tips on gear and patterns."
       }
     ],
     "badges": [
       "Free entry",
       "All skill levels",
       "Family friendly",
-      "Loaner kendamas"
+      "Loaner props"
     ],
-    "meetup_blurb": "A free, drop-in kendama session. Beginners welcome, loaner kendamas available.",
+    "meetup_blurb": "A free, drop-in juggling and flow arts meetup. Beginners welcome, loaner props available.",
     "volunteer": "We're run by volunteers. Help set up, greet first-timers, teach a trick, or plan an event. Every bit counts.",
-    "donate_text": "Sessions are free, always. Donations cover string, loaner kendamas, and venue costs.",
+    "donate_text": "Meetups are free, always. Donations cover loaner beanbags, clubs, practice poi, and venue costs.",
     "contact_note": "First time? You don't need to email first. Just show up. But we're happy to answer questions."
   },
   "loaners": {
-    "yes": "We have loaner kendamas at every session, so you don't need to bring anything.",
-    "no": "Bring a kendama if you have one. No kendama? Email us and we'll try to have a spare."
+    "yes": "We bring loaner beanbags, clubs, and practice poi to every meetup, so you don't need to bring anything.",
+    "no": "Bring your props if you have them. No props? Three rolled-up pairs of socks will do to start."
   },
   "cost": {
     "summary": "Free",
@@ -66,87 +69,92 @@
     "free": true
   },
   "learn": {
-    "title": "Learn Kendama",
-    "intro": "A kendama has three cups, a spike, and a ball called the tama. Here's how to start. Then come to a session and we'll help in person.",
+    "title": "Learn to Juggle",
+    "intro": "Juggling is mostly throwing. Good throws make easy catches. Start here, then come to a meetup and we'll help in person.",
     "basics": [
       {
-        "title": "Know the Parts",
-        "text": "The ken is the handle with the big cup, small cup, base cup, and spike. The tama is the ball. The string ties them together."
+        "title": "One Ball",
+        "text": "Toss one ball from hand to hand in an arc that peaks about eye level. Get it smooth and even before adding another."
       },
       {
-        "title": "Hold It Right",
-        "text": "Hold the ken by the handle, just under the cups, like a pen. Let the tama hang still before every trick."
+        "title": "Two-Ball Exchange",
+        "text": "Toss one. When it peaks, toss the other underneath it. Catch, catch, stop. That's the whole pattern in miniature."
       },
       {
-        "title": "Bend Your Knees",
-        "text": "Your legs do the work, not your arm. Dip, pull the tama straight up, and bend again to catch it soft."
+        "title": "Three-Ball Cascade",
+        "text": "Start with two balls in your dominant hand. Keep throwing on each peak. Drops are part of it, so practice by a wall or a bed."
       },
       {
-        "title": "Fix the String",
-        "text": "Replace the string when it frays. Twisted string? Let the tama hang and spin until it untwists."
+        "title": "Try Flow Props",
+        "text": "Poi, staff, and hoop are about smooth motion, not catches. Start slow, with soft practice poi or a light hoop."
       }
     ],
-    "levels_title": "Trick Ladder",
-    "levels_intro": "A rough order to learn things in. Skip around. Every landed trick counts.",
+    "levels_title": "Trick Path",
+    "levels_intro": "A rough order to learn things in. Skip around. Every pattern you learn counts.",
     "levels": [
       {
         "label": "Level 1",
-        "name": "First Cups",
-        "text": "Pull straight up, bend, catch.",
+        "name": "First Patterns",
+        "text": "Beanbags or soft balls.",
         "tricks": [
-          "Big Cup",
-          "Small Cup",
-          "Base Cup",
-          "Spike",
-          "Candlestick",
-          "Around the Block"
+          "One-Ball Toss",
+          "Two-Ball Exchange",
+          "Three-Ball Cascade",
+          "Two in One Hand",
+          "Reverse Cascade"
         ]
       },
       {
         "label": "Level 2",
         "name": "Building Up",
-        "text": "Flips, swings, and balances.",
+        "text": "New shapes with three balls.",
         "tricks": [
-          "Airplane",
-          "Around the World",
-          "Around Japan",
-          "Lighthouse",
-          "Bird",
-          "Moshikame"
+          "Columns",
+          "Tennis",
+          "Over the Top",
+          "Half Shower",
+          "Mills Mess",
+          "Three-Club Cascade"
         ]
       },
       {
         "label": "Level 3",
-        "name": "Going Further",
-        "text": "Spins, juggles, and style.",
+        "name": "Flow & Further",
+        "text": "More objects, partners, and flow props.",
         "tricks": [
-          "Earth Turn",
-          "Juggle",
-          "Stilt",
-          "Lunar",
-          "Your Own Combo"
+          "Four-Ball Fountain",
+          "Passing with a Partner",
+          "Poi: Forward Weave",
+          "Poi: Butterfly",
+          "Staff: Figure Eight",
+          "Hoop: Waist Hooping"
         ]
       }
     ],
     "divisions": [],
     "links": [
       {
-        "title": "Learn Tricks",
+        "title": "Learn Patterns",
         "links": [
           {
-            "title": "LearnKendama First 50",
-            "url": "https://yoyotricks.com/tag/kendama-first-50-tricks/",
-            "text": "Fifty starter tricks, in order."
+            "title": "Library of Juggling",
+            "url": "https://libraryofjuggling.com/",
+            "text": "Hundreds of patterns, animated."
           },
           {
-            "title": "Kendama USA Tutorials",
-            "url": "https://kendamausa.com/kendama-tricks-and-tutorials/",
-            "text": "Trick videos from beginner up."
-          },
+            "title": "Skill Addicts: How to Juggle",
+            "url": "https://skilladdicts.com/learning-how-to-juggle/",
+            "text": "From one ball to three."
+          }
+        ]
+      },
+      {
+        "title": "Flow Arts",
+        "links": [
           {
-            "title": "Skill Addicts Kendama Tree",
-            "url": "https://app.skilladdicts.com/tree/kendama",
-            "text": "See what to learn next."
+            "title": "Playpoi",
+            "url": "https://playpoi.com/",
+            "text": "Poi lessons for every level."
           }
         ]
       },
@@ -165,26 +173,21 @@
         ]
       }
     ],
-    "outro": "Learning is faster in person. Bring your kendama and questions to the next session."
+    "outro": "Learning is faster in person. Bring your props and questions to the next meetup."
   },
   "resources": [
     {
-      "title": "Community",
+      "title": "Community & Events",
       "links": [
         {
-          "title": "Kendama USA",
-          "url": "https://kendamausa.com/kendama-tricks-and-tutorials/",
-          "text": "Tutorials and community."
+          "title": "International Jugglers' Association",
+          "url": "https://www.juggle.org/",
+          "text": "Juggling news and festivals."
         },
         {
-          "title": "YoYoExpert Forums",
-          "url": "https://forums.yoyoexpert.com/",
-          "text": "Skill toy talk, kendama included."
-        },
-        {
-          "title": "Skill Addicts",
-          "url": "https://skilladdicts.com/",
-          "text": "Kendama, yo-yo, and more."
+          "title": "The Juggling Edge",
+          "url": "https://www.jugglingedge.com/events.php",
+          "text": "Find juggling clubs and festivals."
         }
       ]
     }
@@ -193,7 +196,7 @@
     {
       "group": "General",
       "q": "What is {name}?",
-      "a": "{name} is a kendama club for {area}. We bring together players {ages}, from first-timers to contest players. {welcome}."
+      "a": "{name} is a juggling and flow arts club for {area}. We bring together {players} {ages}, from first-timers to experienced players. {welcome}."
     },
     {
       "group": "General",
@@ -228,17 +231,17 @@
     {
       "group": "Getting Started",
       "q": "Do I need to know how to play?",
-      "a": "No. Total beginners are just as welcome as experienced players. We'll teach you your first cup."
+      "a": "No. Total beginners are just as welcome as experienced players. We'll teach you the cascade one throw at a time."
     },
     {
       "group": "Getting Started",
-      "q": "What kendama should I buy?",
-      "a": "Ask at a session! Try a few loaners first, and our members can recommend one for your budget."
+      "q": "What should I buy first?",
+      "a": "Three soft beanbags. They don't bounce or roll away, so practice goes faster. Try our loaner clubs and poi before you buy those."
     },
     {
       "group": "Getting Started",
-      "q": "Is kendama loud?",
-      "a": "A little. Wooden tamas clack on the cups. We keep play in our space and keep it friendly for the venue."
+      "q": "Can I bring fire props?",
+      "a": "Not to our meetups. Fire spinning needs its own space, safety gear, and the venue's permission. Bring practice props instead."
     },
     {
       "group": "Getting Involved",
@@ -261,15 +264,15 @@
     "points": [
       "Kids are welcome. Younger kids need a parent or guardian with them. A parent or guardian is responsible for their own child at every meetup.",
       "Club volunteers never take kids anywhere away from the group or the meetup space.",
-      "Give each player room. Kendama swings and juggles need space, so check around you first.",
-      "Check your string before you play. A frayed string can snap and send the tama flying."
+      "Give each player a clear circle. Clubs, staffs, poi, and hoops need room, so check around you before you start.",
+      "Practice props only: no knives, torches, or fire at meetups. Watch ceilings and lights with high throws."
     ],
     "photos": "We sometimes take photos at meetups for this website and our social media. Tell a volunteer if you or your child would rather not be photographed. We never post a child's full name, and we take photos down whenever asked."
   },
   "conduct": {
     "effective": "",
     "version": "1.0",
-    "intro": "{name} is built on the idea that kendama should be fun and welcoming for everyone. That only works if people treat each other well. This code sets out what we expect from everyone in our community.",
+    "intro": "{name} is built on the idea that juggling and flow arts should be fun and welcoming for everyone. That only works if people treat each other well. This code sets out what we expect from everyone in our community.",
     "short": "Be kind. Be welcoming. Don't make anyone feel unsafe or unwelcome. If you see something, say something.",
     "applies": [
       "Everyone at our meetups and events, including players, parents, and spectators",
@@ -281,7 +284,7 @@
       "Be respectful. Treat everyone with dignity, whatever their age, skill level, race, ethnicity, gender identity, sexual orientation, disability, religion, or background.",
       "Be welcoming, especially to beginners and younger players. Everyone was new once.",
       "Keep feedback encouraging. If someone asks for tips, help. Skip the harsh criticism.",
-      "Mind the space. Keep the venue clean, watch your swing, and look out for kids.",
+      "Mind the space. Keep the venue clean, watch your circle, and look out for kids.",
       "Respect decisions. Raise disagreements with organizers calmly and privately."
     ],
     "unacceptable": [
@@ -293,19 +296,19 @@
       "Disruptive behavior that ruins the meetup for others"
     ],
     "equipment": [
-      "Ask before you borrow a kendama. Hand it back the way you got it.",
-      "Look before you swing. Big tricks need open space.",
-      "Replace frayed strings, and stop if a tama is cracked.",
-      "Return loaner kendamas before you leave."
+      "Ask before you borrow someone's props, and hand them back the way you got them.",
+      "Look around before you spin or throw. Clubs, staffs, and poi need open space.",
+      "Practice props only: no knives, torches, or fire at meetups.",
+      "Return loaner props before you leave."
     ],
     "reporting": "If something makes you uncomfortable, tell a club volunteer at the meetup or email us. We take every report seriously and keep it as private as we can.",
     "consequences": "Organizers may give a warning, ask someone to leave a meetup, or ban someone from future events, depending on what happened. For anything involving a child's safety, we will contact the venue and, where needed, the authorities."
   },
   "theme": {
-    "primary": "#1f3d2b",
-    "accent": "#b43a1e",
-    "background": "#fffdf7",
-    "ink": "#1c241f",
+    "primary": "#123d4a",
+    "accent": "#a3264f",
+    "background": "#fffdfa",
+    "ink": "#13262d",
     "corners": "sharp"
   }
 }
