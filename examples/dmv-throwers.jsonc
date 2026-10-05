@@ -1,0 +1,82 @@
+// DMV Throwers: the real club this template came from (https://dmvthrowers.club).
+// Its live site is hand-built; this file shows the same club built from the template.
+// Copy it over site.jsonc as a head start, then change every detail to your club's.
+{
+  "preset": "skill-toy-club",
+  "site": { "url": "", "language": "en", "date_format": "us", "timezone": "America/New_York",
+            "source_url": "https://github.com/dmvthrowers/yoyoclub-template", "credit": true },
+  "club": {
+    "name": "DMV Throwers",
+    "short_name": "DMVT",
+    "tagline": "Yo-Yo & Skill Toy Club · DC · MD · VA",
+    "slogan": "All ages, all levels, always free.",
+    "city": "Arlington",
+    "region": "VA",
+    "area": "DC · MD · VA",
+    "founded": "2021",
+    "description": "The Mid-Atlantic's home for yo-yo enthusiasts, kendama players, and all skill toy fans in Washington DC, Northern Virginia, and Maryland.",
+    "history": [
+      "DMV Throwers started in 2021 with meetups at Quincy Park in Arlington, then moved next door into Arlington Central Library.",
+      "In 2026 the club organized the 16th Virginia State Yo-Yo Contest at Dulles Town Center in Sterling, VA."
+    ]
+  },
+  "meetup": {
+    "schedule": { "repeat": "monthly", "week": 3, "weekday": "Sunday", "start": "13:00", "end": "16:00", "months": [] },
+    "show": 6,
+    "venue": "Arlington Central Library",
+    "room": "Barbara M. Donnellan Auditorium",
+    "address": "1015 N Quincy St, Arlington VA 22201",
+    "map_url": "https://library.arlingtonva.us/locations/central-library/",
+    "directions": [
+      "Street parking on N Quincy St and nearby streets.",
+      "About a 5-minute walk from the Virginia Square–GMU Metro station (Orange and Silver lines)."
+    ],
+    "rsvp": "Drop in, no RSVP needed",
+    "first_time": "First time? Just show up. We have loaners, and someone will teach you your first throw.",
+    "loaners": true,
+    "skip": []
+  },
+  "contact": {
+    "email": "contact@dmvthrowers.club",
+    "social": [
+      { "name": "Instagram", "url": "https://instagram.com/dmv_throwers", "text": "Photos & updates" },
+      { "name": "Facebook Group", "url": "https://www.facebook.com/share/g/1DbrxESDDc/", "text": "Join our community" },
+      { "name": "YoYo Club", "url": "https://dmvthrowers.yoyoclub.info/", "text": "Official club page" },
+      { "name": "Linktree", "url": "https://linktr.ee/dmvthrowers", "text": "All our links" },
+      { "name": "GitHub", "url": "https://github.com/dmvthrowers", "text": "Open source" }
+    ],
+    "donate": { "label": "☕ Support DMV Throwers", "url": "https://ko-fi.com/dmvthrowers" }
+  },
+  "cost": { "summary": "Free", "details": "No. Meetups are completely free, with no dues, fees, or memberships. Voluntary donations help but are never required.", "free": true },
+  "officers": [
+    { "role": "Founder / President", "name": "Arthur Foley", "bio": "Club founder and strategic lead. Sets the club's direction and represents it publicly." },
+    { "role": "Coordinator / Vice President", "name": "Brandon Rogers", "handle": "YoYoExpert: Captrogers", "email": "contact@dmvthrowers.club",
+      "bio": "Day-to-day operations lead. Runs communications, event logistics, and volunteers." },
+    { "role": "Co-Coordinator / Moderator", "name": "Abby Brodsky", "bio": "Co-leads event coordination and keeps meetups welcoming and positive." },
+    { "role": "Moderator / Activity Coordinator", "name": "Ibrahim", "bio": "Plans and runs in-event activities and keeps meetups engaging." },
+    { "role": "Adult Activity Coordinator", "name": "Sam", "bio": "Builds programming for grown-up players of every skill level." },
+    { "role": "Alt. Location Co-Coordinator", "open": true, "bio": "Scout and run meetups at venues beyond the Arlington library." }
+  ],
+  "events": [],
+  "partners": [
+    { "name": "YoYo Sam", "text": "Shop YoYo Sam and support the club at the same time. Use our code for 10% off any order, and a portion of every sale comes back to the club.",
+      "url": "https://endlss.io/sl/yoyosam/dmvthrows", "label": "Shop YoYo Sam", "code": "DMVTHROWS" }
+  ],
+  "links": [
+    { "title": "YoYo Map", "text": "Find throwers near you. City-level only, never exact locations.", "url": "https://map.dmvthrowers.club/", "label": "Open the map" },
+    { "title": "VSYC-26 Results", "text": "Results, runs, and photos from the 2026 Virginia State Yo-Yo Contest.", "url": "https://dmvthrowers.club/vsyc26-results.html", "label": "See results" }
+  ],
+  "sister_clubs": [
+    { "title": "Bmore YoYo Club", "url": "https://www.instagram.com/bmoreyoyoclub/", "text": "Baltimore" },
+    { "title": "DC Kendama Club", "url": "https://www.instagram.com/dckenclub/", "text": "Washington DC" },
+    { "title": "Seven Cities YoYo Club", "url": "https://www.instagram.com/7citiesthrowers/", "text": "Hampton Roads, VA" },
+    { "title": "SWVA Throwers", "url": "https://www.instagram.com/swvathrowers/", "text": "Southwest Virginia" },
+    { "title": "Fairfax Jugglers", "url": "https://www.jugglingedge.com/club.php?ClubID=1750", "text": "Juggling" }
+  ],
+  "faq_extra": [
+    { "group": "Meetups", "q": "Is there parking?", "a": "Yes. Street parking on N Quincy St and nearby streets. The library is about a 5-minute walk from the Virginia Square–GMU Metro station." },
+    { "group": "Meetups", "q": "Do you ever meet outside?", "a": "Sometimes. In warmer months we may meet at Quincy Park, next door to the library. Check Instagram before you come." }
+  ],
+  "conduct": { "effective": "April 2026" },
+  "theme": { "primary": "#102040", "accent": "#B80000", "background": "#fffdfa", "ink": "#102040", "corners": "sharp" }
+}

@@ -1,0 +1,40 @@
+// Demo: a made-up skill toy club using the "skill-toy-club" preset.
+{
+  "preset": "skill-toy-club",
+  "site": { "url": "", "language": "en", "date_format": "us", "timezone": "America/Chicago", "source_url": "", "credit": true },
+  "club": {
+    "name": "Prairie Spin Collective",
+    "short_name": "PSC",
+    "tagline": "Yo-Yo & Skill Toy Club · Lincoln, NE",
+    "slogan": "Bring a toy. Leave with a trick.",
+    "city": "Lincoln", "region": "NE", "area": "",
+    "founded": "2024",
+    "description": "Yo-yos, kendama, spin tops, diabolo, and juggling in Lincoln. Free weekly meetups for every age and skill level.",
+    "history": []
+  },
+  "meetup": {
+    "schedule": { "repeat": "weekly", "every": 1, "weekday": "Thursday", "start": "18:00", "end": "20:00", "months": [] },
+    "show": 6,
+    "venue": "Riverside Community Center", "room": "Gym", "address": "500 River St, Lincoln NE",
+    "directions": ["Free lot parking. Enter through the east doors."],
+    "rsvp": "Drop in, no RSVP needed",
+    "first_time": "First time? Grab a loaner and say hi. We'll show you around.",
+    "loaners": true,
+    "skip": [ { "date": "2026-11-26", "note": "Thanksgiving. No meetup." }, { "date": "2026-12-24", "note": "Holiday break. No meetup." } ]
+  },
+  "contact": { "email": "hello@example.org", "social": [], "donate": { "label": "", "url": "" } },
+  "cost": { "summary": "Free", "details": "Meetups are free. No dues, no fees.", "free": true },
+  "officers": [
+    { "role": "Organizer", "name": "Sam Example", "bio": "Kendama first, yo-yo second, diabolo when nobody's looking." },
+    { "role": "Juggling Lead", "name": "Riley Example", "bio": "Teaches the three-ball cascade every week." },
+    { "role": "Events Volunteer", "open": true, "bio": "Help plan demos at schools and libraries." }
+  ],
+  "events": [
+    { "date": "2026-11-14", "time": "10 AM – 4 PM", "kind": "Demo", "title": "Skill Toy Day at the Library", "location": "Lincoln City Library",
+      "details": "Try every toy we play. Free and open to the public.", "featured": true }
+  ],
+  "partners": [], "documents": [], "gallery": [], "links": [], "sister_clubs": [], "faq_extra": [],
+  "calendar": { "embed_url": "" },
+  "conduct": { "effective": "January 2026" },
+  "theme": {}
+}

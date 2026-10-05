@@ -1,0 +1,40 @@
+// Demo: a made-up library yo-yo program using the "youth-program" preset, with a school-year season.
+{
+  "preset": "youth-program",
+  "site": { "url": "", "language": "en", "date_format": "us", "timezone": "America/New_York", "source_url": "", "credit": true },
+  "club": {
+    "name": "Oak Hill Library Yo-Yo Club",
+    "short_name": "OH",
+    "tagline": "Free Yo-Yo Program for Kids · Oak Hill, VA",
+    "slogan": "One trick at a time.",
+    "city": "Oak Hill", "region": "VA", "area": "",
+    "founded": "2026",
+    "description": "A free after-school yo-yo club for kids ages 7 to 14 at the Oak Hill Library. Loaner yo-yos provided.",
+    "history": []
+  },
+  "meetup": {
+    "schedule": { "repeat": "weekly", "every": 1, "weekday": "Wednesday", "start": "16:00", "end": "17:00", "months": [9, 10, 11, 12, 1, 2, 3, 4, 5] },
+    "show": 6,
+    "venue": "Oak Hill Library", "room": "Teen Room", "address": "Oak Hill, VA",
+    "directions": [],
+    "rsvp": "Sign-up required",
+    "first_time": "New this week? A grown-up helper will get you started.",
+    "loaners": true,
+    "skip": [ { "date": "2026-11-25", "note": "Library closed for Thanksgiving." } ],
+    "season": "September through May"
+  },
+  "contact": { "email": "hello@example.org", "social": [], "donate": { "label": "", "url": "" } },
+  "cost": { "summary": "Free", "details": "The club is free, and loaner yo-yos are provided.", "free": true },
+  "officers": [
+    { "role": "Program Lead", "name": "Taylor Example", "bio": "Children's librarian and recovering yo-yo kid." },
+    { "role": "Parent Helpers", "open": true, "bio": "Untangle strings and cheer kids on. No skills needed." }
+  ],
+  "events": [
+    { "date": "2026-12-16", "time": "4–5 PM", "kind": "Showcase", "title": "Winter Trick Show", "location": "Oak Hill Library, Meeting Room",
+      "details": "Kids show off their best tricks for families." }
+  ],
+  "partners": [], "documents": [], "gallery": [], "links": [], "sister_clubs": [], "faq_extra": [],
+  "calendar": { "embed_url": "" },
+  "conduct": { "effective": "" },
+  "theme": {}
+}

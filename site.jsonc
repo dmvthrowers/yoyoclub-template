@@ -1,0 +1,173 @@
+// =====================================================================
+//  YOUR SITE SETTINGS: this is the main file you edit.
+//  Lines starting with // are notes and are ignored.
+//  Keep the quotes and commas. When in doubt, copy an existing line.
+//  After you save (commit) on GitHub, the site rebuilds in about a minute.
+// =====================================================================
+{
+  // STEP 1: Pick a starting preset. It fills in the Learn page, FAQ, links,
+  // code of conduct, and safety rules. Choices:
+  //   "yoyo-club"      - a yo-yo club (default)
+  //   "skill-toy-club" - yo-yos plus kendama, spin tops, diabolo, juggling, and more
+  //   "kendama-club"   - a kendama club
+  //   "youth-program"  - a yo-yo program at a school, library, camp, or rec center
+  // Anything you set below overrides the preset.
+  "preset": "yoyo-club",
+
+  "site": {
+    // Your site's address. Leave "" on GitHub Pages; it's filled in automatically.
+    // Set it if you use your own domain, e.g. "https://springfieldthrowers.org/"
+    "url": "",
+    // Language code for the page (e.g. "en", "es", "fr")
+    "language": "en",
+    // Date and time style: "us" = Sun, Oct 18, 2026 · 1–4 PM   "intl" = Sun 18 Oct 2026 · 13:00–16:00
+    "date_format": "us",
+    // Your time zone, so "next meetup" flips over on the right day. Examples:
+    // "America/New_York", "America/Chicago", "America/Denver", "America/Los_Angeles", "Europe/London"
+    "timezone": "America/New_York",
+    // Optional link in the footer to this site's source code. "" hides it.
+    "source_url": "",
+    // Small "Site template by" credit line in the footer. Set to false to hide it.
+    "credit": true
+  },
+
+  "club": {
+    // Full name, as you want it in the page title and header
+    "name": "Springfield Throwers",
+    // 1–4 letters for the generated yo-yo logo ("" = use the name's initials)
+    "short_name": "ST",
+    // Short line under the name on the home page
+    "tagline": "Yo-Yo Club · Springfield, IL",
+    // Your motto. Shown on the home page, footer, and top bar.
+    "slogan": "All ages, all levels, always free.",
+    "city": "Springfield",
+    // State, province, or region
+    "region": "IL",
+    // How you describe your area, e.g. "DC · MD · VA" ("" = city, region)
+    "area": "",
+    // Year started ("" to hide)
+    "founded": "2025",
+    // One or two sentences for the home page and search results
+    "description": "A free yo-yo club for Springfield and central Illinois. Learn your first trick, practice for a contest, or just hang out with other throwers.",
+    // Optional: a few paragraphs about how the club started (shown on the About page)
+    "history": [
+      "We started in 2025 when a few throwers kept running into each other at the park. Now we meet every month at the library."
+    ]
+  },
+
+  "meetup": {
+    // STEP 2: Your repeating meetup. The site works out the dates for you.
+    // repeat: "monthly" (with week + weekday), "weekly" (with weekday), or "none"
+    //   monthly: "week": 1, 2, 3, 4, 5, or "last"   e.g. 3rd Sunday = week 3, weekday "Sunday"
+    //   weekly:  "every": 1 (every week) or 2 (every other week; also set "from" to one real meetup date)
+    // start/end are 24-hour times: "13:00" is 1 PM.
+    // months: only meet in these months, e.g. [9,10,11,12,1,2,3,4,5]. [] = every month.
+    "schedule": { "repeat": "monthly", "week": 2, "weekday": "Saturday", "start": "13:00", "end": "16:00", "months": [] },
+    // How many upcoming meetups to list on the Meetups page
+    "show": 6,
+    // Leave "" to write it automatically ("Every 2nd Saturday, 1–4 PM")
+    "summary": "",
+    // Where. A public place: library, community center, park, shop.
+    "venue": "Springfield Public Library",
+    "room": "Community Room B",
+    "address": "100 Main St, Springfield IL",
+    // Optional maps link ("" to hide)
+    "map_url": "",
+    // Parking, transit, how to find the room
+    "directions": ["Free parking behind the library. Take the elevator to the second floor."],
+    "rsvp": "Drop in, no RSVP needed",
+    // Shown on the next meetup only
+    "first_time": "First time? Just show up. We'll hand you a yo-yo and teach you your first trick.",
+    // Do you bring loaner yo-yos? true or false
+    "loaners": true,
+    // Dates with no meetup (holidays, venue closed). The site shows the note instead.
+    // { "date": "2026-12-12", "note": "Holiday break. See you in January!" }
+    "skip": [
+      { "date": "2026-12-12", "note": "Holiday break. See you in January!" }
+    ],
+    // Season or months you meet ("" to hide)
+    "season": ""
+  },
+
+  "contact": {
+    // Use a shared club email, not a personal one
+    "email": "hello@example.org",
+    // Optional phone. Think twice before publishing a personal cell number.
+    "phone": "",
+    // Social links: { "name": "Instagram", "url": "https://...", "text": "Photos & updates" }
+    "social": [],
+    // Donation link, e.g. Ko-fi or PayPal ("" to hide). Check your venue's rules first.
+    "donate": { "label": "Support the Club", "url": "" }
+  },
+
+  "cost": {
+    // One or two words for the home page
+    "summary": "Free",
+    // Longer explanation for the FAQ
+    "details": "Meetups are free. No dues, no fees, no membership forms.",
+    // true if meetups are free (tells search engines)
+    "free": true
+  },
+
+  // Club officers and volunteers. Only list people who said yes to being on the site.
+  // "handle" is optional, e.g. "YoYoExpert: name". An entry with "open": true shows a "volunteer" card.
+  "officers": [
+    { "role": "Organizer", "name": "Jordan Example", "bio": "Runs meetups and answers the club email. Throws mostly 1A." },
+    { "role": "Activity Coordinator", "open": true, "bio": "Plan games, trick battles, and workshops at meetups." }
+  ],
+
+  // Special events: workshops, contests, demos. Past events hide automatically.
+  // Use "date": "" for "date to be announced". "featured": true puts it on the home page.
+  // { "date": "2026-11-21", "end_date": "", "time": "10 AM – 2 PM", "kind": "Workshop",
+  //   "title": "Beginner Workshop", "location": "Springfield Park District", "details": "...",
+  //   "url": "https://...", "url_label": "Sign up", "featured": true }
+  "events": [
+    { "date": "2026-11-21", "time": "10 AM – 12 PM", "kind": "Workshop", "title": "Beginner Yo-Yo Workshop",
+      "location": "Springfield Park District, 200 Oak Ave", "details": "Two hours, start to finish: your first ten tricks. Loaners provided.", "featured": true },
+    { "date": "", "kind": "Contest", "title": "Springfield Spring Jam", "details": "A friendly contest and trick battle. Date to be announced." }
+  ],
+
+  // Shops or sponsors that support the club. "code" shows a discount code box.
+  // { "name": "Shop Name", "text": "...", "url": "https://...", "label": "Shop now", "code": "CLUB10" }
+  "partners": [],
+
+  // Downloads. Put files in assets/documents/ and list them here.
+  // "about": true also shows it on the About page (good for a charter or bylaws).
+  // { "title": "Club Charter", "text": "...", "file": "documents/charter.pdf", "about": true }
+  "documents": [],
+
+  // Photos. Put files in assets/images/gallery/. Only post kids with permission.
+  // { "src": "images/gallery/meetup.jpg", "alt": "Kids practicing yo-yo tricks in a library room", "caption": "First Meetup", "text": "March 2025" }
+  "gallery": [],
+
+  // Extra links for the Resources page (your forms, playlists, shared albums)
+  // { "title": "Club Videos", "text": "Meetup clips.", "url": "https://...", "label": "Watch" }
+  "links": [],
+
+  // Nearby clubs to point people to
+  // { "title": "Capital City Kendama", "url": "https://...", "text": "Kendama, Thursdays" }
+  "sister_clubs": [],
+
+  // Extra FAQ entries (added after the preset's FAQ). "group" is optional.
+  // { "group": "Meetups", "q": "Question?", "a": "Answer." }
+  "faq_extra": [
+    { "group": "Meetups", "q": "Is there parking?", "a": "Yes. Free parking behind the library." }
+  ],
+
+  // Google Calendar (optional). Paste the "embed" URL from Google Calendar settings:
+  // Settings and sharing > Integrate calendar > Embed code (just the https://... part).
+  // The calendar must be public. Leave "" to show only the meetup list.
+  "calendar": { "embed_url": "" },
+
+  // Code of conduct: the date it took effect ("" to hide). The text comes from the preset.
+  "conduct": { "effective": "October 2026" },
+
+  // Colors (hex like "#14325c"). Delete a line to use the preset's color.
+  // corners: "sharp" (square, the default), "soft", or "round".
+  // The build warns you if text would be hard to read.
+  "theme": {
+    // "primary": "#14325c",
+    // "accent": "#b4232a",
+    // "corners": "sharp"
+  }
+}
