@@ -1224,6 +1224,14 @@ class Site:
             sections.append(("Support", "Help Keep Meetups Free",
                              f'<p class="center">{esc(self.fill(c["program"]["donate_text"]))}</p>'
                              f'<p class="center">{ext_link(donate["url"], donate.get("label") or "Support the club", "btn btn-accent")}</p>'))
+        # Always last: the How to Yo-Yo guide and a small thank-you to the club behind this template.
+        sections.append(("Learn more", "How to Yo-Yo",
+                         '<p class="center">New to throwing, or teaching someone who is? The free How to Yo-Yo guide '
+                         'walks through the basics, first tricks, practice and what comes next.</p>'
+                         f'<p class="center">{ext_link("https://dmvthrowers.club/learn-yoyo.html", "Read the How to Yo-Yo guide", "btn btn-outline")}</p>'
+                         '<p class="center"><small>Guide and site template from '
+                         f'{ext_link("https://dmvthrowers.club/", "DMV Throwers")}, a free yo-yo and skill toy club in '
+                         'DC, Maryland and Virginia. Thanks for keeping the scene growing.</small></p>'))
         html_parts = []
         for i, (eyebrow, title, inner) in enumerate(sections):
             html_parts.append(f"""
@@ -1235,7 +1243,7 @@ class Site:
   </div>
 </section>""")
         body = f"""{self.page_head("Learn & reference", "Resources", f"Downloads, shops, and trusted links for {self.fill('{players}')} of every level. Looking for tutorials? See the Learn page.")}
-{"".join(html_parts) or '<section class="section"><div class="wrap"><p class="center"><a href="learn.html">Start with the Learn page</a></p></div></section>'}"""
+{"".join(html_parts)}"""
         return "Resources", f"Downloads, shops, and trusted {self.fill('{toy}')} links from {self.name}.", body, None
 
     def page_faq(self):
