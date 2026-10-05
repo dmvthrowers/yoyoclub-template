@@ -1,5 +1,13 @@
 {
   "preset_name": "Skill toy club",
+  "toys": [
+    "yo-yo",
+    "kendama",
+    "spin-top",
+    "diabolo",
+    "juggling",
+    "flow-arts"
+  ],
   "terms": {
     "club_type": "Yo-Yo & Skill Toy Club",
     "toy": "skill toy",
@@ -26,6 +34,7 @@
       "{name} is the yo-yo and skill toy community for {area}. Yo-yos, kendama, spin tops, diabolo, juggling: if it takes practice and it's fun, it's welcome here. {welcome}.",
       "Never touched a kendama? Grinding a contest routine? This is your crew. {loaners} Someone will always help you land your first trick."
     ],
+    "pillars_title": "Come Throw With Us",
     "pillars": [
       {
         "title": "Try Everything",

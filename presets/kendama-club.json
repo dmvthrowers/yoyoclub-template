@@ -1,5 +1,8 @@
 {
   "preset_name": "Kendama club",
+  "toys": [
+    "kendama"
+  ],
   "terms": {
     "club_type": "Kendama Club",
     "toy": "kendama",
@@ -23,6 +26,7 @@
       "{name} is a kendama community for {area}. We meet to learn tricks, play games, and push each other to land the next one. {welcome}.",
       "Never held a kendama? Working on Lunar? This is your crew. {loaners} Someone will always help you land your first cup."
     ],
+    "pillars_title": "Come Play With Us",
     "pillars": [
       {
         "title": "Learn",
@@ -265,7 +269,7 @@
   "conduct": {
     "effective": "",
     "version": "1.0",
-    "intro": "{name} is built on the idea that yo-yos and skill toys should be fun and welcoming for everyone. That only works if people treat each other well. This code sets out what we expect from everyone in our community.",
+    "intro": "{name} is built on the idea that kendama should be fun and welcoming for everyone. That only works if people treat each other well. This code sets out what we expect from everyone in our community.",
     "short": "Be kind. Be welcoming. Don't make anyone feel unsafe or unwelcome. If you see something, say something.",
     "applies": [
       "Everyone at our meetups and events, including players, parents, and spectators",
@@ -277,7 +281,7 @@
       "Be respectful. Treat everyone with dignity, whatever their age, skill level, race, ethnicity, gender identity, sexual orientation, disability, religion, or background.",
       "Be welcoming, especially to beginners and younger players. Everyone was new once.",
       "Keep feedback encouraging. If someone asks for tips, help. Skip the harsh criticism.",
-      "Mind the space. Keep the venue clean, watch your yo-yo's reach, and look out for kids.",
+      "Mind the space. Keep the venue clean, watch your swing, and look out for kids.",
       "Respect decisions. Raise disagreements with organizers calmly and privately."
     ],
     "unacceptable": [

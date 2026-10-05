@@ -1,5 +1,6 @@
 {
   "preset_name": "Yo-yo club",
+  "toys": ["yo-yo"],
   "terms": {
     "club_type": "Yo-Yo Club",
     "toy": "yo-yo",
@@ -18,6 +19,7 @@
       "{name} is a yo-yo community for {area}. We meet up to learn tricks, trade tips, and hang out with people who love to throw. {welcome}.",
       "Never touched a yo-yo? Grinding competition routines? This is your crew. {loaners} Someone will always help you with your first trick."
     ],
+    "pillars_title": "Come Throw With Us",
     "pillars": [
       { "title": "Learn", "text": "Never thrown before? Someone will teach you your first trick. Stuck on a hard one? Someone's done it." },
       { "title": "Play", "text": "Jam sessions, trick battles, and games anyone can join. No experience needed." },

@@ -1,0 +1,200 @@
+{
+  "_about": "The toy library. build.py reads it for the \"toys\" setting. Each toy has its words (name, plural, label), a logo shape, and the starter text used when a club's toys differ from its preset's. \"mix\" is the shared text for those clubs; a preset can replace any part of it with its own \"mix\" block. Not a preset: the leading underscore keeps it out of the preset list.",
+  "aliases": {
+    "yoyo": "yo-yo", "yo-yos": "yo-yo", "yoyos": "yo-yo",
+    "kendamas": "kendama",
+    "spin-tops": "spin-top", "spin top": "spin-top", "spin tops": "spin-top", "spintop": "spin-top", "spintops": "spin-top",
+    "top": "spin-top", "tops": "spin-top", "spinning top": "spin-top", "spinning tops": "spin-top",
+    "diabolos": "diabolo",
+    "juggle": "juggling", "juggler": "juggling",
+    "flow": "flow-arts", "flow arts": "flow-arts", "flow-art": "flow-arts", "poi": "flow-arts"
+  },
+  "toys": {
+    "yo-yo": {
+      "name": "yo-yo", "plural": "yo-yos", "label": "Yo-Yo", "chip": "Yo-Yo", "players": "throwers", "sport": "Yo-yo",
+      "emblem": "yoyo", "preset": "yoyo-club",
+      "card": { "title": "Yo-Yo", "text": "Start with a responsive yo-yo. String to about 2 inches above your belly button, palm up, throw straight down." },
+      "level": { "label": "Yo-yo", "name": "Yo-Yo", "text": "Responsive yo-yo.",
+        "tricks": ["Sleeper", "Gravity Pull", "Forward Pass", "Walk the Dog", "Breakaway", "Around the World", "Rock the Baby", "Trapeze"] },
+      "links": { "title": "Yo-Yo", "links": [
+        { "title": "YoYoTricks.com Trick Library", "url": "https://yoyotricks.com/yoyo-tricks/", "text": "Video lessons from beginner to expert." },
+        { "title": "YoYoExpert Learn", "url": "https://yoyoexpert.com/pages/learn-yoyo-tricks", "text": "Step-by-step trick videos." },
+        { "title": "Classic Yoyo Tricks", "url": "https://www.classicyoyotricks.com/", "text": "Old-school responsive tricks." }
+      ]},
+      "community": [
+        { "title": "YoYoExpert Forums", "url": "https://forums.yoyoexpert.com/", "text": "The biggest yo-yo forum." },
+        { "title": "National Yo-Yo League", "url": "https://nyyl.org/", "text": "US yo-yo contest league." }
+      ],
+      "safety": "Yo-yo: check your string before you throw. A worn string can snap and send a yo-yo flying. Keep looping and offstring play in open space.",
+      "equipment": "Replace worn yo-yo strings, and stop if a yo-yo is cracked or damaged.",
+      "faq": [
+        { "q": "Is it cheating to learn on an unresponsive yo-yo?", "a": "No. A landed trick is a landed trick. Classic tricks are worth learning on a responsive yo-yo too, but there's no wrong way to play." }
+      ]
+    },
+    "kendama": {
+      "name": "kendama", "plural": "kendamas", "label": "Kendama", "players": "players", "sport": "Kendama",
+      "emblem": "kendama", "preset": "kendama-club",
+      "card": { "title": "Kendama", "text": "Hold the ken by the handle, let the tama hang still, and bend your knees as you pull it up." },
+      "level": { "label": "Kendama", "name": "Kendama", "text": "Knees bent, eyes on the tama.",
+        "tricks": ["Big Cup", "Small Cup", "Base Cup", "Spike", "Candlestick", "Airplane", "Around the World", "Lighthouse"] },
+      "links": { "title": "Kendama", "links": [
+        { "title": "LearnKendama First 50", "url": "https://yoyotricks.com/tag/kendama-first-50-tricks/", "text": "Fifty starter tricks, in order." },
+        { "title": "Kendama USA Tutorials", "url": "https://kendamausa.com/kendama-tricks-and-tutorials/", "text": "Trick videos from beginner up." },
+        { "title": "Skill Addicts Kendama Tree", "url": "https://app.skilladdicts.com/tree/kendama", "text": "See what to learn next." }
+      ]},
+      "community": [],
+      "safety": "Kendama: swings and juggles need room. Check around you first, and replace a frayed string before it snaps and sends the tama flying.",
+      "equipment": "Replace frayed kendama strings, and stop if a tama is cracked.",
+      "faq": [
+        { "q": "Is kendama loud?", "a": "A little. Wooden tamas clack on the cups. We keep play in our space and keep it friendly for the venue." }
+      ]
+    },
+    "spin-top": {
+      "name": "spin top", "plural": "spin tops", "label": "Spin Top", "chip": "Spin Tops", "players": "players", "sport": "Spin tops",
+      "emblem": "top", "preset": "spintop-club",
+      "card": { "title": "Spin Tops", "text": "Wind the string tight from the tip up, then throw toward the floor and snap your hand back. A hard floor helps." },
+      "level": { "label": "Spin tops", "name": "Spin Tops", "text": "Wind tight, throw smooth.",
+        "tricks": ["Ground Spin", "Long Spin", "Pick Up", "Hand Spin", "Throw to Hand"] },
+      "links": { "title": "Spin Tops", "links": [
+        { "title": "Skill Addicts: How to Spin a Top", "url": "https://skilladdicts.com/how-to-spin-a-top/", "text": "Winding and your first throw." },
+        { "title": "Getting Started with Spin Tops", "url": "https://forums.yoyoexpert.com/t/getting-started-with-spin-tops/23363", "text": "Forum guide for beginners." }
+      ]},
+      "community": [
+        { "title": "YoYoExpert Spin Top Forum", "url": "https://forums.yoyoexpert.com/c/spin-tops/16", "text": "Ask questions, share tricks." }
+      ],
+      "safety": "Spin tops: throw toward the floor, never toward people, and only on a hard floor the venue says is okay. Mats protect floors from metal tips.",
+      "equipment": "Check a top's tip and string before you throw. A loose tip can fly off.",
+      "faq": [
+        { "q": "What kind of floor do spin tops need?", "a": "A hard, smooth floor like wood, tile, or concrete. Carpet and grass stop most tops. We meet where the floor works, and we use mats where the venue asks." }
+      ]
+    },
+    "diabolo": {
+      "name": "diabolo", "plural": "diabolos", "label": "Diabolo", "players": "players", "sport": "Diabolo",
+      "emblem": "diabolo", "preset": "diabolo-club",
+      "card": { "title": "Diabolo", "text": "Set it on the string, roll it to one side as you lift, then whip one stick in a steady rhythm to keep it spinning." },
+      "level": { "label": "Diabolo", "name": "Diabolo", "text": "Keep it spinning and level.",
+        "tricks": ["Rolling Start", "Acceleration", "Toss and Catch", "Sun", "Around the Leg"] },
+      "links": { "title": "Diabolo", "links": [
+        { "title": "Skill Addicts: Diabolo", "url": "https://skilladdicts.com/how-to-do-tricks-with-diabolo/", "text": "Starting, spinning, and tricks." },
+        { "title": "Diabolo on Wikipedia", "url": "https://en.wikipedia.org/wiki/Diabolo", "text": "Where it comes from and how it works." }
+      ]},
+      "community": [
+        { "title": "International Jugglers' Association", "url": "https://www.juggle.org/", "text": "Juggling and diabolo news and festivals." },
+        { "title": "The Juggling Edge", "url": "https://www.jugglingedge.com/events.php", "text": "Clubs and festivals, diabolo included." }
+      ],
+      "safety": "Diabolo: tosses go up, so toss only where the ceiling is high, away from lights, windows, and people. Look up before every toss.",
+      "equipment": "Look up and around before a diabolo toss, and replace worn string before it snaps.",
+      "faq": [
+        { "q": "How much space does diabolo need?", "a": "More than you'd think. Tosses go up, so we play where the ceiling is high and there's room around each player, away from lights and windows." }
+      ]
+    },
+    "juggling": {
+      "name": "juggling", "plural": "juggling props", "label": "Juggling", "players": "jugglers", "sport": "Juggling",
+      "emblem": "juggling", "preset": "juggling-club",
+      "card": { "title": "Juggling", "text": "Start with one ball, tossed hand to hand at eye level. Then two: throw the second when the first peaks." },
+      "level": { "label": "Juggling", "name": "Juggling", "text": "Throws first, catches second.",
+        "tricks": ["One-Ball Toss", "Two-Ball Exchange", "Three-Ball Cascade", "Reverse Cascade", "Columns"] },
+      "links": { "title": "Juggling", "links": [
+        { "title": "Library of Juggling", "url": "https://libraryofjuggling.com/", "text": "Hundreds of patterns, animated." },
+        { "title": "Skill Addicts: How to Juggle", "url": "https://skilladdicts.com/learning-how-to-juggle/", "text": "From one ball to three." }
+      ]},
+      "community": [
+        { "title": "International Jugglers' Association", "url": "https://www.juggle.org/", "text": "Juggling news and festivals." },
+        { "title": "The Juggling Edge", "url": "https://www.jugglingedge.com/events.php", "text": "Juggling clubs and festivals." }
+      ],
+      "safety": "Juggling: clubs and rings need a clear circle around you. Practice props only at meetups: no knives, torches, or fire.",
+      "equipment": "Juggle practice props only. No knives, torches, or fire at meetups.",
+      "faq": [
+        { "q": "What do I need to start juggling?", "a": "Three soft beanbags are all you need. Balls that don't bounce or roll away make practice much easier. We bring loaners." }
+      ]
+    },
+    "flow-arts": {
+      "name": "flow arts", "plural": "flow props", "label": "Flow Arts", "players": "players", "sport": "Flow arts",
+      "emblem": "badge",
+      "card": { "title": "Flow Arts", "text": "Poi, staff, and hoops are about smooth motion, not catches. Start slow with soft practice poi or a light hoop." },
+      "level": { "label": "Flow arts", "name": "Flow Arts", "text": "Smooth beats fast.",
+        "tricks": ["Poi: Forward Weave", "Poi: Butterfly", "Staff: Figure Eight", "Hoop: Waist Hooping", "Hoop: Hand Spin"] },
+      "links": { "title": "Flow Arts", "links": [
+        { "title": "Playpoi", "url": "https://playpoi.com/", "text": "Poi lessons for every level." }
+      ]},
+      "community": [],
+      "safety": "Flow arts: poi, staffs, and hoops need a clear circle. Practice props only at meetups: no fire.",
+      "equipment": "Spin practice props only. Fire spinning needs its own space, safety gear, and the venue's permission.",
+      "faq": [
+        { "q": "Can I bring fire props?", "a": "Not to our meetups. Fire spinning needs its own space, safety gear, and the venue's permission. Bring practice props instead." }
+      ]
+    }
+  },
+  "mix": {
+    "terms": { "meetup_label": "Club meetup" },
+    "program": {
+      "about_title": "Practice, Play, and Good Company",
+      "about": [
+        "{name} is a {toy} community for {area}. We meet up to learn tricks, trade tips, and hang out with people who love to practice. {welcome}.",
+        "Never tried it? Working on something hard? This is your crew. {loaners} Someone will always help you land your first trick."
+      ],
+      "pillars_title": "Come Play With Us",
+      "pillars": [
+        { "title": "Learn", "text": "New to it? Someone will show you your first trick. Stuck on a hard one? Someone's done it." },
+        { "title": "Play", "text": "Jam sessions, challenges, and games anyone can join. No experience needed." },
+        { "title": "Progress", "text": "Work through the trick list with people who've been there. Compete if you want to, or never. Up to you." },
+        { "title": "Share", "text": "Try other people's gear, swap tips, and learn how to care for your {toys}." }
+      ],
+      "badges": ["Free entry", "All skill levels", "Family friendly", "Loaners available"],
+      "meetup_blurb": "A free, drop-in {toy} meetup. Beginners welcome, loaners available.",
+      "donate_text": "Meetups are free, always. Donations cover loaner {toys}, spare parts, and venue costs."
+    },
+    "loaners": {
+      "yes": "We bring loaner {toys} to every meetup, so you don't need to bring anything.",
+      "no": "Bring your {toys} if you have them. Don't have any? Email us and we'll try to have a spare."
+    },
+    "learn": {
+      "title": "Learn the Basics",
+      "intro": "Every trick starts the same way: one small move, practiced until it clicks. Pick a toy and start here, then come to a meetup and we'll help in person.",
+      "levels_title": "First Tricks",
+      "levels_intro": "A starter list for each toy. Skip around. Every landed trick counts.",
+      "outro": "Learning is faster in person. Bring your questions to the next meetup."
+    },
+    "resources_title": "Community & Events",
+    "faq_toy_group": "Getting Started",
+    "faq": [
+      { "group": "General", "q": "What is {name}?", "a": "{name} is a {toy} club for {area}. We bring together {players} {ages}, from total beginners to experienced players. {welcome}." },
+      { "group": "General", "q": "What do you play?", "a": "{toy_list}. Bring what you love, or try something new with a loaner.", "min_toys": 2 },
+      { "group": "General", "q": "Is there a membership fee?", "a": "{cost}" },
+      { "group": "General", "q": "Do I have to compete?", "a": "Not at all. Most people come to hang out, learn tricks, and have fun. Competing is up to you." },
+      { "group": "Meetups", "q": "When and where do you meet?", "a": "{meetup}. We meet at {venue}, {address}. Come and go anytime during the meetup." },
+      { "group": "Meetups", "q": "Do I need to RSVP?", "a": "No. Just show up. If a meetup is ever cancelled, we post it on this site and our social media as early as we can." },
+      { "group": "Meetups", "q": "What should I bring?", "a": "Nothing. {loaners} Wear comfortable clothes you can move in." },
+      { "group": "Meetups", "q": "Can kids come?", "a": "Yes! All ages are welcome. Younger kids should come with a parent or guardian, especially the first time." },
+      { "group": "Getting Started", "q": "Do I need to know any tricks?", "a": "No. Total beginners are just as welcome as experienced players. We'll help you with your first trick." },
+      { "group": "Getting Started", "q": "What should I buy first?", "a": "Nothing, yet. Try the loaners at a meetup, then ask our members. They'll help you pick something for your budget." },
+      { "group": "Getting Involved", "q": "How do I become a member?", "a": "Just come to a meetup. There's no sign-up. If you show up, you're part of the club." },
+      { "group": "Getting Involved", "q": "Can I volunteer?", "a": "Yes, please. Email {email} or talk to us at a meetup. We always need help setting up, greeting newcomers, and running activities." },
+      { "group": "Getting Involved", "q": "Can my organization partner with the club?", "a": "Yes. We're open to venue partnerships, demos, workshops, and sponsorships. Email {email} with your idea." }
+    ],
+    "safety": {
+      "points": [
+        "Kids are welcome. Younger kids need a parent or guardian with them. A parent or guardian is responsible for their own child at every meetup.",
+        "Club volunteers never take kids anywhere away from the group or the meetup space.",
+        "Give everyone room. Look around before a big trick, and check your gear before you play."
+      ]
+    },
+    "conduct": {
+      "intro": "{name} is built on the idea that {toys} should be fun and welcoming for everyone. That only works if people treat each other well. This code sets out what we expect from everyone in our community.",
+      "expected": [
+        "Be respectful. Treat everyone with dignity, whatever their age, skill level, race, ethnicity, gender identity, sexual orientation, disability, religion, or background.",
+        "Be welcoming, especially to beginners and younger players. Everyone was new once.",
+        "Keep feedback encouraging. If someone asks for tips, help. Skip the harsh criticism.",
+        "Mind the space. Keep the venue clean, watch your reach, and look out for kids.",
+        "Respect decisions. Raise disagreements with organizers calmly and privately."
+      ],
+      "equipment_first": [
+        "Ask before you borrow someone's gear. Hand it back the way you got it.",
+        "Look before you play. Big tricks and tosses need open space."
+      ],
+      "equipment_last": [
+        "Return loaners before you leave."
+      ]
+    }
+  }
+}
