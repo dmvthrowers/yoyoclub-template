@@ -1,0 +1,32 @@
+// Demo: a made-up spin top club using the "spintop-club" preset, with soft corners.
+{
+  "preset": "spintop-club",
+  "site": { "url": "", "language": "en", "date_format": "us", "timezone": "America/Phoenix", "source_url": "", "credit": true },
+  "club": {
+    "name": "Desert Spin Tops",
+    "short_name": "DST",
+    "tagline": "Spin Top Club · Tucson, AZ",
+    "slogan": "Wind tight. Throw smooth.",
+    "city": "Tucson", "region": "AZ", "area": "",
+    "founded": "2024",
+    "description": "Throw tops in Tucson. We meet every other Saturday on the library's hard floor, with loaner tops for beginners.",
+    "history": []
+  },
+  "meetup": {
+    "schedule": { "repeat": "weekly", "every": 2, "from": "2026-10-10", "weekday": "Saturday", "start": "10:00", "end": "12:00", "months": [] },
+    "show": 6,
+    "venue": "Mesa Branch Library", "room": "Program Room", "address": "450 W Mesa Rd, Tucson AZ",
+    "directions": [],
+    "rsvp": "Drop in",
+    "first_time": "First time? Borrow a top and we'll show you how to wind it.",
+    "loaners": true,
+    "skip": []
+  },
+  "contact": { "email": "hello@example.org", "social": [], "donate": { "label": "", "url": "" } },
+  "cost": { "summary": "Free", "details": "Meetups are free.", "free": true },
+  "officers": [ { "role": "Organizer", "name": "Casey Example", "bio": "Still chasing a three-minute spin." } ],
+  "events": [], "partners": [], "documents": [], "gallery": [], "links": [], "sister_clubs": [], "faq_extra": [],
+  "calendar": { "embed_url": "" },
+  "conduct": { "effective": "" },
+  "theme": { "corners": "soft" }
+}

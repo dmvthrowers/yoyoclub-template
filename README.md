@@ -1,8 +1,8 @@
-# Yo-Yo Club Website Template
+# Yo-Yo & Skill Toy Club Website Template
 
-A free, fast, mobile-friendly website for a **yo-yo club, kendama club, skill toy meetup, or a
-school or library yo-yo program**. Edit one settings file, and GitHub builds and publishes the site
-for you. No coding, servers, or monthly fees.
+A free, fast, mobile-friendly website for a **yo-yo, kendama, diabolo, spin top, or juggling club, a
+mixed skill toy meetup, or a school or library program**. Edit one settings file, and GitHub builds
+and publishes the site for you. No coding, servers, or monthly fees.
 
 ![Five sites built from this template: DMV Throwers and four demos](.github/preview.png)
 
@@ -18,7 +18,9 @@ Code of Conduct, Privacy & Safety) plus a "page not found" page.
 - **Meetups that schedule themselves.** Describe your rule once, like "3rd Sunday, 1–4 PM" or
   "every other Thursday". The site lists the next dates, shows a **next meetup** bar on every page,
   and rebuilds every morning so it's never out of date. Add skip dates for holidays.
-- **A Learn page** with first steps, a trick path, contest styles (1A–5A), and trusted tutorial links.
+- **A Learn page** for your toys: first steps, a trick path, trusted tutorial links, and yo-yo contest styles (1A–5A) if you throw.
+- **Made for what you play.** Pick a preset, or list your toys (`"toys": ["yo-yo", "kendama"]`) and the
+  wording, Learn page, FAQ, safety notes, and logo follow ("loaner yo-yos and kendamas").
 - **A code of conduct** written for skill toy meetups, including equipment safety.
 - **Shops and sponsors** with discount-code boxes, plus a donate button.
 - **Every meetup is an event Google understands**, and the FAQ shows up in search results too.
@@ -53,9 +55,18 @@ Open **`site.jsonc`**, click the **pencil icon** to edit, and work top to bottom
    | Preset | For | Learn page shows |
    | --- | --- | --- |
    | `yoyo-club` (default) | A yo-yo club | Yo-yo basics, a 3-level trick path, 1A–5A contest styles |
-   | `skill-toy-club` | Yo-yos plus kendama, spin tops, diabolo, juggling, flow arts | First tricks for each toy |
    | `kendama-club` | A kendama club | Kendama basics and a trick ladder |
+   | `diabolo-club` | A diabolo club | Starting and spinning, a trick path, and space and ceiling-height safety |
+   | `spintop-club` | A spin top (throw top) club | Winding and throwing, a trick path, and hard-floor and throwing safety |
+   | `juggling-club` | A juggling and flow arts club (balls, clubs, rings, poi, staff, hoop) | Cascade basics, a trick path, flow props, and a no-fire rule |
+   | `skill-toy-club` | Yo-yos plus kendama, spin tops, diabolo, juggling, flow arts | First tricks for each toy |
    | `youth-program` | A yo-yo program at a school, library, camp, or rec center | A printable trick checklist, tips for teachers, stricter kid-safety rules |
+
+   **`toys`**: what you play. Leave it `[]` to use the preset's toys. If your mix is different, list
+   it, for example `["kendama", "spin-top"]`. The Learn page, FAQ, loaner and safety text, code of
+   conduct, and logo are then written for exactly those toys ("loaner kendamas and spin tops").
+   Known toys: `yo-yo`, `kendama`, `spin-top`, `diabolo`, `juggling`, `flow-arts`. Any other name
+   works too, with plain wording (the build tells you).
 
 2. **`club`**: name, tagline, slogan, city, area, short description.
 3. **`meetup`**: your repeating schedule, venue, address, and whether you bring loaners.
@@ -122,9 +133,10 @@ Set the rule once in `site.jsonc` → `meetup.schedule`. Times are 24-hour (`"13
 | Workshops, contests, demos | `site.jsonc` → `events` | `"featured": true` puts one on the home page. |
 | Shops and sponsors | `site.jsonc` → `partners` | `"code"` shows a discount code box. |
 | Charter, guides, checklists | `assets/documents/` + `site.jsonc` → `documents` | `"about": true` also shows it on the About page. |
-| What you play (the tags) | `site.jsonc` → `"disciplines": ["Yo-Yo", "Kendama"]` | |
+| What you play | `site.jsonc` → `"toys": ["yo-yo", "kendama"]` | Rewrites the toy wording, Learn page, FAQ, and safety text. See step 3. |
+| The tags under "About us" | `site.jsonc` → `"disciplines": ["Yo-Yo", "Kendama"]` | |
 | Colors and corners | `site.jsonc` → `theme` | Any hex color. `"corners"`: `sharp`, `soft`, or `round`. The build warns if text would be hard to read. |
-| Logo | add `assets/emblem.svg` | Otherwise a yo-yo logo with your initials (`club.short_name`) is generated. |
+| Logo | add `assets/emblem.svg` | Otherwise a logo with your initials (`club.short_name`) is generated, shaped like your first toy: a yo-yo, kendama, top, diabolo, or juggling balls. Pick another with `theme.emblem`. |
 | Social-share image | add `assets/og-card.png` (1200×630) | Otherwise one is generated in your colors. |
 | Photos | `assets/images/gallery/` + `site.jsonc` → `gallery` | See [Photos](#photos-and-privacy). |
 | Extra links on Resources | `site.jsonc` → `links`, `sister_clubs` | |
@@ -229,8 +241,11 @@ python3 scripts/check_site.py
 | Page wording (buttons, headings) | in English in `build.py`. Search for the text and translate it |
 | Month and day names | `MONTHS`, `MONTHS_FULL`, `DAYS`, and `DAYS_FULL` near the top of `build.py` |
 
-To add a new preset, copy `presets/yoyo-club.json` to `presets/my-preset.json`, edit it, and set
-`"preset": "my-preset"` in `site.jsonc`.
+To add a new preset, copy `presets/yoyo-club.json` to `presets/my-preset.json`, edit it (including
+its `"toys"`), and set `"preset": "my-preset"` in `site.jsonc`. To add a toy, add an entry to
+`presets/_toys.json`: its words, logo shape, starter card, first tricks, links, and one safety line.
+In any text, `{toys}` becomes your toys ("yo-yos and kendamas"), `{toy}` the short form ("yo-yo and
+kendama", or "skill toy" for three or more), and `{Toy}` the title form ("Yo-Yo & Kendama").
 
 ---
 
@@ -258,8 +273,8 @@ To add a new preset, copy `presets/yoyo-club.json` to `presets/my-preset.json`, 
   The GitHub Actions it uses are pinned to exact versions and kept current by Dependabot.
 - **Turn on two-factor login** for your GitHub account. Whoever controls the account controls the site.
 - **Trademarks:** brand names in the presets (shops, apps, leagues) are used only to link to their
-  sites. This template includes no brand logos and isn't affiliated with or endorsed by any yo-yo
-  or skill toy company, league, or shop.
+  sites. This template includes no brand logos and isn't affiliated with or endorsed by any yo-yo,
+  kendama, juggling, or skill toy company, league, or shop.
 - **Links change.** The preset links were checked in October 2026. Fix any that break in your preset file.
 
 ---
@@ -269,7 +284,9 @@ To add a new preset, copy `presets/yoyo-club.json` to `presets/my-preset.json`, 
 ```
 site.jsonc              ← your settings (start here)
 presets/                ← starting text for each kind of club
-  yoyo-club.json  skill-toy-club.json  kendama-club.json  youth-program.json
+  yoyo-club.json  kendama-club.json  diabolo-club.json  spintop-club.json
+  juggling-club.json  skill-toy-club.json  youth-program.json
+  _toys.json            ← the toy library: words, logo, and starter tips for each toy
 assets/                 ← copied to the site as-is
   style.css             ← look and layout (colors come from site.jsonc)
   site.js               ← phone menu (the only script)

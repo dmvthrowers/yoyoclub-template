@@ -1,14 +1,16 @@
 # Instructions for AI coding agents
 
-You're helping someone launch a website for a yo-yo club, kendama club, skill toy meetup, or youth
-yo-yo program from this template. The human-facing guide is [README.md](README.md). Read it, then follow this.
+You're helping someone launch a website for a yo-yo, kendama, diabolo, spin top, or juggling club, a
+mixed skill toy meetup, or a youth program from this template. The human-facing guide is [README.md](README.md). Read it, then follow this.
 
 ## Goal
 Get a correct, live site in one session (15–30 minutes) with as few human steps as possible.
 
 ## Steps
 1. **Collect facts from the user**:
-   - preset (`yoyo-club`, `skill-toy-club`, `kendama-club`, `youth-program`)
+   - preset (`yoyo-club`, `kendama-club`, `diabolo-club`, `spintop-club`, `juggling-club`,
+     `skill-toy-club`, `youth-program`)
+   - which toys they play, if that differs from the preset (`"toys": ["yo-yo", "kendama"]`)
    - club name, city, region, and how they describe their area
    - the meetup rule (e.g. "3rd Sunday, 1–4 PM"), venue, room, address, and time zone
    - whether they bring loaners
@@ -56,6 +58,13 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
 - **Pages:** each page is one `page_<slug>()` method in `build.py`. To add a page, add a method
   and an entry in `self.pages`.
 - **Extra content:** `content/<slug>.html` is appended to that page. Plain HTML only.
+- **Toys:** set `toys` in `site.jsonc` instead of rewriting preset text toy by toy. When the list differs
+  from the preset's, the build rewrites the Learn page, FAQ, loaner, safety, and conduct text from
+  `presets/_toys.json` (a preset's `"mix"` block can replace that shared text). Write toy words in
+  presets as `{toys}`, `{toy}`, and `{Toy}`, not hard-coded "yo-yo". The check fails if any
+  `{placeholder}` is left unfilled.
+- **Facts in presets:** keep tips generic and safe. Link only to sources you've checked load, and
+  don't describe a real shop, league, or person as a fact you can't verify.
 - **Showcase:** `showcase/`, `examples/`, and `scripts/build_showcase.py` only run in the original
   template repository. Ignore them (or delete them) in a user's copy.
 - **No dependencies:** keep `build.py` and `scripts/check_site.py` standard-library Python 3.9+.

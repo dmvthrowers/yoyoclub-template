@@ -1,0 +1,32 @@
+// Demo: a made-up diabolo club using the "diabolo-club" preset, meeting in a gym for the ceiling height.
+{
+  "preset": "diabolo-club",
+  "site": { "url": "", "language": "en", "date_format": "us", "timezone": "America/Chicago", "source_url": "", "credit": true },
+  "club": {
+    "name": "Lakeshore Diabolo Club",
+    "short_name": "LDC",
+    "tagline": "Diabolo Club · Duluth, MN",
+    "slogan": "Look up. Toss high. Catch clean.",
+    "city": "Duluth", "region": "MN", "area": "",
+    "founded": "2025",
+    "description": "A friendly diabolo club in Duluth. Monthly meetups in a high-ceiling gym, with loaner diabolos and sticks for anyone who wants to try.",
+    "history": []
+  },
+  "meetup": {
+    "schedule": { "repeat": "monthly", "week": 1, "weekday": "Sunday", "start": "14:00", "end": "16:00", "months": [] },
+    "show": 6,
+    "venue": "Harborview Community Center", "room": "Main Gym", "address": "200 Lake Ave, Duluth MN",
+    "directions": ["The gym has a high ceiling, so we can toss. Enter through the side doors."],
+    "rsvp": "Drop in, no RSVP needed",
+    "first_time": "First time? Grab a loaner set and we'll get your diabolo spinning.",
+    "loaners": true,
+    "skip": []
+  },
+  "contact": { "email": "hello@example.org", "social": [], "donate": { "label": "", "url": "" } },
+  "cost": { "summary": "Free", "details": "Meetups are free.", "free": true },
+  "officers": [ { "role": "Organizer", "name": "Morgan Example", "bio": "Two diabolos on a good day." } ],
+  "events": [], "partners": [], "documents": [], "gallery": [], "links": [], "sister_clubs": [], "faq_extra": [],
+  "calendar": { "embed_url": "" },
+  "conduct": { "effective": "" },
+  "theme": {}
+}
