@@ -146,6 +146,9 @@ for page in pages:
         if not (svg.get("width") and svg.get("height")):
             err("inline <svg> without width/height")
     for ref in p.refs:
+        if ref.strip() in ("", "mailto:", "tel:") or ref.strip().startswith(("mailto:?", "tel:?")):
+            err(f"empty link target: {ref!r}")
+            continue
         u = urlparse(ref)
         if u.scheme in ("http", "https", "mailto", "tel", "data") or ref.startswith("#"):
             continue
