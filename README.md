@@ -308,3 +308,26 @@ Pull requests with improvements, new presets, or translations are welcome.
 site (divisions, schedule, rules, venue, sponsors, results). Clubs and contests are separate
 templates because they rarely share the same organizers, dates, or audience.
 For Scout units and kids clubs: [Scouts-Template-Site](https://github.com/dmvthrowers/Scouts-Template-Site).
+
+## Words you'll see
+
+| Word | Plain meaning |
+| --- | --- |
+| **JSONC** | A settings file that allows `//` comments, so every setting can explain itself |
+| **GitHub Actions** | GitHub's free robot. It builds and checks your site every time you save a change |
+| **GitHub Pages** | GitHub's free web hosting for the site the robot builds |
+| **CSP** | Content Security Policy: a rule in each page that only lets it load its own files |
+| **Preset** | A ready-made set of defaults (colors, wording) you start from and then change |
+
+## The family
+
+These templates share one look, one way of working, and one checklist. Pick the one that fits.
+
+| Template | Use it for |
+| --- | --- |
+| [yoyoclub-template](https://github.com/dmvthrowers/yoyoclub-template) | A club website: meetups, team, gallery, FAQ |
+| [yoyo-contest-template](https://github.com/dmvthrowers/yoyo-contest-template) | A contest website: schedule, divisions, sponsors, results |
+| [Scouts-Template-Site](https://github.com/dmvthrowers/Scouts-Template-Site) | A Scout pack or troop, Girl Scout troop, or kids club website |
+| [yoyo-map-template](https://github.com/dmvthrowers/yoyo-map-template) | A city-level community map with privacy built in |
+| [yoyo-registration-template](https://github.com/dmvthrowers/yoyo-registration-template) | Contest registration, payments and day-of tools (Next.js, Stripe, Supabase) |
+| [yoyo-player-map](https://github.com/dmvthrowers/yoyo-player-map) | The full player map app behind map.dmvthrowers.club |

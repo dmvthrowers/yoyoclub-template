@@ -190,6 +190,9 @@ def ext_link(url, label, cls=""):
 
 
 def mailto(email, subject=""):
+    if not (email or "").strip():
+        sys.exit('\ncontact.email is empty in site.jsonc. Add a shared club email address '
+                 '(not a personal one) so the contact links have somewhere to go.\n')
     q = f"?subject={esc(subject)}" if subject else ""
     return f'<a href="mailto:{esc(email)}{q}">{esc(email)}</a>'
 
