@@ -9,6 +9,8 @@ that the header, menu, and footer are identical on every page, and that no text 
 shows a {placeholder} (a misspelled word like {toys} in site.jsonc or a preset).
 Security: every page has the Content Security Policy and referrer tags, with no
 'unsafe-inline', no inline styles, scripts or event handlers, and no http:// links.
+With --real (your copy's deploy workflow), it also fails while the template's sample content
+(example.org addresses, the Springfield sample club) is still on the site.
 Exits non-zero if anything fails. No installs needed.
 """
 import json
@@ -20,6 +22,13 @@ from urllib.parse import urlparse, unquote
 
 ROOT = Path(__file__).resolve().parent.parent
 args = sys.argv[1:]
+# --real: this is someone's live site, so the template's sample content must be gone.
+# Your copy's deploy workflow passes it; the template's own showcase doesn't.
+REAL = "--real" in args
+args = [a for a in args if a != "--real"]
+# Text that only appears in the template's sample settings. Reserved example domains never belong
+# on a real site.
+SAMPLE_MARKERS = ("example.org", "example.com", "Springfield Throwers", "Jordan Example")
 # Optional: check_site.py [SITE_DIR [BASE_PATH]] (used for the showcase's example sites)
 SITE = (ROOT / args[0]).resolve() if args else ROOT / "_site"
 base_file = ROOT / ".build-base-path"
@@ -150,7 +159,7 @@ for page in pages:
             err(f"empty link target: {ref!r}")
             continue
         u = urlparse(ref)
-        if u.scheme in ("http", "https", "mailto", "tel", "data") or ref.startswith("#"):
+        if u.scheme in ("http", "https", "mailto", "tel", "data", "webcal") or ref.startswith("#"):
             continue
         path = unquote(u.path)
         if path.startswith(BASE):
@@ -160,6 +169,12 @@ for page in pages:
             continue
         if not (SITE / (path or "index.html")).exists():
             err(f"broken link: {ref}")
+
+if REAL:
+    found = sorted({m for page in pages for m in SAMPLE_MARKERS if m in page.read_text(encoding="utf-8")})
+    if found:
+        errors.append("the site still shows the template's sample content (" + ", ".join(found) + "). "
+                      "Put your own club's details in site.jsonc: name, contact email, meetup place and team.")
 
 reference = (SITE / "about.html").read_text(encoding="utf-8")
 for label, start, end in (("header", "<header", "</header>"), ("footer", "<footer", "</footer>")):

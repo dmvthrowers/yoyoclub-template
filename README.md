@@ -18,10 +18,13 @@ Code of Conduct, Privacy & Safety) plus a "page not found" page.
 - **Meetups that schedule themselves.** Describe your rule once, like "3rd Sunday, 1–4 PM" or
   "every other Thursday". The site lists the next dates, shows a **next meetup** bar on every page,
   and rebuilds every morning so it's never out of date. Add skip dates for holidays.
+  People can subscribe in their own calendar app (`meetups.ics`), so the dates show up on their phone.
 - **A Learn page** for your toys: first steps, a trick path, trusted tutorial links, and yo-yo contest styles (1A–5A) if you throw.
 - **Made for what you play.** Pick a preset, or list your toys (`"toys": ["yo-yo", "kendama"]`) and the
   wording, Learn page, FAQ, safety notes, and logo follow ("loaner yo-yos and kendamas").
 - **A code of conduct** written for skill toy meetups, including equipment safety.
+  Name your conduct team, reply time and a private (anonymous-friendly) report form in
+  `site.jsonc` → `conduct`; the report link then appears in every footer.
 - **Shops and sponsors** with discount-code boxes, plus a donate button.
 - **Every meetup is an event Google understands**, and the FAQ shows up in search results too.
 
@@ -97,6 +100,10 @@ first run fails. Go to **Actions → Build and deploy → Run workflow** to run 
 `site.jsonc` or a missing photo. Click the run to see a plain-English message. Your live site
 stays as it was until the problem is fixed.
 
+**"The site still shows the template's sample content"** means `site.jsonc` still has the sample
+club (Springfield Throwers, `hello@example.org`, Jordan Example). The check won't publish a site
+with someone else's placeholder details; replace them with your club's and push again.
+
 ---
 
 ## Meetup dates
@@ -127,7 +134,7 @@ Set the rule once in `site.jsonc` → `meetup.schedule`. Times are 24-hour (`"13
 | --- | --- | --- |
 | Name, tagline, slogan, area, description | `site.jsonc` → `club` | |
 | Meetup schedule, venue, address, loaners | `site.jsonc` → `meetup` | Use a public place. Don't publish home addresses. |
-| Email, social links, donate button | `site.jsonc` → `contact` | Use a shared email (free with Gmail). Avoid personal cell numbers. |
+| Email, social links, donate button, contact form | `site.jsonc` → `contact` | Use a shared email (free with Gmail). Avoid personal cell numbers. |
 | Cost | `site.jsonc` → `cost` | Plain text, so any currency works. |
 | Officers and volunteers | `site.jsonc` → `officers` | Ask before listing anyone. |
 | Workshops, contests, demos | `site.jsonc` → `events` | `"featured": true` puts one on the home page. |
@@ -170,6 +177,15 @@ the trick path, add a `"learn": { "levels": [ ... ] }` section to `site.jsonc` i
    ```
 
 The **Privacy & Safety** page tells visitors these rules and how to ask for a photo to be removed.
+
+---
+
+## Optional pages: Loaners and For Schools
+
+Two pages are off until you turn them on in `site.jsonc`. Each adds a menu item.
+
+- **Loaners** (`"loaner_page": { "show": true }`): how borrowing works, in three steps, plus care tips. Reword any of it with `intro`, `steps` and `care`. Add `"accepts_donations": true` only if you take donated gear.
+- **For Schools** (`"schools": { "show": true }`): ideas by subject (science, math, PE and mindset, history, art) and a "bring it to your school" note with your email. Turn it on only if you'll answer school requests. Reword the ideas with `subjects`, and say what you offer with `offer`.
 
 ---
 
@@ -251,8 +267,10 @@ kendama", or "skill toy" for three or more), and `{Toy}` the title form ("Yo-Yo 
 
 ## Make it better (optional add-ons)
 
-- **Contact form.** [Formspree](https://formspree.io) (free tier) or a Google Form linked from the Contact
-  page. An embedded form also needs its address added to `form-action` / `frame-src` in `csp()` in `build.py`.
+- **Contact form.** Make a free form at [Formspree](https://formspree.io) and paste its endpoint into
+  `contact.form.action` in `site.jsonc`. The Contact page gets a name/email/message form with a spam
+  trap, and the Privacy page and security policy update to match. Other services that accept a plain
+  HTML form post (and a `_gotcha` spam field) work too.
 - **Player map.** Point people to a city-level map like the [YoYo Map](https://map.dmvthrowers.club/) in `links`.
 - **Contest sign-up.** Link your registration form from `events[].url`.
 - **"Subscribe to our calendar" link.** Add your public Google Calendar's iCal link to `links`.

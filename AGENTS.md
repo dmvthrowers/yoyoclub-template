@@ -57,6 +57,9 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
   `Site.layout` and `Site.footer`. The check fails if they differ.
 - **Pages:** each page is one `page_<slug>()` method in `build.py`. To add a page, add a method
   and an entry in `self.pages`.
+- **Optional pages:** `loaner_page.show` adds a Loaners page and `schools.show` adds a For Schools page (both off by
+  default). Ask the user before turning either on: only enable For Schools if the club will answer school requests, and
+  `loaner_page.accepts_donations` only if it takes donated gear.
 - **Extra content:** `content/<slug>.html` is appended to that page. Plain HTML only.
 - **Toys:** set `toys` in `site.jsonc` instead of rewriting preset text toy by toy. When the list differs
   from the preset's, the build rewrites the Learn page, FAQ, loaner, safety, and conduct text from
