@@ -1049,8 +1049,9 @@ class Site:
         season = f' <strong>Season:</strong> {esc(m["season"])}.' if m.get("season") else ""
         body = f"""{self.page_head("Schedule", "Meetups & Events", summary or "Meetups, workshops, and special events.")}
 
-<section class="section">
+<section class="section" aria-labelledby="dates-heading">
   <div class="wrap">
+    <h2 id="dates-heading" class="sr-only">Upcoming Dates</h2>
     <p class="intro">{esc(" ".join(intro_bits))}{season} Questions? Email {mailto(c["contact"]["email"])}.</p>
     {self.agenda_html()}
     <ul class="pill-row" aria-label="Good to know">{"".join(f"<li>{esc(t)}</li>" for t in c["program"]["badges"])}</ul>
@@ -1132,8 +1133,9 @@ class Site:
             f'<p class="muted center">Our team list is coming soon. Want to help run the club? Email {mailto(c["contact"]["email"])}.</p>'
         body = f"""{self.page_head("Leadership", "Meet the Team", "The volunteers who keep the club running.")}
 
-<section class="section">
+<section class="section" aria-labelledby="team-heading">
   <div class="wrap">
+    <h2 id="team-heading" class="sr-only">Our Volunteers</h2>
     {grid}
   </div>
 </section>
