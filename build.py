@@ -428,8 +428,13 @@ class Site:
         self.today = dt.datetime.now(self.tz).date()
         self.has_calendar = bool(cfg.get("calendar", {}).get("embed_url"))
         self.pages = [("index", "Home"), ("about", "About"), ("meetups", "Meetups"), ("learn", "Learn"),
-                      ("team", "Team"), ("gallery", "Gallery"), ("resources", "Resources"),
-                      ("faq", "FAQ"), ("contact", "Contact")]
+                      ("team", "Team"), ("gallery", "Gallery"), ("resources", "Resources")]
+        # Optional pages: each exists only when its "show" setting is true.
+        if (cfg.get("loaner_page") or {}).get("show") is True:
+            self.pages.append(("loaners", "Loaners"))
+        if (cfg.get("schools") or {}).get("show") is True:
+            self.pages.append(("schools", "For Schools"))
+        self.pages += [("faq", "FAQ"), ("contact", "Contact")]
         self.footer_pages = self.pages + [("conduct", "Code of Conduct"), ("privacy", "Privacy & Safety")]
         self.occurrences = self.meetup_occurrences()
 
@@ -1248,6 +1253,82 @@ class Site:
         body = f"""{self.page_head("Learn & reference", "Resources", f"Downloads, shops, and trusted links for {self.fill('{players}')} of every level. Looking for tutorials? See the Learn page.")}
 {"".join(html_parts)}"""
         return "Resources", f"Downloads, shops, and trusted {self.fill('{toy}')} links from {self.name}.", body, None
+
+    def page_loaners(self):
+        """How loaners work. Shown only when loaner_page.show is true."""
+        c = self.cfg
+        lp = c.get("loaner_page") or {}
+        has = self.meetup.get("loaners", True)
+        if not has:
+            warnings.append("loaner_page.show is true, but meetup.loaners is false, so the page says you have no loaners. "
+                            "Hide the page or set meetup.loaners to true.")
+        steps = lp.get("steps") or [
+            {"title": "Ask a volunteer", "text": "Tell anyone on the team you'd like to borrow a {toy}. They'll find you a good one."},
+            {"title": "Use it while you're here", "text": "It's yours until you leave. A volunteer can show you your first trick."},
+            {"title": "Hand it back", "text": "Return it before you leave so the next {players} can use it."},
+        ]
+        care = lp.get("care") or [
+            "Be gentle with strings and moving parts.",
+            "Tell a volunteer if a string looks worn or something breaks, so it gets fixed before the next person uses it.",
+        ]
+        donate = ""
+        if lp.get("accepts_donations") is True:
+            text = lp.get("donations_text") or "Have a {toy} you don't use any more? Email us and we may be able to add it to our loaners."
+            donate = f"""
+<section class="section section-alt">
+  <div class="wrap narrow">
+    <h2>Donate a {esc(self.fill("{toy}").title())}</h2>
+    <p>{esc(self.fill(text))} {mailto(c["contact"]["email"], "Loaner donation")}</p>
+  </div>
+</section>"""
+        body = f"""{self.page_head("Borrow one", lp.get("title") or "Loaners", self.fill(lp.get("intro") or "{loaners}"))}
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="center">How It Works</h2>
+    {self.cards(steps, "cards cards-3")}
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap narrow">
+    <h2>Taking Care of Them</h2>
+    <ul class="checklist">{"".join(f"<li>{esc(self.fill(x))}</li>" for x in care)}</ul>
+  </div>
+</section>{donate}"""
+        return "Loaners", f"Borrow a {self.fill('{toy}')} when you visit {self.name}: how loaners work.", body, None
+
+    def page_schools(self):
+        """Ideas for teachers and a way to ask for a visit. Shown only when schools.show is true."""
+        c = self.cfg
+        sc = c.get("schools") or {}
+        subjects = sc.get("subjects") or [
+            {"title": "Science", "text": "Watch a {toy} speed up, slow down and stop. Where does the energy go? Change one thing, such as string length or weight, and measure what happens."},
+            {"title": "Math", "text": "Try a trick 20 times, tally the catches and work out the success rate. Real data, and students care about the answer."},
+            {"title": "PE and Mindset", "text": "Nobody lands a trick the first time. Practice builds hand-eye coordination, focus and the habit of trying again."},
+            {"title": "History and Culture", "text": "Skill toys have traveled between countries and centuries. Pick one {toy} and trace where it came from."},
+            {"title": "Art and Design", "text": "Sketch a design, pick the colors and name it. Then ask what makes some designs easier to use than others."},
+        ]
+        offer = sc.get("offer") or ("Want {toys} in your classroom, after-school program or homeschool group? "
+                                    "Tell us your grade level and group size and we'll see what we can do.")
+        mail = f'Email {mailto(c["contact"]["email"], "School visit")}'
+        body = f"""{self.page_head("For teachers", sc.get("title") or "For Schools", self.fill(sc.get("intro") or "A {toy} is a physics lab, a math tool and a PE unit for the price of a toy. Here are some ways to use it in class."))}
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="center">Ideas by Subject</h2>
+    {self.cards(subjects, "cards cards-3")}
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap narrow">
+    <h2>Bring It to Your School</h2>
+    <p>{esc(self.fill(offer))}</p>
+    <p>{mail}.</p>
+  </div>
+</section>"""
+        return "For Schools", f"Ideas for teachers and school groups from {self.name}.", body, None
 
     def page_faq(self):
         c = self.cfg

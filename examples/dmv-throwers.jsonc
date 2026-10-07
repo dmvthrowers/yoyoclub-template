@@ -77,6 +77,8 @@
     { "group": "Meetups", "q": "Is there parking?", "a": "Yes. Street parking on N Quincy St and nearby streets. The library is about a 5-minute walk from the Virginia Square–GMU Metro station." },
     { "group": "Meetups", "q": "Do you ever meet outside?", "a": "Sometimes. In warmer months we may meet at Quincy Park, next door to the library. Check Instagram before you come." }
   ],
+  "loaner_page": { "show": true },
+
   "conduct": { "effective": "April 2026" },
   "theme": { "primary": "#102040", "accent": "#B80000", "background": "#fffdfa", "ink": "#102040", "corners": "sharp" }
 }

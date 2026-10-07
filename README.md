@@ -173,6 +173,15 @@ The **Privacy & Safety** page tells visitors these rules and how to ask for a ph
 
 ---
 
+## Optional pages: Loaners and For Schools
+
+Two pages are off until you turn them on in `site.jsonc`. Each adds a menu item.
+
+- **Loaners** (`"loaner_page": { "show": true }`): how borrowing works, in three steps, plus care tips. Reword any of it with `intro`, `steps` and `care`. Add `"accepts_donations": true` only if you take donated gear.
+- **For Schools** (`"schools": { "show": true }`): ideas by subject (science, math, PE and mindset, history, art) and a "bring it to your school" note with your email. Turn it on only if you'll answer school requests. Reword the ideas with `subjects`, and say what you offer with `offer`.
+
+---
+
 ## Google Calendar (optional)
 
 1. In Google Calendar, make a calendar for your club, then open **Settings and sharing**.
