@@ -262,3 +262,8 @@ figcaption span { color: var(--muted); }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
 @media print { .site-header, .site-footer, .skip-link { display: none; } body { background: #fff; } }
+.contact-form { display: flex; flex-direction: column; gap: .4rem; }
+.contact-form label { font-weight: 700; margin-top: .6rem; }
+.contact-form input, .contact-form textarea { width: 100%; min-height: 48px; padding: .6rem .75rem; font: inherit; color: var(--ink); background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); }
+.contact-form .btn { align-self: flex-start; margin-top: .4rem; font-family: inherit; cursor: pointer; }
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
