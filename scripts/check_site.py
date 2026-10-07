@@ -150,7 +150,7 @@ for page in pages:
             err(f"empty link target: {ref!r}")
             continue
         u = urlparse(ref)
-        if u.scheme in ("http", "https", "mailto", "tel", "data") or ref.startswith("#"):
+        if u.scheme in ("http", "https", "mailto", "tel", "data", "webcal") or ref.startswith("#"):
             continue
         path = unquote(u.path)
         if path.startswith(BASE):

@@ -18,6 +18,7 @@ Code of Conduct, Privacy & Safety) plus a "page not found" page.
 - **Meetups that schedule themselves.** Describe your rule once, like "3rd Sunday, 1–4 PM" or
   "every other Thursday". The site lists the next dates, shows a **next meetup** bar on every page,
   and rebuilds every morning so it's never out of date. Add skip dates for holidays.
+  People can subscribe in their own calendar app (`meetups.ics`), so the dates show up on their phone.
 - **A Learn page** for your toys: first steps, a trick path, trusted tutorial links, and yo-yo contest styles (1A–5A) if you throw.
 - **Made for what you play.** Pick a preset, or list your toys (`"toys": ["yo-yo", "kendama"]`) and the
   wording, Learn page, FAQ, safety notes, and logo follow ("loaner yo-yos and kendamas").
