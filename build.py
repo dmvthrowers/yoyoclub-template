@@ -29,6 +29,7 @@ import sys
 import zlib
 from pathlib import Path
 from urllib.parse import urlparse
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "_site"
@@ -438,13 +439,13 @@ class Site:
         s = self.meetup.get("schedule") or {}
         return parse_time(s.get("start"), "meetup.schedule.start"), parse_time(s.get("end"), "meetup.schedule.end")
 
-    def meetup_occurrences(self):
+    def meetup_occurrences(self, count=None):
         """Upcoming meetup dates from the repeating rule, as (date, skip_note_or_None)."""
         s = self.meetup.get("schedule") or {}
         repeat = (s.get("repeat") or "none").lower()
         if repeat == "none":
             return []
-        count = int(self.meetup.get("show") or 6)
+        count = count or int(self.meetup.get("show") or 6)
         months = set(s.get("months") or range(1, 13))
         skips = {}
         for sk in self.meetup.get("skip", []):
@@ -488,6 +489,60 @@ class Site:
             if held >= count:
                 break
         return out
+
+    def meetups_ics(self):
+        """meetups.ics: the next 12 held meetups as calendar events. The site rebuilds daily, so a
+        calendar app subscribed to this file always has the coming year's dates."""
+        def text(v):
+            return (str(v).replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,")
+                    .replace("\n", "\\n"))
+
+        def fold(line):
+            out, b = [], line.encode("utf-8")
+            while len(b) > 75:
+                cut = 75
+                while (b[cut] & 0xC0) == 0x80:  # don't split a UTF-8 character
+                    cut -= 1
+                out.append(b[:cut].decode("utf-8"))
+                b = b" " + b[cut:]
+            out.append(b.decode("utf-8"))
+            return "\r\n".join(out)
+
+        def stamp(d, t):
+            moment = dt.datetime.combine(d, t, tzinfo=self.tz)
+            if self.tz:  # an exact moment: write it in UTC so every calendar app agrees
+                return moment.astimezone(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+            return moment.strftime("%Y%m%dT%H%M%S")  # no time zone set: "floating" local time
+
+        start, end = self.schedule_times()
+        m = self.meetup
+        where = ", ".join(x for x in (m.get("venue"), m.get("room"), m.get("address")) if x)
+        host = (urlparse(self.base_url).hostname or "") if self.base_url else ""
+        uid_host = host or re.sub(r"[^a-z0-9]+", "-", self.name.lower()).strip("-")
+        now = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        lines = ["BEGIN:VCALENDAR", "VERSION:2.0", f"PRODID:-//{text(self.name)}//Club site//EN",
+                 "CALSCALE:GREGORIAN", "METHOD:PUBLISH", f"X-WR-CALNAME:{text(self.name)} meetups"]
+        for d, skip in self.meetup_occurrences(12):
+            if skip:
+                continue
+            ev = ["BEGIN:VEVENT", f"UID:{d.isoformat()}-meetup@{uid_host}", f"DTSTAMP:{now}",
+                  f"SUMMARY:{text(self.name)} meetup"]
+            if start:
+                ev.append(f"DTSTART:{stamp(d, start)}")
+                if end:
+                    ev.append(f"DTEND:{stamp(d, end)}")
+            else:
+                ev += [f"DTSTART;VALUE=DATE:{d.strftime('%Y%m%d')}",
+                       f"DTEND;VALUE=DATE:{(d + dt.timedelta(days=1)).strftime('%Y%m%d')}"]
+            if where:
+                ev.append(f"LOCATION:{text(where)}")
+            desc = ". ".join(x.rstrip(".") for x in (self.meetup_summary(), self.cfg["cost"]["summary"]) if x) + "."
+            ev.append(f"DESCRIPTION:{text(desc)}")
+            if self.base_url:
+                ev.append(f"URL:{self.url('meetups')}")
+            lines += ev + ["END:VEVENT"]
+        lines.append("END:VCALENDAR")
+        return "\r\n".join(fold(l) for l in lines) + "\r\n"
 
     def next_meetup(self):
         return next((d for d, skip in self.occurrences if not skip), None)
@@ -1053,12 +1108,21 @@ class Site:
   <div class="wrap">
     <p class="intro">{esc(" ".join(intro_bits))}{season} Questions? Email {mailto(c["contact"]["email"])}.</p>
     {self.agenda_html()}
+    {self.calendar_links()}
     <ul class="pill-row" aria-label="Good to know">{"".join(f"<li>{esc(t)}</li>" for t in c["program"]["badges"])}</ul>
     {frame}
   </div>
 </section>
 {where}"""
         return "Meetups", f"{self.name} meetups and events: {summary or 'dates, times, and place'}.", body, self.event_jsonld()
+
+    def calendar_links(self):
+        if not self.occurrences:
+            return ""
+        sub = ""
+        if self.base_url.startswith("https://"):
+            sub = f'<a class="btn btn-primary" href="{esc("webcal://" + self.base_url[len("https://"):] + "meetups.ics")}">Subscribe in your calendar</a> '
+        return (f'<p class="center">{sub}<a class="btn btn-ghost" href="meetups.ics" download>Download the dates (.ics)</a></p>')
 
     def page_learn(self):
         c = self.cfg
@@ -1478,6 +1542,8 @@ class Site:
             title, desc, body, ld = getattr(self, f"page_{slug}")()
             robots = "noindex, follow" if slug == "404" or getattr(self, "noindex", False) else "index, follow"
             (OUT / f"{slug}.html").write_text(self.layout(slug, title, desc, body, ld, robots), encoding="utf-8")
+        if self.occurrences:
+            (OUT / "meetups.ics").write_text(self.meetups_ics(), encoding="utf-8", newline="")
         robots = "User-agent: *\nAllow: /\n"
         if self.base_url:
             robots += f"\nSitemap: {self.base_url}sitemap.xml\n"
