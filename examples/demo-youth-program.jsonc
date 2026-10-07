@@ -35,6 +35,10 @@
   ],
   "partners": [], "documents": [], "gallery": [], "links": [], "sister_clubs": [], "faq_extra": [],
   "calendar": { "embed_url": "" },
+  // This demo turns on the optional Loaners and For Schools pages.
+  "loaner_page": { "show": true },
+  "schools": { "show": true },
+
   "conduct": { "effective": "" },
   "theme": {}
 }

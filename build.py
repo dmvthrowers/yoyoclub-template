@@ -29,6 +29,7 @@ import sys
 import zlib
 from pathlib import Path
 from urllib.parse import urlparse
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "_site"
@@ -428,8 +429,13 @@ class Site:
         self.today = dt.datetime.now(self.tz).date()
         self.has_calendar = bool(cfg.get("calendar", {}).get("embed_url"))
         self.pages = [("index", "Home"), ("about", "About"), ("meetups", "Meetups"), ("learn", "Learn"),
-                      ("team", "Team"), ("gallery", "Gallery"), ("resources", "Resources"),
-                      ("faq", "FAQ"), ("contact", "Contact")]
+                      ("team", "Team"), ("gallery", "Gallery"), ("resources", "Resources")]
+        # Optional pages: each exists only when its "show" setting is true.
+        if (cfg.get("loaner_page") or {}).get("show") is True:
+            self.pages.append(("loaners", "Loaners"))
+        if (cfg.get("schools") or {}).get("show") is True:
+            self.pages.append(("schools", "For Schools"))
+        self.pages += [("faq", "FAQ"), ("contact", "Contact")]
         self.footer_pages = self.pages + [("conduct", "Code of Conduct"), ("privacy", "Privacy & Safety")]
         self.occurrences = self.meetup_occurrences()
 
@@ -438,13 +444,13 @@ class Site:
         s = self.meetup.get("schedule") or {}
         return parse_time(s.get("start"), "meetup.schedule.start"), parse_time(s.get("end"), "meetup.schedule.end")
 
-    def meetup_occurrences(self):
+    def meetup_occurrences(self, count=None):
         """Upcoming meetup dates from the repeating rule, as (date, skip_note_or_None)."""
         s = self.meetup.get("schedule") or {}
         repeat = (s.get("repeat") or "none").lower()
         if repeat == "none":
             return []
-        count = int(self.meetup.get("show") or 6)
+        count = count or int(self.meetup.get("show") or 6)
         months = set(s.get("months") or range(1, 13))
         skips = {}
         for sk in self.meetup.get("skip", []):
@@ -488,6 +494,60 @@ class Site:
             if held >= count:
                 break
         return out
+
+    def meetups_ics(self):
+        """meetups.ics: the next 12 held meetups as calendar events. The site rebuilds daily, so a
+        calendar app subscribed to this file always has the coming year's dates."""
+        def text(v):
+            return (str(v).replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,")
+                    .replace("\n", "\\n"))
+
+        def fold(line):
+            out, b = [], line.encode("utf-8")
+            while len(b) > 75:
+                cut = 75
+                while (b[cut] & 0xC0) == 0x80:  # don't split a UTF-8 character
+                    cut -= 1
+                out.append(b[:cut].decode("utf-8"))
+                b = b" " + b[cut:]
+            out.append(b.decode("utf-8"))
+            return "\r\n".join(out)
+
+        def stamp(d, t):
+            moment = dt.datetime.combine(d, t, tzinfo=self.tz)
+            if self.tz:  # an exact moment: write it in UTC so every calendar app agrees
+                return moment.astimezone(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+            return moment.strftime("%Y%m%dT%H%M%S")  # no time zone set: "floating" local time
+
+        start, end = self.schedule_times()
+        m = self.meetup
+        where = ", ".join(x for x in (m.get("venue"), m.get("room"), m.get("address")) if x)
+        host = (urlparse(self.base_url).hostname or "") if self.base_url else ""
+        uid_host = host or re.sub(r"[^a-z0-9]+", "-", self.name.lower()).strip("-")
+        now = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        lines = ["BEGIN:VCALENDAR", "VERSION:2.0", f"PRODID:-//{text(self.name)}//Club site//EN",
+                 "CALSCALE:GREGORIAN", "METHOD:PUBLISH", f"X-WR-CALNAME:{text(self.name)} meetups"]
+        for d, skip in self.meetup_occurrences(12):
+            if skip:
+                continue
+            ev = ["BEGIN:VEVENT", f"UID:{d.isoformat()}-meetup@{uid_host}", f"DTSTAMP:{now}",
+                  f"SUMMARY:{text(self.name)} meetup"]
+            if start:
+                ev.append(f"DTSTART:{stamp(d, start)}")
+                if end:
+                    ev.append(f"DTEND:{stamp(d, end)}")
+            else:
+                ev += [f"DTSTART;VALUE=DATE:{d.strftime('%Y%m%d')}",
+                       f"DTEND;VALUE=DATE:{(d + dt.timedelta(days=1)).strftime('%Y%m%d')}"]
+            if where:
+                ev.append(f"LOCATION:{text(where)}")
+            desc = ". ".join(x.rstrip(".") for x in (self.meetup_summary(), self.cfg["cost"]["summary"]) if x) + "."
+            ev.append(f"DESCRIPTION:{text(desc)}")
+            if self.base_url:
+                ev.append(f"URL:{self.url('meetups')}")
+            lines += ev + ["END:VEVENT"]
+        lines.append("END:VCALENDAR")
+        return "\r\n".join(fold(l) for l in lines) + "\r\n"
 
     def next_meetup(self):
         return next((d for d, skip in self.occurrences if not skip), None)
@@ -538,11 +598,22 @@ class Site:
             return ""
         return self.base_url if page == "index" else f"{self.base_url}{page}.html"
 
-    def csp(self):
+    def form_action(self):
+        """The contact form's endpoint (contact.form), or "" when the form is off."""
+        url = ((self.cfg["contact"].get("form") or {}).get("action") or "").strip()
+        if url and not re.match(r"https://[^/\s\"'<>]+/\S*$", url):
+            sys.exit(f'\ncontact.form.action "{url}" should be a full https:// address, '
+                     'like "https://formspree.io/f/abcd1234".\n')
+        return url
+
+    def csp(self, slug=""):
         frame = "https://calendar.google.com" if self.has_calendar else "'none'"
+        action = self.form_action() if slug == "contact" else ""
+        # Only the Contact page may post anywhere, and only to the form's own address.
+        form = action if action else "'none'"
         return ("default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; "
                 f"font-src 'self'; frame-src {frame}; connect-src 'self'; base-uri 'self'; "
-                "form-action 'none'; object-src 'none'; upgrade-insecure-requests")
+                f"form-action {form}; object-src 'none'; upgrade-insecure-requests")
 
     def nav(self, current, pages, root):
         items = []
@@ -568,6 +639,12 @@ class Site:
     def donate(self):
         d = self.cfg["contact"].get("donate") or {}
         return d if d.get("url") else None
+
+    def report_link_html(self):
+        url = (self.cfg["conduct"].get("report_url") or "").strip()
+        if url and not url.startswith("https://"):
+            sys.exit(f'\nconduct.report_url "{url}" should be a full https:// address.\n')
+        return f'<p>{ext_link(url, "Report a concern privately")}</p>' if url else ""
 
     def footer(self, current, root):
         c = self.cfg
@@ -597,6 +674,7 @@ class Site:
       </ul>
     </nav>
     <p>{mailto(c["contact"]["email"])}</p>
+    {self.report_link_html()}
     {f'<p>{socials}</p>' if socials else ''}
     {donate_html}
     {source_html}
@@ -640,7 +718,7 @@ class Site:
   <meta name="robots" content="{robots}">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="{esc(self.theme['primary'])}">
-  <meta http-equiv="Content-Security-Policy" content="{self.csp()}">
+  <meta http-equiv="Content-Security-Policy" content="{self.csp(slug)}">
   {chr(10).join('  ' + h for h in head_urls).strip()}
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{esc(self.name)}">
@@ -1055,16 +1133,26 @@ class Site:
         season = f' <strong>Season:</strong> {esc(m["season"])}.' if m.get("season") else ""
         body = f"""{self.page_head("Schedule", "Meetups & Events", summary or "Meetups, workshops, and special events.")}
 
-<section class="section">
+<section class="section" aria-labelledby="dates-heading">
   <div class="wrap">
+    <h2 id="dates-heading" class="sr-only">Upcoming Dates</h2>
     <p class="intro">{esc(" ".join(intro_bits))}{season} Questions? Email {mailto(c["contact"]["email"])}.</p>
     {self.agenda_html()}
+    {self.calendar_links()}
     <ul class="pill-row" aria-label="Good to know">{"".join(f"<li>{esc(t)}</li>" for t in c["program"]["badges"])}</ul>
     {frame}
   </div>
 </section>
 {where}"""
         return "Meetups", f"{self.name} meetups and events: {summary or 'dates, times, and place'}.", body, self.event_jsonld()
+
+    def calendar_links(self):
+        if not self.occurrences:
+            return ""
+        sub = ""
+        if self.base_url.startswith("https://"):
+            sub = f'<a class="btn btn-primary" href="{esc("webcal://" + self.base_url[len("https://"):] + "meetups.ics")}">Subscribe in your calendar</a> '
+        return (f'<p class="center">{sub}<a class="btn btn-ghost" href="meetups.ics" download>Download the dates (.ics)</a></p>')
 
     def page_learn(self):
         c = self.cfg
@@ -1138,8 +1226,9 @@ class Site:
             f'<p class="muted center">Our team list is coming soon. Want to help run the club? Email {mailto(c["contact"]["email"])}.</p>'
         body = f"""{self.page_head("Leadership", "Meet the Team", "The volunteers who keep the club running.")}
 
-<section class="section">
+<section class="section" aria-labelledby="team-heading">
   <div class="wrap">
+    <h2 id="team-heading" class="sr-only">Our Volunteers</h2>
     {grid}
   </div>
 </section>
@@ -1255,6 +1344,82 @@ class Site:
 {"".join(html_parts)}"""
         return "Resources", f"Downloads, shops, and trusted {self.fill('{toy}')} links from {self.name}.", body, None
 
+    def page_loaners(self):
+        """How loaners work. Shown only when loaner_page.show is true."""
+        c = self.cfg
+        lp = c.get("loaner_page") or {}
+        has = self.meetup.get("loaners", True)
+        if not has:
+            warnings.append("loaner_page.show is true, but meetup.loaners is false, so the page says you have no loaners. "
+                            "Hide the page or set meetup.loaners to true.")
+        steps = lp.get("steps") or [
+            {"title": "Ask a volunteer", "text": "Tell anyone on the team you'd like to borrow a {toy}. They'll find you a good one."},
+            {"title": "Use it while you're here", "text": "It's yours until you leave. A volunteer can show you your first trick."},
+            {"title": "Hand it back", "text": "Return it before you leave so the next {players} can use it."},
+        ]
+        care = lp.get("care") or [
+            "Be gentle with strings and moving parts.",
+            "Tell a volunteer if a string looks worn or something breaks, so it gets fixed before the next person uses it.",
+        ]
+        donate = ""
+        if lp.get("accepts_donations") is True:
+            text = lp.get("donations_text") or "Have a {toy} you don't use any more? Email us and we may be able to add it to our loaners."
+            donate = f"""
+<section class="section section-alt">
+  <div class="wrap narrow">
+    <h2>Donate a {esc(self.fill("{toy}").title())}</h2>
+    <p>{esc(self.fill(text))} {mailto(c["contact"]["email"], "Loaner donation")}</p>
+  </div>
+</section>"""
+        body = f"""{self.page_head("Borrow one", lp.get("title") or "Loaners", self.fill(lp.get("intro") or "{loaners}"))}
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="center">How It Works</h2>
+    {self.cards(steps, "cards cards-3")}
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap narrow">
+    <h2>Taking Care of Them</h2>
+    <ul class="checklist">{"".join(f"<li>{esc(self.fill(x))}</li>" for x in care)}</ul>
+  </div>
+</section>{donate}"""
+        return "Loaners", f"Borrow a {self.fill('{toy}')} when you visit {self.name}: how loaners work.", body, None
+
+    def page_schools(self):
+        """Ideas for teachers and a way to ask for a visit. Shown only when schools.show is true."""
+        c = self.cfg
+        sc = c.get("schools") or {}
+        subjects = sc.get("subjects") or [
+            {"title": "Science", "text": "Watch a {toy} speed up, slow down and stop. Where does the energy go? Change one thing, such as string length or weight, and measure what happens."},
+            {"title": "Math", "text": "Try a trick 20 times, tally the catches and work out the success rate. Real data, and students care about the answer."},
+            {"title": "PE and Mindset", "text": "Nobody lands a trick the first time. Practice builds hand-eye coordination, focus and the habit of trying again."},
+            {"title": "History and Culture", "text": "Skill toys have traveled between countries and centuries. Pick one {toy} and trace where it came from."},
+            {"title": "Art and Design", "text": "Sketch a design, pick the colors and name it. Then ask what makes some designs easier to use than others."},
+        ]
+        offer = sc.get("offer") or ("Want {toys} in your classroom, after-school program or homeschool group? "
+                                    "Tell us your grade level and group size and we'll see what we can do.")
+        mail = f'Email {mailto(c["contact"]["email"], "School visit")}'
+        body = f"""{self.page_head("For teachers", sc.get("title") or "For Schools", self.fill(sc.get("intro") or "A {toy} is a physics lab, a math tool and a PE unit for the price of a toy. Here are some ways to use it in class."))}
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="center">Ideas by Subject</h2>
+    {self.cards(subjects, "cards cards-3")}
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap narrow">
+    <h2>Bring It to Your School</h2>
+    <p>{esc(self.fill(offer))}</p>
+    <p>{mail}.</p>
+  </div>
+</section>"""
+        return "For Schools", f"Ideas for teachers and school groups from {self.name}.", body, None
+
     def page_faq(self):
         c = self.cfg
         groups = {}
@@ -1292,6 +1457,26 @@ class Site:
         if self.meetup_summary() or m.get("venue"):
             meet = (f'<p><strong>Meetups:</strong> {esc(self.meetup_summary())}<br>{esc(self.venue_line())}'
                     f'{"<br>" + esc(m["address"]) if m.get("address") else ""}</p>')
+        form_html = ""
+        if self.form_action():
+            form_html = f"""
+<section class="section section-alt">
+  <div class="wrap narrow">
+    <h2 class="center">Send a Message</h2>
+    <form class="contact-form card" action="{esc(self.form_action())}" method="POST">
+      <!-- Honeypot: hidden from people; bots fill it in and the form service drops those messages. -->
+      <input class="hp-field" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label for="cf-name">Name</label>
+      <input id="cf-name" type="text" name="name" autocomplete="name" required>
+      <label for="cf-email">Email</label>
+      <input id="cf-email" type="email" name="email" autocomplete="email" inputmode="email" required>
+      <label for="cf-message">Message</label>
+      <textarea id="cf-message" name="message" rows="6" required></textarea>
+      <p class="muted">We only use what you send to answer you. See our <a href="privacy.html">privacy page</a>.</p>
+      <button class="btn btn-primary" type="submit">Send</button>
+    </form>
+  </div>
+</section>"""
         body = f"""{self.page_head("Get in touch", "Contact Us", "Questions about the club, meetups, or getting started? We'd love to hear from you.")}
 
 <section class="section">
@@ -1308,7 +1493,7 @@ class Site:
       {social_html}
     </div>
   </div>
-</section>"""
+</section>{form_html}"""
         return "Contact", f"Contact {self.name}: email, meetup time and place, and social links.", body, None
 
     def page_conduct(self):
@@ -1318,6 +1503,26 @@ class Site:
             return "<ul>" + "".join(f"<li>{esc(self.fill(i))}</li>" for i in items) + "</ul>"
         version = " · ".join(x for x in ((f"Effective {cc['effective']}" if cc.get("effective") else ""),
                                           (f"Version {cc['version']}" if cc.get("version") else "")) if x)
+        url = (cc.get("report_url") or "").strip()
+        email = mailto(c["contact"]["email"], "Code of conduct")
+        report = (f'Use our {ext_link(url, "private report form")} (you can leave your name off), or email {email}.'
+                  if url else f"Email {email}.")
+        team = [m for m in cc.get("team") or [] if (m.get("name") or "").strip()]
+        if len(team) == 1:
+            warnings.append("conduct.team lists one person. Name at least two, so someone can step aside "
+                            "when a report is about them.")
+        team_html = ""
+        if team:
+            who = join_words([esc(m["name"]) + (f' ({esc(m["role"])})' if m.get("role") else "") for m in team])
+            team_html = (f"<p>Reports go to our conduct team: {who}. If a report is about one of them, "
+                         "they step aside and the others handle it."
+                         + (f" We reply within {esc(cc['response'])}." if cc.get("response") else "") + "</p>")
+        steps = [x for x in cc.get("steps") or [] if x]
+        steps_html = ("<p>What can happen, mildest first:</p>" + ul(steps)) if steps else ""
+        changes = [ch for ch in cc.get("changes") or [] if ch.get("text")]
+        changes_html = ("<h2>Changes to This Code</h2><ul>" + "".join(
+            f'<li>{esc(ch.get("date", ""))}{": " if ch.get("date") else ""}{esc(ch["text"])}</li>' for ch in changes)
+            + "</ul>") if changes else ""
         body = f"""{self.page_head("Community standards", "Code of Conduct", f"Applies to all {self.name} meetups, events, and online spaces.")}
 
 <section class="section">
@@ -1335,9 +1540,12 @@ class Site:
     <h2>Equipment Safety</h2>
     {ul(cc["equipment"])}
     <h2>Reporting a Problem</h2>
-    <p>{esc(self.fill(cc["reporting"]))} Email {mailto(c["contact"]["email"], "Code of conduct")}.</p>
+    <p>{esc(self.fill(cc["reporting"]))} {report}</p>
+    {team_html}
     <h2>What Happens Next</h2>
     <p>{esc(self.fill(cc["consequences"]))}</p>
+    {steps_html}
+    {changes_html}
   </div>
 </section>"""
         return "Code of Conduct", f"The {self.name} code of conduct for meetups, events, and online spaces.", body, None
@@ -1346,12 +1554,16 @@ class Site:
         c = self.cfg
         cal = (" The Meetups page shows a Google Calendar, covered by the "
                + ext_link("https://policies.google.com/privacy", "Google Privacy Policy") + ".") if self.has_calendar else ""
+        action = self.form_action()
+        form_note = ("Only what you send through the Contact page form, which "
+                     + esc(re.sub(r"^https://([^/]+).*$", r"\1", action))
+                     + " delivers to us by email. ") if action else "Nothing. "
         body = f"""{self.page_head("Your information", "Privacy & Safety", "How this website handles information, and how we keep meetups safe.")}
 
 <section class="section">
   <div class="wrap narrow prose">
     <h2>What This Website Collects</h2>
-    <p>Nothing. This site has no sign-up forms, cookies, analytics, ads, or tracking. It is hosted on
+    <p>{form_note}This site has no sign-up forms, cookies, analytics, ads, or tracking. It is hosted on
       GitHub Pages, which may log basic technical data for security under the
       {ext_link("https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement", "GitHub Privacy Statement")}.{cal}</p>
     <p>Links to shops, social media, and other sites follow those sites' own privacy policies.</p>
@@ -1484,6 +1696,8 @@ class Site:
             title, desc, body, ld = getattr(self, f"page_{slug}")()
             robots = "noindex, follow" if slug == "404" or getattr(self, "noindex", False) else "index, follow"
             (OUT / f"{slug}.html").write_text(self.layout(slug, title, desc, body, ld, robots), encoding="utf-8")
+        if self.occurrences:
+            (OUT / "meetups.ics").write_text(self.meetups_ics(), encoding="utf-8", newline="")
         robots = "User-agent: *\nAllow: /\n"
         if self.base_url:
             robots += f"\nSitemap: {self.base_url}sitemap.xml\n"
