@@ -4,7 +4,8 @@
 {
   "preset": "skill-toy-club",
   "site": { "url": "", "language": "en", "date_format": "us", "timezone": "America/New_York",
-            "source_url": "https://github.com/dmvthrowers/yoyoclub-template", "credit": true },
+            "source_url": "https://github.com/dmvthrowers/yoyoclub-template",
+            "status_url": "https://stats.uptimerobot.com/7XjeeDhuSq", "credit": true },
   "club": {
     "name": "DMV Throwers",
     "short_name": "DMVT",

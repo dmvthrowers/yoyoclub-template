@@ -253,6 +253,8 @@ kendama", or "skill toy" for three or more), and `{Toy}` the title form ("Yo-Yo 
 
 - **Contact form.** [Formspree](https://formspree.io) (free tier) or a Google Form linked from the Contact
   page. An embedded form also needs its address added to `form-action` / `frame-src` in `csp()` in `build.py`.
+- **Status page.** Make a free [UptimeRobot](https://uptimerobot.com) status page and put its address
+  in `site.status_url`; every footer gets a "Site status" link.
 - **Player map.** Point people to a city-level map like the [YoYo Map](https://map.dmvthrowers.club/) in `links`.
 - **Contest sign-up.** Link your registration form from `events[].url`.
 - **"Subscribe to our calendar" link.** Add your public Google Calendar's iCal link to `links`.
