@@ -67,6 +67,9 @@ Get a correct, live site in one session (15–30 minutes) with as few human step
   don't describe a real shop, league, or person as a fact you can't verify.
 - **Showcase:** `showcase/`, `examples/`, and `scripts/build_showcase.py` only run in the original
   template repository. Ignore them (or delete them) in a user's copy.
+- **Smoke test:** `scripts/smoke_test.js` and `.github/workflows/smoke-test.yml` click through every page of the built showcase
+  and its examples at phone width. They only run in the original template repository. Run it after changing `build.py`
+  or `assets/`: `python3 scripts/build_showcase.py && node scripts/smoke_test.js` (needs Node and Playwright).
 - **No dependencies:** keep `build.py` and `scripts/check_site.py` standard-library Python 3.9+.
 
 ## Useful commands
