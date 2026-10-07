@@ -43,7 +43,7 @@ jobs:
             python3 scripts/build_showcase.py
           else
             python3 build.py
-            python3 scripts/check_site.py
+            python3 scripts/check_site.py --real
           fi
       - name: Package the site
         if: github.event_name != 'pull_request'
