@@ -1152,7 +1152,7 @@ class Site:
         sub = ""
         if self.base_url.startswith("https://"):
             sub = f'<a class="btn btn-primary" href="{esc("webcal://" + self.base_url[len("https://"):] + "meetups.ics")}">Subscribe in your calendar</a> '
-        return (f'<p class="center">{sub}<a class="btn btn-ghost" href="meetups.ics" download>Download the dates (.ics)</a></p>')
+        return (f'<p class="center">{sub}<a class="btn btn-outline" href="meetups.ics" download>Download the dates (.ics)</a></p>')
 
     def page_learn(self):
         c = self.cfg
@@ -1171,7 +1171,7 @@ class Site:
   <div class="wrap narrow">
     <h2>{esc(self.fill(L.get("divisions_title", "Contest Styles")))}</h2>
     <p>{esc(self.fill(L.get("divisions_intro", "")))}</p>
-    <div class="table-wrap"><table><thead><tr><th scope="col">Style</th><th scope="col">Name</th><th scope="col">What it is</th></tr></thead>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Styles of play"><table><thead><tr><th scope="col">Style</th><th scope="col">Name</th><th scope="col">What it is</th></tr></thead>
     <tbody>{rows}</tbody></table></div>
   </div>
 </section>"""

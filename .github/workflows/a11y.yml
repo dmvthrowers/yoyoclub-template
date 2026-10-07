@@ -1,0 +1,38 @@
+# Runs the axe accessibility checker on every page of the showcase and its examples, at phone and desktop width.
+# Fails on serious or critical problems (low contrast, unnamed buttons, missing labels). Only runs in the original template repository.
+name: Accessibility check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: a11y-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  axe:
+    if: ${{ github.repository == 'dmvthrowers/yoyoclub-template' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Build the showcase and its examples
+        run: python3 scripts/build_showcase.py
+      - name: Get a browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/pw" --no-audit --no-fund playwright@1.56.1 axe-core@4.10.3
+          "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Run axe on every page
+        env:
+          NODE_PATH: ${{ runner.temp }}/pw/node_modules
+        run: node scripts/a11y_test.js
