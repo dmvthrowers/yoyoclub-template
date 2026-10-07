@@ -43,6 +43,7 @@ a:hover { color: var(--accent-dark); }
 .skip-link { position: absolute; left: .5rem; top: -6rem; z-index: 100; background: var(--accent); color: var(--on-accent);
   padding: .6rem 1rem; font-weight: 700; text-decoration: none; }
 .skip-link:focus { top: .5rem; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* ---------- Header: top bar, brand, navigation ---------- */
 .site-header { background: var(--bg); border-bottom: 1px solid var(--line); }
