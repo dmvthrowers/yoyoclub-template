@@ -654,6 +654,12 @@ class Site:
         source = c["site"].get("source_url")
         source_html = (f'<p class="footer-source"><a href="{esc(source)}" rel="noopener noreferrer">'
                        f'Website source code</a></p>') if source else ""
+        status = (c["site"].get("status_url") or "").strip()
+        if status and not status.startswith("https://"):
+            sys.exit(f'\nsite.status_url "{status}" should be a full https:// address.\n')
+        if status:
+            source_html += (f'<p class="footer-source"><a href="{esc(status)}" rel="noopener noreferrer">'
+                            'Site status</a></p>')
         credit_html = ('<p class="footer-credit">Site template by Brandon Rogers &amp; '
                        '<a href="https://dmvthrowers.club/" rel="noopener noreferrer">DMV Throwers</a></p>'
                        ) if c["site"].get("credit", True) else ""

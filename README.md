@@ -271,6 +271,8 @@ kendama", or "skill toy" for three or more), and `{Toy}` the title form ("Yo-Yo 
   `contact.form.action` in `site.jsonc`. The Contact page gets a name/email/message form with a spam
   trap, and the Privacy page and security policy update to match. Other services that accept a plain
   HTML form post (and a `_gotcha` spam field) work too.
+- **Status page.** Make a free [UptimeRobot](https://uptimerobot.com) status page and put its address
+  in `site.status_url`; every footer gets a "Site status" link.
 - **Player map.** Point people to a city-level map like the [YoYo Map](https://map.dmvthrowers.club/) in `links`.
 - **Contest sign-up.** Link your registration form from `events[].url`.
 - **"Subscribe to our calendar" link.** Add your public Google Calendar's iCal link to `links`.
