@@ -10,7 +10,7 @@ Nothing yet. Changes that merge after 1.0.0 are listed here until the next tag.
 
 The first tagged release: a club website built from one settings file.
 
-- Ten pages from `site.jsonc` and a preset: home, about, meetups, learn, team, gallery, resources, FAQ, contact, code of conduct, plus privacy and a 404.
+- Home, About, Meetups, Learn, Team, Gallery, Resources, FAQ, Contact, Code of Conduct and Privacy pages from `site.jsonc` and a preset, plus a 404.
 - Meetup dates roll forward on their own from a repeating rule; `meetup.skip` handles exceptions and the site rebuilds daily.
 - Seven presets (yo-yo, kendama, diabolo, spin top, juggling, mixed skill toys, youth program) and a `toys` setting that rewrites the text for any mix of toys.
 - Generated emblem, icons and share card in your colors; strict security policy; no cookies, trackers or outside fonts.
