@@ -22,6 +22,8 @@ Code of Conduct, Privacy & Safety) plus a "page not found" page.
 - **Made for what you play.** Pick a preset, or list your toys (`"toys": ["yo-yo", "kendama"]`) and the
   wording, Learn page, FAQ, safety notes, and logo follow ("loaner yo-yos and kendamas").
 - **A code of conduct** written for skill toy meetups, including equipment safety.
+  Name your conduct team, reply time and a private (anonymous-friendly) report form in
+  `site.jsonc` → `conduct`; the report link then appears in every footer.
 - **Shops and sponsors** with discount-code boxes, plus a donate button.
 - **Every meetup is an event Google understands**, and the FAQ shows up in search results too.
 

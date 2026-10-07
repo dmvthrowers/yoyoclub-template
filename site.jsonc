@@ -168,8 +168,24 @@
   // The calendar must be public. Leave "" to show only the meetup list.
   "calendar": { "embed_url": "" },
 
-  // Code of conduct: the date it took effect ("" to hide). The text comes from the preset.
-  "conduct": { "effective": "October 2026" },
+  // Code of conduct. The text comes from the preset; these settings make it yours.
+  "conduct": {
+    // The date it took effect ("" to hide)
+    "effective": "October 2026",
+    // Who handles reports. Name at least two people, so one can step aside if a report is about them.
+    // { "name": "Jordan Example", "role": "Organizer" }
+    "team": [],
+    // How fast you reply, e.g. "3 days" ("" to hide)
+    "response": "",
+    // Optional private report form that allows anonymous reports (e.g. a Google Form with
+    // "collect email" off). Shown on the conduct page and in every footer. "" uses email only.
+    "report_url": "",
+    // What can happen after a report, mildest first, if you want to spell it out ([] to hide), e.g.
+    // ["A private conversation", "A warning", "A break from meetups", "Being asked not to return"]
+    "steps": [],
+    // Changes to the code over time: { "date": "October 2026", "text": "First version." }
+    "changes": []
+  },
 
   // Colors (hex like "#14325c"). Delete a line to use the preset's color.
   // corners: "sharp" (square, the default), "soft", or "round".

@@ -569,6 +569,12 @@ class Site:
         d = self.cfg["contact"].get("donate") or {}
         return d if d.get("url") else None
 
+    def report_link_html(self):
+        url = (self.cfg["conduct"].get("report_url") or "").strip()
+        if url and not url.startswith("https://"):
+            sys.exit(f'\nconduct.report_url "{url}" should be a full https:// address.\n')
+        return f'<p>{ext_link(url, "Report a concern privately")}</p>' if url else ""
+
     def footer(self, current, root):
         c = self.cfg
         socials = " &bull; ".join(ext_link(s["url"], s["name"]) for s in self.socials())
@@ -591,6 +597,7 @@ class Site:
       </ul>
     </nav>
     <p>{mailto(c["contact"]["email"])}</p>
+    {self.report_link_html()}
     {f'<p>{socials}</p>' if socials else ''}
     {donate_html}
     {source_html}
@@ -1312,6 +1319,26 @@ class Site:
             return "<ul>" + "".join(f"<li>{esc(self.fill(i))}</li>" for i in items) + "</ul>"
         version = " · ".join(x for x in ((f"Effective {cc['effective']}" if cc.get("effective") else ""),
                                           (f"Version {cc['version']}" if cc.get("version") else "")) if x)
+        url = (cc.get("report_url") or "").strip()
+        email = mailto(c["contact"]["email"], "Code of conduct")
+        report = (f'Use our {ext_link(url, "private report form")} (you can leave your name off), or email {email}.'
+                  if url else f"Email {email}.")
+        team = [m for m in cc.get("team") or [] if (m.get("name") or "").strip()]
+        if len(team) == 1:
+            warnings.append("conduct.team lists one person. Name at least two, so someone can step aside "
+                            "when a report is about them.")
+        team_html = ""
+        if team:
+            who = join_words([esc(m["name"]) + (f' ({esc(m["role"])})' if m.get("role") else "") for m in team])
+            team_html = (f"<p>Reports go to our conduct team: {who}. If a report is about one of them, "
+                         "they step aside and the others handle it."
+                         + (f" We reply within {esc(cc['response'])}." if cc.get("response") else "") + "</p>")
+        steps = [x for x in cc.get("steps") or [] if x]
+        steps_html = ("<p>What can happen, mildest first:</p>" + ul(steps)) if steps else ""
+        changes = [ch for ch in cc.get("changes") or [] if ch.get("text")]
+        changes_html = ("<h2>Changes to This Code</h2><ul>" + "".join(
+            f'<li>{esc(ch.get("date", ""))}{": " if ch.get("date") else ""}{esc(ch["text"])}</li>' for ch in changes)
+            + "</ul>") if changes else ""
         body = f"""{self.page_head("Community standards", "Code of Conduct", f"Applies to all {self.name} meetups, events, and online spaces.")}
 
 <section class="section">
@@ -1329,9 +1356,12 @@ class Site:
     <h2>Equipment Safety</h2>
     {ul(cc["equipment"])}
     <h2>Reporting a Problem</h2>
-    <p>{esc(self.fill(cc["reporting"]))} Email {mailto(c["contact"]["email"], "Code of conduct")}.</p>
+    <p>{esc(self.fill(cc["reporting"]))} {report}</p>
+    {team_html}
     <h2>What Happens Next</h2>
     <p>{esc(self.fill(cc["consequences"]))}</p>
+    {steps_html}
+    {changes_html}
   </div>
 </section>"""
         return "Code of Conduct", f"The {self.name} code of conduct for meetups, events, and online spaces.", body, None
