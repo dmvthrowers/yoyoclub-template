@@ -538,11 +538,22 @@ class Site:
             return ""
         return self.base_url if page == "index" else f"{self.base_url}{page}.html"
 
-    def csp(self):
+    def form_action(self):
+        """The contact form's endpoint (contact.form), or "" when the form is off."""
+        url = ((self.cfg["contact"].get("form") or {}).get("action") or "").strip()
+        if url and not re.match(r"https://[^/\s\"'<>]+/\S*$", url):
+            sys.exit(f'\ncontact.form.action "{url}" should be a full https:// address, '
+                     'like "https://formspree.io/f/abcd1234".\n')
+        return url
+
+    def csp(self, slug=""):
         frame = "https://calendar.google.com" if self.has_calendar else "'none'"
+        action = self.form_action() if slug == "contact" else ""
+        # Only the Contact page may post anywhere, and only to the form's own address.
+        form = action if action else "'none'"
         return ("default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; "
                 f"font-src 'self'; frame-src {frame}; connect-src 'self'; base-uri 'self'; "
-                "form-action 'none'; object-src 'none'; upgrade-insecure-requests")
+                f"form-action {form}; object-src 'none'; upgrade-insecure-requests")
 
     def nav(self, current, pages, root):
         items = []
@@ -634,7 +645,7 @@ class Site:
   <meta name="robots" content="{robots}">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="theme-color" content="{esc(self.theme['primary'])}">
-  <meta http-equiv="Content-Security-Policy" content="{self.csp()}">
+  <meta http-equiv="Content-Security-Policy" content="{self.csp(slug)}">
   {chr(10).join('  ' + h for h in head_urls).strip()}
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{esc(self.name)}">
@@ -1286,6 +1297,26 @@ class Site:
         if self.meetup_summary() or m.get("venue"):
             meet = (f'<p><strong>Meetups:</strong> {esc(self.meetup_summary())}<br>{esc(self.venue_line())}'
                     f'{"<br>" + esc(m["address"]) if m.get("address") else ""}</p>')
+        form_html = ""
+        if self.form_action():
+            form_html = f"""
+<section class="section section-alt">
+  <div class="wrap narrow">
+    <h2 class="center">Send a Message</h2>
+    <form class="contact-form card" action="{esc(self.form_action())}" method="POST">
+      <!-- Honeypot: hidden from people; bots fill it in and the form service drops those messages. -->
+      <input class="hp-field" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label for="cf-name">Name</label>
+      <input id="cf-name" type="text" name="name" autocomplete="name" required>
+      <label for="cf-email">Email</label>
+      <input id="cf-email" type="email" name="email" autocomplete="email" inputmode="email" required>
+      <label for="cf-message">Message</label>
+      <textarea id="cf-message" name="message" rows="6" required></textarea>
+      <p class="muted">We only use what you send to answer you. See our <a href="privacy.html">privacy page</a>.</p>
+      <button class="btn btn-primary" type="submit">Send</button>
+    </form>
+  </div>
+</section>"""
         body = f"""{self.page_head("Get in touch", "Contact Us", "Questions about the club, meetups, or getting started? We'd love to hear from you.")}
 
 <section class="section">
@@ -1302,7 +1333,7 @@ class Site:
       {social_html}
     </div>
   </div>
-</section>"""
+</section>{form_html}"""
         return "Contact", f"Contact {self.name}: email, meetup time and place, and social links.", body, None
 
     def page_conduct(self):
@@ -1340,12 +1371,16 @@ class Site:
         c = self.cfg
         cal = (" The Meetups page shows a Google Calendar, covered by the "
                + ext_link("https://policies.google.com/privacy", "Google Privacy Policy") + ".") if self.has_calendar else ""
+        action = self.form_action()
+        form_note = ("Only what you send through the Contact page form, which "
+                     + esc(re.sub(r"^https://([^/]+).*$", r"\1", action))
+                     + " delivers to us by email. ") if action else "Nothing. "
         body = f"""{self.page_head("Your information", "Privacy & Safety", "How this website handles information, and how we keep meetups safe.")}
 
 <section class="section">
   <div class="wrap narrow prose">
     <h2>What This Website Collects</h2>
-    <p>Nothing. This site has no sign-up forms, cookies, analytics, ads, or tracking. It is hosted on
+    <p>{form_note}This site has no sign-up forms, cookies, analytics, ads, or tracking. It is hosted on
       GitHub Pages, which may log basic technical data for security under the
       {ext_link("https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement", "GitHub Privacy Statement")}.{cal}</p>
     <p>Links to shops, social media, and other sites follow those sites' own privacy policies.</p>

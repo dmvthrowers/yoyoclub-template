@@ -106,7 +106,11 @@
     // Social links: { "name": "Instagram", "url": "https://...", "text": "Photos & updates" }
     "social": [],
     // Donation link, e.g. Ko-fi or PayPal ("" to hide). Check your venue's rules first.
-    "donate": { "label": "Support the Club", "url": "" }
+    "donate": { "label": "Support the Club", "url": "" },
+    // Optional message form on the Contact page ("" to hide). Paste the endpoint from a form
+    // service such as Formspree (free tier), e.g. "https://formspree.io/f/abcd1234". Messages
+    // arrive in your email; the Privacy page and security policy update to match.
+    "form": { "action": "" }
   },
 
   "cost": {

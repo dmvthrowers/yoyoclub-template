@@ -127,7 +127,7 @@ Set the rule once in `site.jsonc` → `meetup.schedule`. Times are 24-hour (`"13
 | --- | --- | --- |
 | Name, tagline, slogan, area, description | `site.jsonc` → `club` | |
 | Meetup schedule, venue, address, loaners | `site.jsonc` → `meetup` | Use a public place. Don't publish home addresses. |
-| Email, social links, donate button | `site.jsonc` → `contact` | Use a shared email (free with Gmail). Avoid personal cell numbers. |
+| Email, social links, donate button, contact form | `site.jsonc` → `contact` | Use a shared email (free with Gmail). Avoid personal cell numbers. |
 | Cost | `site.jsonc` → `cost` | Plain text, so any currency works. |
 | Officers and volunteers | `site.jsonc` → `officers` | Ask before listing anyone. |
 | Workshops, contests, demos | `site.jsonc` → `events` | `"featured": true` puts one on the home page. |
@@ -251,8 +251,10 @@ kendama", or "skill toy" for three or more), and `{Toy}` the title form ("Yo-Yo 
 
 ## Make it better (optional add-ons)
 
-- **Contact form.** [Formspree](https://formspree.io) (free tier) or a Google Form linked from the Contact
-  page. An embedded form also needs its address added to `form-action` / `frame-src` in `csp()` in `build.py`.
+- **Contact form.** Make a free form at [Formspree](https://formspree.io) and paste its endpoint into
+  `contact.form.action` in `site.jsonc`. The Contact page gets a name/email/message form with a spam
+  trap, and the Privacy page and security policy update to match. Other services that accept a plain
+  HTML form post (and a `_gotcha` spam field) work too.
 - **Player map.** Point people to a city-level map like the [YoYo Map](https://map.dmvthrowers.club/) in `links`.
 - **Contest sign-up.** Link your registration form from `events[].url`.
 - **"Subscribe to our calendar" link.** Add your public Google Calendar's iCal link to `links`.
