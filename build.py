@@ -1146,7 +1146,7 @@ class Site:
         sub = ""
         if self.base_url.startswith("https://"):
             sub = f'<a class="btn btn-primary" href="{esc("webcal://" + self.base_url[len("https://"):] + "meetups.ics")}">Subscribe in your calendar</a> '
-        return (f'<p class="center">{sub}<a class="btn btn-ghost" href="meetups.ics" download>Download the dates (.ics)</a></p>')
+        return (f'<p class="center">{sub}<a class="btn btn-outline" href="meetups.ics" download>Download the dates (.ics)</a></p>')
 
     def page_learn(self):
         c = self.cfg
