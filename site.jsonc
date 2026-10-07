@@ -167,6 +167,16 @@
     { "group": "Meetups", "q": "Is there parking?", "a": "Yes. Free parking behind the library." }
   ],
 
+  // A "Loaners" page that explains how borrowing works. Set "show" to true to add it to the menu.
+  // Every line has a plain default you can reword: "intro", "steps" (a list of { "title", "text" }),
+  // "care" (a list of sentences). Set "accepts_donations": true only if you take donated gear.
+  "loaner_page": { "show": false, "accepts_donations": false },
+
+  // A "For Schools" page: ideas by subject plus a way to ask for a visit. Set "show" to true to add it.
+  // Only turn it on if your club will actually answer school requests. Reword the ideas with
+  // "subjects" (a list of { "title", "text" }), and say what you offer in "offer".
+  "schools": { "show": false },
+
   // Google Calendar (optional). Paste the "embed" URL from Google Calendar settings:
   // Settings and sharing > Integrate calendar > Embed code (just the https://... part).
   // The calendar must be public. Leave "" to show only the meetup list.
