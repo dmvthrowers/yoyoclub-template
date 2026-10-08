@@ -179,6 +179,17 @@
   // "subjects" (a list of { "title", "text" }), and say what you offer in "offer".
   "schools": { "show": false },
 
+  // Long-form guides (optional). Set "show" to true to add a "Guides" page to the menu.
+  // Each guide is a hub page plus numbered parts. Write each part's text in
+  // content/guides/<guide slug>/<part slug>.html (or point "dir" somewhere else) using <h2 id="...">
+  // headings. Put [ref:some-id] in the text to cite a reference; list the references on the guide as
+  // { "id", "title", "url", "note" } and they appear on the hub page. Example:
+  //   "items": [{ "slug": "first-week", "title": "Your First Week", "summary": "...",
+  //     "parts": [{ "slug": "basics", "title": "The Basics", "summary": "..." }],
+  //     "references": [{ "id": "tips", "title": "A Good Source", "url": "https://..." }] }]
+  // See examples/demo-kendama.jsonc for a working one.
+  "guides": { "show": false },
+
   // Google Calendar (optional). Paste the "embed" URL from Google Calendar settings:
   // Settings and sharing > Integrate calendar > Embed code (just the https://... part).
   // The calendar must be public. Leave "" to show only the meetup list.

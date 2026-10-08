@@ -47,6 +47,7 @@ class Page(HTMLParser):
         self.csp = None
         self.security = []
         self.placeholders = []
+        self.stray_refs = []
         self._skip = 0
 
     def handle_starttag(self, tag, attrs):
@@ -103,6 +104,7 @@ class Page(HTMLParser):
             self.placeholders += PLACEHOLDER.findall(d)
         elif not self._skip:
             self.placeholders += PLACEHOLDER.findall(d)
+            self.stray_refs += re.findall(r"\[ref:[^\]]*\]", d)
 
 
 def shared_block(html, start, end):
@@ -133,6 +135,8 @@ for page in pages:
         err(problem)
     for word in dict.fromkeys(p.placeholders):
         err(f"unfilled placeholder {word} in the page text (check its spelling in site.jsonc or the preset)")
+    for ref in dict.fromkeys(p.stray_refs):
+        err(f"citation {ref} was not turned into a link (is the guide's page listed in guides.items?)")
     if not p.title:
         err("missing <title>")
     if not p.meta.get("description"):

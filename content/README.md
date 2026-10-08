@@ -32,3 +32,7 @@ Example `content/about.html`:
 Use plain HTML. No `<script>`, `<style>`, or `style="…"` attributes; the site's security policy
 blocks them, and the automatic check will fail. Add CSS to `assets/style.css` instead. This
 README itself is ignored by the build.
+
+## Guides
+
+Long-form guides are not written here. Turn them on with `guides.show` in `site.jsonc`, then put each part's text in `content/guides/<guide slug>/<part slug>.html`. See the `guides` comment in `site.jsonc`.

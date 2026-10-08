@@ -435,6 +435,14 @@ class Site:
             self.pages.append(("loaners", "Loaners"))
         if (cfg.get("schools") or {}).get("show") is True:
             self.pages.append(("schools", "For Schools"))
+        self.guide_list = []              # long-form guides (guides.show); their pages are built but not in the menu
+        self.guide_pages = []             # (slug, label) for each guide hub and part
+        self.nav_alias = {}               # page slug -> menu item that lights up for it
+        self.page_attrs = {}              # page slug -> extra attributes for <body>
+        self.guide_builders = {}
+        if (cfg.get("guides") or {}).get("show") is True:
+            self.pages.append(("guides", "Guides"))
+            self.load_guides()
         self.pages += [("faq", "FAQ"), ("contact", "Contact")]
         self.footer_pages = self.pages + [("conduct", "Code of Conduct"), ("privacy", "Privacy & Safety")]
         self.occurrences = self.meetup_occurrences()
@@ -731,7 +739,7 @@ class Site:
   <link rel="stylesheet" href="{root}theme.css">
   <link rel="stylesheet" href="{root}style.css">{ld_html}
 </head>
-<body>
+<body{self.page_attrs.get(slug, "")}>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header">
   {self.top_bar(root)}
@@ -744,14 +752,14 @@ class Site:
   </div>
   <nav class="site-nav" id="site-nav" aria-label="Main navigation">
     <ul>
-      {self.nav(slug, self.pages, root)}
+      {self.nav(self.nav_alias.get(slug, slug), self.pages, root)}
     </ul>
   </nav>
 </header>
 <main id="main-content">
 {body}{self.extra_content(slug)}
 </main>
-{self.footer(slug, root)}
+{self.footer(self.nav_alias.get(slug, slug), root)}
 <script src="{root}site.js" defer></script>
 </body>
 </html>
@@ -1420,6 +1428,129 @@ class Site:
 </section>"""
         return "For Schools", f"Ideas for teachers and school groups from {self.name}.", body, None
 
+    # ---------------------------------------------------------------- guides
+
+    def load_guides(self):
+        """Read the guides setting and each part's HTML file. Pages: guides, guide-<g>, guide-<g>-<part>."""
+        G = self.cfg.get("guides") or {}
+        seen = set()
+        for g in G.get("items") or []:
+            gs = g.get("slug") or ""
+            if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", gs) or gs in seen:
+                sys.exit(f'\nguides.items needs a unique lower-case "slug" (letters, numbers, dashes); got "{gs}".\n')
+            seen.add(gs)
+            parts = g.get("parts") or []
+            if not parts:
+                sys.exit(f'\nGuide "{gs}" has no "parts". Add at least one part with a "slug" and "title".\n')
+            folder = ROOT / (g.get("dir") or f"content/guides/{gs}")
+            loaded = []
+            for part in parts:
+                ps = part.get("slug") or ""
+                if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", ps):
+                    sys.exit(f'\nGuide "{gs}": each part needs a lower-case "slug"; got "{ps}".\n')
+                f = folder / f"{ps}.html"
+                if not f.exists():
+                    sys.exit(f'\nGuide "{gs}" part "{ps}": write its text in {f.relative_to(ROOT)}.\n')
+                loaded.append({**part, "html": f.read_text(encoding="utf-8")})
+            refs = g.get("references") or []
+            ids = [r.get("id") for r in refs]
+            if len(set(ids)) != len(ids):
+                sys.exit(f'\nGuide "{gs}" has two references with the same "id".\n')
+            self.guide_list.append({**g, "parts": loaded, "references": refs})
+            hub = f"guide-{gs}"
+            self.guide_pages.append((hub, g["title"]))
+            self.guide_builders[hub] = lambda g=g: self.page_guide_hub(g["slug"])
+            self.nav_alias[hub] = "guides"
+            for i, part in enumerate(loaded):
+                slug = f"{hub}-{part['slug']}"
+                self.guide_pages.append((slug, part["title"]))
+                self.guide_builders[slug] = lambda g=g, i=i: self.page_guide_part(g["slug"], i)
+                self.nav_alias[slug] = "guides"
+            # Old deep links (hub.html#section) jump to the part that holds the section.
+            moved = {}
+            for part in loaded:
+                for hid in re.findall(r'<h2[^>]*\sid="([^"]+)"', part["html"]):
+                    moved[hid] = f"{hub}-{part['slug']}.html#{hid}"
+            self.page_attrs[hub] = f' data-guide-map="{esc(json.dumps(moved, sort_keys=True))}"'
+
+    def guide(self, gs):
+        return next(g for g in self.guide_list if g["slug"] == gs)
+
+    def cite(self, g, text):
+        """[ref:id] in a part becomes a small numbered link to the hub's references list."""
+        order = [r["id"] for r in g["references"]]
+        def sub(m):
+            rid = m.group(1)
+            if rid not in order:
+                sys.exit(f'\nGuide "{g["slug"]}" cites [ref:{rid}], but no reference has that "id".\n')
+            return (f'<sup class="cite"><a href="guide-{g["slug"]}.html#ref-{esc(rid)}" '
+                    f'aria-label="Reference {order.index(rid) + 1}">{order.index(rid) + 1}</a></sup>')
+        return re.sub(r"\[ref:([A-Za-z0-9_-]+)\]", sub, text)
+
+    def page_guides(self):
+        G = self.cfg["guides"]
+        cards = "".join(
+            f'\n  <div class="card"><h3><a href="guide-{esc(g["slug"])}.html">{esc(self.fill(g["title"]))}</a></h3>'
+            f'<p>{esc(self.fill(g.get("summary", "")))}</p><p class="muted">{len(g["parts"])} '
+            f'{"part" if len(g["parts"]) == 1 else "parts"}</p></div>' for g in self.guide_list)
+        body = f"""{self.page_head("Guides", self.fill(G.get("title") or "Guides"), self.fill(G.get("intro") or "Long reads for when a quick answer is not enough."))}
+
+<section class="section">
+  <div class="wrap">
+    <div class="cards cards-2">{cards}
+    </div>
+  </div>
+</section>"""
+        return "Guides", f"Long-form guides from {self.name}.", body, None
+
+    def page_guide_hub(self, gs):
+        g = self.guide(gs)
+        toc = ""
+        for i, part in enumerate(g["parts"], 1):
+            heads = re.findall(r'<h2[^>]*\sid="([^"]+)"[^>]*>(.*?)</h2>', part["html"], re.S)
+            sub = "".join(f'<li><a href="guide-{gs}-{part["slug"]}.html#{esc(h)}">{t}</a></li>' for h, t in heads)
+            toc += (f'\n    <li><a href="guide-{gs}-{part["slug"]}.html">Part {i}: {esc(part["title"])}</a>'
+                    f'<p>{esc(self.fill(part.get("summary", "")))}</p>{f"<ul>{sub}</ul>" if sub else ""}</li>')
+        refs = ""
+        if g["references"]:
+            items = "".join(
+                f'\n    <li id="ref-{esc(r["id"])}">{ext_link(r["url"], r["title"])}'
+                f'{" — " + esc(r["note"]) if r.get("note") else ""}</li>' for r in g["references"])
+            refs = f'\n<section class="section section-alt">\n  <div class="wrap narrow">\n    <h2 id="references">References</h2>\n    <ol class="references">{items}\n    </ol>\n  </div>\n</section>'
+        body = f"""{self.page_head("Guide", self.fill(g["title"]), self.fill(g.get("summary", "")))}
+
+<section class="section">
+  <div class="wrap narrow">
+    <h2>In This Guide</h2>
+    <ol class="guide-toc">{toc}
+    </ol>
+    <p><a href="guides.html">All guides</a></p>
+  </div>
+</section>{refs}"""
+        return g["title"], self.fill(g.get("summary") or f"A guide from {self.name}."), body, None
+
+    def page_guide_part(self, gs, i):
+        g = self.guide(gs)
+        parts = g["parts"]
+        part = parts[i]
+        nav = []
+        if i > 0:
+            p = parts[i - 1]
+            nav.append(f'<a class="btn btn-outline" href="guide-{gs}-{p["slug"]}.html">&larr; {esc(p["title"])}</a>')
+        if i + 1 < len(parts):
+            n = parts[i + 1]
+            nav.append(f'<a class="btn btn-primary" href="guide-{gs}-{n["slug"]}.html">{esc(n["title"])} &rarr;</a>')
+        body = f"""{self.page_head(f"Part {i + 1} of {len(parts)}", part["title"], self.fill(part.get("summary", "")))}
+
+<section class="section">
+  <div class="wrap narrow guide-body">
+    <p class="muted"><a href="guide-{gs}.html">&larr; {esc(self.fill(g["title"]))}</a></p>
+{self.cite(g, self.fill(part["html"]))}
+    <p class="guide-pager">{" ".join(nav)}</p>
+  </div>
+</section>"""
+        return f'{part["title"]} — {g["title"]}', self.fill(part.get("summary") or g["title"]), body, None
+
     def page_faq(self):
         c = self.cfg
         groups = {}
@@ -1692,8 +1823,8 @@ class Site:
             "theme_color": t["primary"],
             "icons": [{"src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png"},
                       {"src": "emblem.svg", "sizes": "any", "type": "image/svg+xml"}]}, indent=2))
-        for slug, _ in self.footer_pages + [("404", "")]:
-            title, desc, body, ld = getattr(self, f"page_{slug}")()
+        for slug, _ in self.footer_pages + self.guide_pages + [("404", "")]:
+            title, desc, body, ld = (self.guide_builders.get(slug) or getattr(self, f"page_{slug}"))()
             robots = "noindex, follow" if slug == "404" or getattr(self, "noindex", False) else "index, follow"
             (OUT / f"{slug}.html").write_text(self.layout(slug, title, desc, body, ld, robots), encoding="utf-8")
         if self.occurrences:
@@ -1702,7 +1833,7 @@ class Site:
         if self.base_url:
             robots += f"\nSitemap: {self.base_url}sitemap.xml\n"
             urls = "".join(f"  <url><loc>{esc(self.url(s))}</loc><lastmod>{self.today.isoformat()}</lastmod></url>\n"
-                           for s, _ in self.footer_pages)
+                           for s, _ in self.footer_pages + self.guide_pages)
             (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
                                              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n")
         else:
