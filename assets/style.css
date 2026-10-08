@@ -278,3 +278,4 @@ figcaption span { color: var(--muted); }
 .cite { font-size: .75em; }
 .cite a { padding: 0 .15rem; }
 .references li { margin-bottom: .6rem; overflow-wrap: anywhere; }
+.card-title { font-size: 1.15rem; margin-top: 0; }

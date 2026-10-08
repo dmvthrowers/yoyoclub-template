@@ -1490,7 +1490,7 @@ class Site:
     def page_guides(self):
         G = self.cfg["guides"]
         cards = "".join(
-            f'\n  <div class="card"><h3><a href="guide-{esc(g["slug"])}.html">{esc(self.fill(g["title"]))}</a></h3>'
+            f'\n  <div class="card"><h2 class="card-title"><a href="guide-{esc(g["slug"])}.html">{esc(self.fill(g["title"]))}</a></h2>'
             f'<p>{esc(self.fill(g.get("summary", "")))}</p><p class="muted">{len(g["parts"])} '
             f'{"part" if len(g["parts"]) == 1 else "parts"}</p></div>' for g in self.guide_list)
         body = f"""{self.page_head("Guides", self.fill(G.get("title") or "Guides"), self.fill(G.get("intro") or "Long reads for when a quick answer is not enough."))}
