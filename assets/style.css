@@ -268,3 +268,14 @@ figcaption span { color: var(--muted); }
 .contact-form input, .contact-form textarea { width: 100%; min-height: 48px; padding: .6rem .75rem; font: inherit; color: var(--ink); background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); }
 .contact-form .btn { align-self: flex-start; margin-top: .4rem; font-family: inherit; cursor: pointer; }
 .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+.guide-toc { padding-left: 1.2rem; }
+.guide-toc > li { margin-bottom: 1rem; }
+.guide-toc p { margin: .2rem 0; color: var(--muted); }
+.guide-toc ul { margin: .3rem 0 0; padding-left: 1.2rem; }
+.guide-body h2 { margin-top: 2rem; }
+.guide-pager { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+.cite { font-size: .75em; }
+.cite a { padding: 0 .15rem; }
+.references li { margin-bottom: .6rem; overflow-wrap: anywhere; }
+.card-title { font-size: 1.15rem; margin-top: 0; }

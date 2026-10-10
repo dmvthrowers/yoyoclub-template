@@ -18,3 +18,13 @@
     }
   });
 })();
+
+/* Old guide links (guide.html#section) jump to the part page that now holds the section. */
+(function () {
+  var raw = document.body.getAttribute("data-guide-map");
+  if (!raw || !location.hash) return;
+  try {
+    var target = JSON.parse(raw)[decodeURIComponent(location.hash.slice(1))];
+    if (target) location.replace(target);
+  } catch (e) { /* keep the current page */ }
+})();

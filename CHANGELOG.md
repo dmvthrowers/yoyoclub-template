@@ -4,7 +4,9 @@ What changed in each release of this template. Newest first. Copies of the templ
 
 ## Unreleased
 
-Nothing yet. Changes that merge after 1.0.0 are listed here until the next tag.
+Changes that merge after 1.0.0 are listed here until the next tag.
+
+- Long-form guides: a `guides` setting adds a Guides page, a hub per guide with a table of contents and numbered references, and numbered part pages with previous/next links. Off by default. Old `hub.html#section` links forward to the right part.
 
 ## 1.0.0
 

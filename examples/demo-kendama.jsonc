@@ -27,6 +27,22 @@
   "officers": [ { "role": "Organizer", "name": "Alex Example", "bio": "Still chasing a clean Lunar." } ],
   "events": [], "partners": [], "documents": [], "gallery": [], "links": [], "sister_clubs": [], "faq_extra": [],
   "calendar": { "embed_url": "" },
+  "guides": {
+    "show": true,
+    "title": "Guides",
+    "intro": "Longer reads for when a quick answer is not enough.",
+    "items": [{
+      "slug": "first-week", "title": "Your First Week", "summary": "A short plan for getting started.",
+      "dir": "examples/guides/first-week",
+      "parts": [
+        { "slug": "basics", "title": "The Basics", "summary": "Grip and stance." },
+        { "slug": "practice", "title": "Practice", "summary": "How to practice without burning out." }
+      ],
+      "references": [
+        { "id": "practice-tips", "title": "Deliberate Practice Overview", "url": "https://example.org/practice", "note": "Why short sessions work." }
+      ]
+    }]
+  },
   "conduct": { "effective": "" },
   "theme": { "corners": "round" }
 }
