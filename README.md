@@ -35,6 +35,18 @@ flat cards, serif headings, and a bold top bar, in your colors.
 
 ---
 
+## Prerequisites
+
+Everything here is free except the optional custom domain.
+
+| You need | Free / low-cost option |
+|---|---|
+| GitHub account | [github.com/signup](https://github.com/signup) — Pages hosting is free on public repos |
+| Shared club email | Gmail (free) — put it in `site.jsonc` → `contact`. Never a personal cell number |
+| Contact form endpoint | [Formspree](https://formspree.io) (free tier) or [FormSubmit](https://formsubmit.co) (free) — paste the endpoint into `contact.form.action` |
+| Custom domain (optional) | [Cloudflare Registrar](https://www.cloudflare.com/products/registrar/) or [Porkbun](https://porkbun.com) (~$10–15/yr), or use the free `yourclub.github.io` address |
+| Status page (optional) | [UptimeRobot](https://uptimerobot.com) (free tier) |
+
 ## Quick start (15–30 minutes)
 
 You need a free [GitHub account](https://github.com/signup).
